@@ -1,0 +1,1389 @@
+/// Copyright 2020 Johannes Marbach
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+
+import Contacts
+import Foundation
+
+// MARK: - Contacts Strings
+
+@available(iOS 9.0, *)
+extension String {
+
+    /// Contacts Not Comparable Error
+    public static var _1000_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{30}\u{30}\u{30}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{4E}\u{6F}\u{74}\u{20}\u{43}\u{6F}\u{6D}\u{70}\u{61}\u{72}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// Contacts must each have the same set of fetched properties in order to be compared.
+    public static var _1000_REASON｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{30}\u{30}\u{30}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{6D}\u{75}\u{73}\u{74}\u{20}\u{65}\u{61}\u{63}\u{68}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{73}\u{61}\u{6D}\u{65}\u{20}\u{73}\u{65}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{66}\u{65}\u{74}\u{63}\u{68}\u{65}\u{64}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{65}\u{72}\u{74}\u{69}\u{65}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{6F}\u{72}\u{64}\u{65}\u{72}\u{20}\u{74}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{70}\u{61}\u{72}\u{65}\u{64}\u{2E}") }
+
+    /// Access Denied
+    public static var _100_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{30}\u{30}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{41}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{44}\u{65}\u{6E}\u{69}\u{65}\u{64}") }
+
+    /// This application has not been granted permission to access Contacts.
+    public static var _100_REASON｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{30}\u{30}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{69}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{68}\u{61}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{65}\u{6E}\u{20}\u{67}\u{72}\u{61}\u{6E}\u{74}\u{65}\u{64}\u{20}\u{70}\u{65}\u{72}\u{6D}\u{69}\u{73}\u{73}\u{69}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{2E}") }
+
+    /// No Accessible Writable Containers
+    public static var _101_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{30}\u{31}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{4E}\u{6F}\u{20}\u{41}\u{63}\u{63}\u{65}\u{73}\u{73}\u{69}\u{62}\u{6C}\u{65}\u{20}\u{57}\u{72}\u{69}\u{74}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{65}\u{72}\u{73}") }
+
+    /// This application does not have access to any writable Contacts containers.
+    public static var _101_REASON｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{30}\u{31}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{69}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6E}\u{79}\u{20}\u{77}\u{72}\u{69}\u{74}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{65}\u{72}\u{73}\u{2E}") }
+
+    /// Communication Error
+    public static var _1_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{43}\u{6F}\u{6D}\u{6D}\u{75}\u{6E}\u{69}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// An error occurred while trying to communicate with the Contacts service.
+    public static var _1_REASON｜Contacts: String { Util｜Contacts.systemString("\u{31}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{41}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{6F}\u{63}\u{63}\u{75}\u{72}\u{72}\u{65}\u{64}\u{20}\u{77}\u{68}\u{69}\u{6C}\u{65}\u{20}\u{74}\u{72}\u{79}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{75}\u{6E}\u{69}\u{63}\u{61}\u{74}\u{65}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{73}\u{65}\u{72}\u{76}\u{69}\u{63}\u{65}\u{2E}") }
+
+    /// Updated Record Does Not Exist
+    public static var _200_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{30}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{64}\u{20}\u{52}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{20}\u{44}\u{6F}\u{65}\u{73}\u{20}\u{4E}\u{6F}\u{74}\u{20}\u{45}\u{78}\u{69}\u{73}\u{74}") }
+
+    /// The save request failed because it updates a record that does not exist or has already been deleted.
+    public static var _200_REASON｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{30}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{69}\u{74}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{73}\u{20}\u{61}\u{20}\u{72}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{65}\u{78}\u{69}\u{73}\u{74}\u{20}\u{6F}\u{72}\u{20}\u{68}\u{61}\u{73}\u{20}\u{61}\u{6C}\u{72}\u{65}\u{61}\u{64}\u{79}\u{20}\u{62}\u{65}\u{65}\u{6E}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}") }
+
+    /// Duplicate Record
+    public static var _201_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{31}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{44}\u{75}\u{70}\u{6C}\u{69}\u{63}\u{61}\u{74}\u{65}\u{20}\u{52}\u{65}\u{63}\u{6F}\u{72}\u{64}") }
+
+    /// The save request failed because it attempted to insert a duplicate record.
+    public static var _201_REASON｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{31}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{69}\u{74}\u{20}\u{61}\u{74}\u{74}\u{65}\u{6D}\u{70}\u{74}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{69}\u{6E}\u{73}\u{65}\u{72}\u{74}\u{20}\u{61}\u{20}\u{64}\u{75}\u{70}\u{6C}\u{69}\u{63}\u{61}\u{74}\u{65}\u{20}\u{72}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{2E}") }
+
+    /// Collection Cycle Error
+    public static var _202_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{32}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{43}\u{6F}\u{6C}\u{6C}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{43}\u{79}\u{63}\u{6C}\u{65}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// The save request failed because it would cause a container or group to contain itself as a descendant.
+    public static var _202_REASON｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{32}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{69}\u{74}\u{20}\u{77}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{61}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{65}\u{72}\u{20}\u{6F}\u{72}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{20}\u{69}\u{74}\u{73}\u{65}\u{6C}\u{66}\u{20}\u{61}\u{73}\u{20}\u{61}\u{20}\u{64}\u{65}\u{73}\u{63}\u{65}\u{6E}\u{64}\u{61}\u{6E}\u{74}\u{2E}") }
+
+    /// Container Scope Error
+    public static var _203_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{33}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{65}\u{72}\u{20}\u{53}\u{63}\u{6F}\u{70}\u{65}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// The save request failed because it attempted to move records between containers that do not share a common ancestor.
+    public static var _203_REASON｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{33}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{69}\u{74}\u{20}\u{61}\u{74}\u{74}\u{65}\u{6D}\u{70}\u{74}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{72}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{73}\u{20}\u{62}\u{65}\u{74}\u{77}\u{65}\u{65}\u{6E}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{65}\u{72}\u{73}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{64}\u{6F}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{20}\u{61}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{6F}\u{6E}\u{20}\u{61}\u{6E}\u{63}\u{65}\u{73}\u{74}\u{6F}\u{72}\u{2E}") }
+
+    /// Parent Record Missing Error
+    public static var _204_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{34}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{52}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{20}\u{4D}\u{69}\u{73}\u{73}\u{69}\u{6E}\u{67}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// The save request failed because it attempted to add or move records to a parent that does not exist.
+    public static var _204_REASON｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{34}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{69}\u{74}\u{20}\u{61}\u{74}\u{74}\u{65}\u{6D}\u{70}\u{74}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{64}\u{64}\u{20}\u{6F}\u{72}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{72}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{20}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{65}\u{78}\u{69}\u{73}\u{74}\u{2E}") }
+
+    /// Record is read-only
+    public static var _206_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{36}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{52}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{20}\u{69}\u{73}\u{20}\u{72}\u{65}\u{61}\u{64}\u{2D}\u{6F}\u{6E}\u{6C}\u{79}") }
+
+    /// The save request failed because it attempted to modify records that are read-only
+    public static var _206_REASON｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{30}\u{36}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{69}\u{74}\u{20}\u{61}\u{74}\u{74}\u{65}\u{6D}\u{70}\u{74}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{6F}\u{64}\u{69}\u{66}\u{79}\u{20}\u{72}\u{65}\u{63}\u{6F}\u{72}\u{64}\u{73}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{61}\u{72}\u{65}\u{20}\u{72}\u{65}\u{61}\u{64}\u{2D}\u{6F}\u{6E}\u{6C}\u{79}") }
+
+    /// Data Access Error
+    public static var _2_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{44}\u{61}\u{74}\u{61}\u{20}\u{41}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// The requested data does not exist or the request is invalid.
+    public static var _2_REASON｜Contacts: String { Util｜Contacts.systemString("\u{32}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{65}\u{64}\u{20}\u{64}\u{61}\u{74}\u{61}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{65}\u{78}\u{69}\u{73}\u{74}\u{20}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{2E}") }
+
+    /// Multiple Validation Errors
+    public static var _300_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{33}\u{30}\u{30}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{4D}\u{75}\u{6C}\u{74}\u{69}\u{70}\u{6C}\u{65}\u{20}\u{56}\u{61}\u{6C}\u{69}\u{64}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}\u{73}") }
+
+    /// The save request failed due to multiple property validation errors.
+    public static var _300_REASON｜Contacts: String { Util｜Contacts.systemString("\u{33}\u{30}\u{30}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{64}\u{75}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{75}\u{6C}\u{74}\u{69}\u{70}\u{6C}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{65}\u{72}\u{74}\u{79}\u{20}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{73}\u{2E}") }
+
+    /// Value Validation Error
+    public static var _301_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{33}\u{30}\u{31}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{56}\u{61}\u{6C}\u{75}\u{65}\u{20}\u{56}\u{61}\u{6C}\u{69}\u{64}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// The save request failed because a property value was assigned an incorrect type.
+    public static var _301_REASON｜Contacts: String { Util｜Contacts.systemString("\u{33}\u{30}\u{31}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{61}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{65}\u{72}\u{74}\u{79}\u{20}\u{76}\u{61}\u{6C}\u{75}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{61}\u{73}\u{73}\u{69}\u{67}\u{6E}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{20}\u{69}\u{6E}\u{63}\u{6F}\u{72}\u{72}\u{65}\u{63}\u{74}\u{20}\u{74}\u{79}\u{70}\u{65}\u{2E}") }
+
+    /// Value Validation Error
+    public static var _302_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{33}\u{30}\u{32}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{56}\u{61}\u{6C}\u{75}\u{65}\u{20}\u{56}\u{61}\u{6C}\u{69}\u{64}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// The save request failed because a property value was configured incorrectly.
+    public static var _302_REASON｜Contacts: String { Util｜Contacts.systemString("\u{33}\u{30}\u{32}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{73}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{61}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{65}\u{72}\u{74}\u{79}\u{20}\u{76}\u{61}\u{6C}\u{75}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{66}\u{69}\u{67}\u{75}\u{72}\u{65}\u{64}\u{20}\u{69}\u{6E}\u{63}\u{6F}\u{72}\u{72}\u{65}\u{63}\u{74}\u{6C}\u{79}\u{2E}") }
+
+    /// Invalid Predicate
+    public static var _400_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{34}\u{30}\u{30}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{49}\u{6E}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{20}\u{50}\u{72}\u{65}\u{64}\u{69}\u{63}\u{61}\u{74}\u{65}") }
+
+    /// The operation couldn’t be completed because its predicate is invalid.
+    public static var _400_REASON｜Contacts: String { Util｜Contacts.systemString("\u{34}\u{30}\u{30}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{6F}\u{70}\u{65}\u{72}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{63}\u{6F}\u{75}\u{6C}\u{64}\u{6E}\u{2019}\u{74}\u{20}\u{62}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{70}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{69}\u{74}\u{73}\u{20}\u{70}\u{72}\u{65}\u{64}\u{69}\u{63}\u{61}\u{74}\u{65}\u{20}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{2E}") }
+
+    /// Violated Constraints Error
+    public static var _500_DESCRIPTION｜Contacts: String { Util｜Contacts.systemString("\u{35}\u{30}\u{30}\u{5F}\u{44}\u{45}\u{53}\u{43}\u{52}\u{49}\u{50}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{56}\u{69}\u{6F}\u{6C}\u{61}\u{74}\u{65}\u{64}\u{20}\u{43}\u{6F}\u{6E}\u{73}\u{74}\u{72}\u{61}\u{69}\u{6E}\u{74}\u{73}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// The operation couldn’t be completed because some policy constraints have been violated.
+    public static var _500_REASON｜Contacts: String { Util｜Contacts.systemString("\u{35}\u{30}\u{30}\u{5F}\u{52}\u{45}\u{41}\u{53}\u{4F}\u{4E}", value: "\u{54}\u{68}\u{65}\u{20}\u{6F}\u{70}\u{65}\u{72}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{63}\u{6F}\u{75}\u{6C}\u{64}\u{6E}\u{2019}\u{74}\u{20}\u{62}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{70}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{73}\u{6F}\u{6D}\u{65}\u{20}\u{70}\u{6F}\u{6C}\u{69}\u{63}\u{79}\u{20}\u{63}\u{6F}\u{6E}\u{73}\u{74}\u{72}\u{61}\u{69}\u{6E}\u{74}\u{73}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{62}\u{65}\u{65}\u{6E}\u{20}\u{76}\u{69}\u{6F}\u{6C}\u{61}\u{74}\u{65}\u{64}\u{2E}") }
+
+    /// AIM
+    public static var AIM｜Contacts: String { Util｜Contacts.systemString("\u{41}\u{49}\u{4D}", value: "\u{41}\u{49}\u{4D}") }
+
+    ///  
+    public static var ExemptedStandardRelationships｜Contacts: String { Util｜Contacts.systemString("\u{45}\u{78}\u{65}\u{6D}\u{70}\u{74}\u{65}\u{64}\u{53}\u{74}\u{61}\u{6E}\u{64}\u{61}\u{72}\u{64}\u{52}\u{65}\u{6C}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{68}\u{69}\u{70}\u{73}", value: "\u{20}") }
+
+    ///  
+    public static var ExtendedRelevantRelationships｜Contacts: String { Util｜Contacts.systemString("\u{45}\u{78}\u{74}\u{65}\u{6E}\u{64}\u{65}\u{64}\u{52}\u{65}\u{6C}\u{65}\u{76}\u{61}\u{6E}\u{74}\u{52}\u{65}\u{6C}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{68}\u{69}\u{70}\u{73}", value: "\u{20}") }
+
+    /// Facebook
+    public static var Facebook｜Contacts: String { Util｜Contacts.systemString("\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}", value: "\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}") }
+
+    /// Flickr
+    public static var Flickr｜Contacts: String { Util｜Contacts.systemString("\u{46}\u{6C}\u{69}\u{63}\u{6B}\u{72}", value: "\u{46}\u{6C}\u{69}\u{63}\u{6B}\u{72}") }
+
+    /// Gadu-Gadu
+    public static var GaduGadu｜Contacts: String { Util｜Contacts.systemString("\u{47}\u{61}\u{64}\u{75}\u{47}\u{61}\u{64}\u{75}", value: "\u{47}\u{61}\u{64}\u{75}\u{2D}\u{47}\u{61}\u{64}\u{75}") }
+
+    /// Google Talk
+    public static var GoogleTalk｜Contacts: String { Util｜Contacts.systemString("\u{47}\u{6F}\u{6F}\u{67}\u{6C}\u{65}\u{54}\u{61}\u{6C}\u{6B}", value: "\u{47}\u{6F}\u{6F}\u{67}\u{6C}\u{65}\u{20}\u{54}\u{61}\u{6C}\u{6B}") }
+
+    /// ICQ
+    public static var ICQ｜Contacts: String { Util｜Contacts.systemString("\u{49}\u{43}\u{51}", value: "\u{49}\u{43}\u{51}") }
+
+    /// Country code
+    public static var ISOCountryCode｜Contacts: String { Util｜Contacts.systemString("\u{49}\u{53}\u{4F}\u{43}\u{6F}\u{75}\u{6E}\u{74}\u{72}\u{79}\u{43}\u{6F}\u{64}\u{65}", value: "\u{43}\u{6F}\u{75}\u{6E}\u{74}\u{72}\u{79}\u{20}\u{63}\u{6F}\u{64}\u{65}") }
+
+    /// Jabber
+    public static var Jabber｜Contacts: String { Util｜Contacts.systemString("\u{4A}\u{61}\u{62}\u{62}\u{65}\u{72}", value: "\u{4A}\u{61}\u{62}\u{62}\u{65}\u{72}") }
+
+    /// LinkedIn
+    public static var LinkedIn｜Contacts: String { Util｜Contacts.systemString("\u{4C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{49}\u{6E}", value: "\u{4C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{49}\u{6E}") }
+
+    /// Maybe: %@
+    public static var MAYBE_FORMAT﹣％＠｜Contacts: String { Util｜Contacts.systemString("\u{4D}\u{41}\u{59}\u{42}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{4D}\u{61}\u{79}\u{62}\u{65}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// MSN
+    public static var MSN｜Contacts: String { Util｜Contacts.systemString("\u{4D}\u{53}\u{4E}", value: "\u{4D}\u{53}\u{4E}") }
+
+    /// Myspace
+    public static var MySpace｜Contacts: String { Util｜Contacts.systemString("\u{4D}\u{79}\u{53}\u{70}\u{61}\u{63}\u{65}", value: "\u{4D}\u{79}\u{73}\u{70}\u{61}\u{63}\u{65}") }
+
+    /// %@ and %@
+    public static var NAME_AND_OTHER_NAME｜Contacts: String { Util｜Contacts.systemString("\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{4F}\u{54}\u{48}\u{45}\u{52}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}") }
+
+    /// QQ
+    public static var QQ｜Contacts: String { Util｜Contacts.systemString("\u{51}\u{51}", value: "\u{51}\u{51}") }
+
+    /// Sina Weibo
+    public static var SinaWeibo｜Contacts: String { Util｜Contacts.systemString("\u{53}\u{69}\u{6E}\u{61}\u{57}\u{65}\u{69}\u{62}\u{6F}", value: "\u{53}\u{69}\u{6E}\u{61}\u{20}\u{57}\u{65}\u{69}\u{62}\u{6F}") }
+
+    /// Skype
+    public static var Skype｜Contacts: String { Util｜Contacts.systemString("\u{53}\u{6B}\u{79}\u{70}\u{65}", value: "\u{53}\u{6B}\u{79}\u{70}\u{65}") }
+
+    ///  
+    public static var SupplementalRelationships｜Contacts: String { Util｜Contacts.systemString("\u{53}\u{75}\u{70}\u{70}\u{6C}\u{65}\u{6D}\u{65}\u{6E}\u{74}\u{61}\u{6C}\u{52}\u{65}\u{6C}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{68}\u{69}\u{70}\u{73}", value: "\u{20}") }
+
+    /// Tencent Weibo
+    public static var TencentWeibo｜Contacts: String { Util｜Contacts.systemString("\u{54}\u{65}\u{6E}\u{63}\u{65}\u{6E}\u{74}\u{57}\u{65}\u{69}\u{62}\u{6F}", value: "\u{54}\u{65}\u{6E}\u{63}\u{65}\u{6E}\u{74}\u{20}\u{57}\u{65}\u{69}\u{62}\u{6F}") }
+
+    /// Twitter
+    public static var Twitter｜Contacts: String { Util｜Contacts.systemString("\u{54}\u{77}\u{69}\u{74}\u{74}\u{65}\u{72}", value: "\u{54}\u{77}\u{69}\u{74}\u{74}\u{65}\u{72}") }
+
+    /// Contact
+    public static var VCARD_DEFAULT_FILE_NAME｜Contacts: String { Util｜Contacts.systemString("\u{56}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{46}\u{49}\u{4C}\u{45}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Yahoo
+    public static var Yahoo｜Contacts: String { Util｜Contacts.systemString("\u{59}\u{61}\u{68}\u{6F}\u{6F}", value: "\u{59}\u{61}\u{68}\u{6F}\u{6F}") }
+
+    /// Yelp
+    public static var Yelp｜Contacts: String { Util｜Contacts.systemString("\u{59}\u{65}\u{6C}\u{70}", value: "\u{59}\u{65}\u{6C}\u{70}") }
+
+    /// anniversary
+    public static var _$！﹤Anniversary﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{6E}\u{6E}\u{69}\u{76}\u{65}\u{72}\u{73}\u{61}\u{72}\u{79}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{6E}\u{6E}\u{69}\u{76}\u{65}\u{72}\u{73}\u{61}\u{72}\u{79}") }
+
+    /// assistant
+    public static var _$！﹤Assistant﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}") }
+
+    /// assistant
+    public static var _$！﹤AssistantPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}") }
+
+    /// aunt
+    public static var _$！﹤Aunt﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}") }
+
+    /// aunt (father’s brother’s wife)
+    public static var _$！﹤AuntFathersBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// aunt (father’s elder brother’s wife)
+    public static var _$！﹤AuntFathersElderBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// aunt (father’s elder sister)
+    public static var _$！﹤AuntFathersElderSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (father’s sister)
+    public static var _$！﹤AuntFathersSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (father’s younger brother’s wife)
+    public static var _$！﹤AuntFathersYoungerBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// aunt (father’s younger sister)
+    public static var _$！﹤AuntFathersYoungerSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (mother’s brother’s wife)
+    public static var _$！﹤AuntMothersBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// aunt (mother’s elder sister)
+    public static var _$！﹤AuntMothersElderSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (mother’s sister)
+    public static var _$！﹤AuntMothersSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (mother’s younger sister)
+    public static var _$！﹤AuntMothersYoungerSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (parent’s elder sister)
+    public static var _$！﹤AuntParentsElderSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (parent’s sister)
+    public static var _$！﹤AuntParentsSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// aunt (parent’s younger sister)
+    public static var _$！﹤AuntParentsYoungerSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{41}\u{75}\u{6E}\u{74}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{75}\u{6E}\u{74}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// boyfriend
+    public static var _$！﹤Boyfriend﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{6F}\u{79}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{6F}\u{79}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}") }
+
+    /// brother
+    public static var _$！﹤Brother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// brother-in-law
+    public static var _$！﹤BrotherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// brother-in-law (elder sister’s husband)
+    public static var _$！﹤BrotherInLawElderSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// brother-in-law (husband’s brother)
+    public static var _$！﹤BrotherInLawHusbandsBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// brother-in-law (husband’s sister’s husband)
+    public static var _$！﹤BrotherInLawHusbandsSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// brother-in-law (sister’s husband)
+    public static var _$！﹤BrotherInLawSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// brother-in-law (spouse’s brother)
+    public static var _$！﹤BrotherInLawSpousesBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{53}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// brother-in-law (wife’s brother)
+    public static var _$！﹤BrotherInLawWifesBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{57}\u{69}\u{66}\u{65}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// brother-in-law (wife’s sister’s husband)
+    public static var _$！﹤BrotherInLawWifesSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{57}\u{69}\u{66}\u{65}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// brother-in-law (younger sister’s husband)
+    public static var _$！﹤BrotherInLawYoungerSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// callback
+    public static var _$！﹤Callback﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{61}\u{6C}\u{6C}\u{62}\u{61}\u{63}\u{6B}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{61}\u{6C}\u{6C}\u{62}\u{61}\u{63}\u{6B}") }
+
+    /// car
+    public static var _$！﹤Car﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{61}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{61}\u{72}") }
+
+    /// child
+    public static var _$！﹤Child﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// child-in-law
+    public static var _$！﹤ChildInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{68}\u{69}\u{6C}\u{64}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{68}\u{69}\u{6C}\u{64}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// co-brother-in-law (brother or husband of sibling-in-law)
+    public static var _$！﹤CoBrotherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{2D}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{6F}\u{72}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{20}\u{6F}\u{66}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{29}") }
+
+    /// co-father-in-law (child’s spouse’s father)
+    public static var _$！﹤CoFatherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{2D}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{2019}\u{73}\u{20}\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{2019}\u{73}\u{20}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// co-mother-in-law (child’s spouse’s mother)
+    public static var _$！﹤CoMotherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{2D}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{2019}\u{73}\u{20}\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{2019}\u{73}\u{20}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// co-parent-in-law (child’s spouse’s parent)
+    public static var _$！﹤CoParentInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{2D}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{2019}\u{73}\u{20}\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{2019}\u{73}\u{20}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{29}") }
+
+    /// co-sibling-in-law (sibling or spouse of sibling-in-law)
+    public static var _$！﹤CoSiblingInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{2D}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{29}") }
+
+    /// co-sister-in-law (sister or wife of sibling-in-law)
+    public static var _$！﹤CoSisterInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{2D}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{20}\u{6F}\u{72}\u{20}\u{77}\u{69}\u{66}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{29}") }
+
+    /// colleague
+    public static var _$！﹤Colleague﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{6C}\u{6C}\u{65}\u{61}\u{67}\u{75}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{6C}\u{6C}\u{65}\u{61}\u{67}\u{75}\u{65}") }
+
+    /// company main
+    public static var _$！﹤CompanyMain﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{6D}\u{70}\u{61}\u{6E}\u{79}\u{4D}\u{61}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{6D}\u{70}\u{61}\u{6E}\u{79}\u{20}\u{6D}\u{61}\u{69}\u{6E}") }
+
+    /// cousin
+    public static var _$！﹤Cousin﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}") }
+
+    /// cousin (father’s brother’s daughter)
+    public static var _$！﹤CousinFathersBrothersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// cousin (father’s brother’s son)
+    public static var _$！﹤CousinFathersBrothersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// cousin (father’s sister’s daughter)
+    public static var _$！﹤CousinFathersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// cousin (father’s sister’s son)
+    public static var _$！﹤CousinFathersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// cousin (grandparent’s sibling’s child)
+    public static var _$！﹤CousinGrandparentsSiblingsChild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{43}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{29}") }
+
+    /// cousin (grandparent’s sibling’s daughter)
+    public static var _$！﹤CousinGrandparentsSiblingsDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// cousin (grandparent’s sibling’s son)
+    public static var _$！﹤CousinGrandparentsSiblingsSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// cousin (mother’s brother’s daughter)
+    public static var _$！﹤CousinMothersBrothersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// cousin (mother’s brother’s son)
+    public static var _$！﹤CousinMothersBrothersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// cousin (mother’s sister’s daughter)
+    public static var _$！﹤CousinMothersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// cousin (mother’s sister’s son)
+    public static var _$！﹤CousinMothersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// cousin or sibling’s child
+    public static var _$！﹤CousinOrSiblingsChild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4F}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{43}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// cousin (parent’s sibling’s child)
+    public static var _$！﹤CousinParentsSiblingsChild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{43}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{29}") }
+
+    /// cousin (parent’s sibling’s daughter)
+    public static var _$！﹤CousinParentsSiblingsDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// cousin (parent’s sibling’s son)
+    public static var _$！﹤CousinParentsSiblingsSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// daughter
+    public static var _$！﹤Daughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}") }
+
+    /// daughter-in-law
+    public static var _$！﹤DaughterInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// daughter-in-law or sister-in-law
+    public static var _$！﹤DaughterInLawOrSisterInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{4F}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// daughter-in-law or stepdaughter
+    public static var _$！﹤DaughterInLawOrStepdaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{4F}\u{72}\u{53}\u{74}\u{65}\u{70}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{74}\u{65}\u{70}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}") }
+
+    /// anniversary
+    public static var _$！﹤EX﹣Anniversary﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{41}\u{6E}\u{6E}\u{69}\u{76}\u{65}\u{72}\u{73}\u{61}\u{72}\u{79}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{6E}\u{6E}\u{69}\u{76}\u{65}\u{72}\u{73}\u{61}\u{72}\u{79}") }
+
+    /// assistant
+    public static var _$！﹤EX﹣AssistantName﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{41}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{4E}\u{61}\u{6D}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}") }
+
+    /// assistant
+    public static var _$！﹤EX﹣AssistantPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{41}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{73}\u{73}\u{69}\u{73}\u{74}\u{61}\u{6E}\u{74}") }
+
+    /// birthday
+    public static var _$！﹤EX﹣Birthday﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{42}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// work
+    public static var _$！﹤EX﹣Business﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{42}\u{75}\u{73}\u{69}\u{6E}\u{65}\u{73}\u{73}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{77}\u{6F}\u{72}\u{6B}") }
+
+    /// work fax
+    public static var _$！﹤EX﹣BusinessFax﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{42}\u{75}\u{73}\u{69}\u{6E}\u{65}\u{73}\u{73}\u{46}\u{61}\u{78}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{77}\u{6F}\u{72}\u{6B}\u{20}\u{66}\u{61}\u{78}") }
+
+    /// homepage
+    public static var _$！﹤EX﹣BusinessHomePage﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{42}\u{75}\u{73}\u{69}\u{6E}\u{65}\u{73}\u{73}\u{48}\u{6F}\u{6D}\u{65}\u{50}\u{61}\u{67}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{6F}\u{6D}\u{65}\u{70}\u{61}\u{67}\u{65}") }
+
+    /// alternate work
+    public static var _$！﹤EX﹣BusinessPhone2﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{42}\u{75}\u{73}\u{69}\u{6E}\u{65}\u{73}\u{73}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{32}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{6C}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{74}\u{65}\u{20}\u{77}\u{6F}\u{72}\u{6B}") }
+
+    /// work
+    public static var _$！﹤EX﹣BusinessPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{42}\u{75}\u{73}\u{69}\u{6E}\u{65}\u{73}\u{73}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{77}\u{6F}\u{72}\u{6B}") }
+
+    /// callback
+    public static var _$！﹤EX﹣Callback﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{43}\u{61}\u{6C}\u{6C}\u{62}\u{61}\u{63}\u{6B}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{61}\u{6C}\u{6C}\u{62}\u{61}\u{63}\u{6B}") }
+
+    /// car
+    public static var _$！﹤EX﹣CarPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{43}\u{61}\u{72}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{61}\u{72}") }
+
+    /// company main
+    public static var _$！﹤EX﹣CompanyMainPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{43}\u{6F}\u{6D}\u{70}\u{61}\u{6E}\u{79}\u{4D}\u{61}\u{69}\u{6E}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{6D}\u{70}\u{61}\u{6E}\u{79}\u{20}\u{6D}\u{61}\u{69}\u{6E}") }
+
+    /// email 1
+    public static var _$！﹤EX﹣EmailAddress1﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{45}\u{6D}\u{61}\u{69}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{31}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{31}") }
+
+    /// email 2
+    public static var _$！﹤EX﹣EmailAddress2﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{45}\u{6D}\u{61}\u{69}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{32}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{32}") }
+
+    /// email 3
+    public static var _$！﹤EX﹣EmailAddress3﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{45}\u{6D}\u{61}\u{69}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{33}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{33}") }
+
+    /// home
+    public static var _$！﹤EX﹣Home﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{48}\u{6F}\u{6D}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{6F}\u{6D}\u{65}") }
+
+    /// home fax
+    public static var _$！﹤EX﹣HomeFax﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{48}\u{6F}\u{6D}\u{65}\u{46}\u{61}\u{78}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{6F}\u{6D}\u{65}\u{20}\u{66}\u{61}\u{78}") }
+
+    /// alternate home
+    public static var _$！﹤EX﹣HomePhone2﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{48}\u{6F}\u{6D}\u{65}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{32}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{61}\u{6C}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{74}\u{65}\u{20}\u{68}\u{6F}\u{6D}\u{65}") }
+
+    /// home
+    public static var _$！﹤EX﹣HomePhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{48}\u{6F}\u{6D}\u{65}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{6F}\u{6D}\u{65}") }
+
+    /// messaging 1
+    public static var _$！﹤EX﹣ImAddress1﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{49}\u{6D}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{31}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{69}\u{6E}\u{67}\u{20}\u{31}") }
+
+    /// messaging 2
+    public static var _$！﹤EX﹣ImAddress2﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{49}\u{6D}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{32}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{69}\u{6E}\u{67}\u{20}\u{32}") }
+
+    /// messaging 3
+    public static var _$！﹤EX﹣ImAddress3﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{49}\u{6D}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{33}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{69}\u{6E}\u{67}\u{20}\u{33}") }
+
+    /// ISDN
+    public static var _$！﹤EX﹣Isdn﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{49}\u{73}\u{64}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{49}\u{53}\u{44}\u{4E}") }
+
+    /// manager
+    public static var _$！﹤EX﹣Manager﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{4D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{72}") }
+
+    /// mobile
+    public static var _$！﹤EX﹣MobilePhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{62}\u{69}\u{6C}\u{65}") }
+
+    /// other
+    public static var _$！﹤EX﹣Other﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{4F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// other fax
+    public static var _$！﹤EX﹣OtherFax﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{4F}\u{74}\u{68}\u{65}\u{72}\u{46}\u{61}\u{78}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{66}\u{61}\u{78}") }
+
+    /// other
+    public static var _$！﹤EX﹣OtherTelephone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{4F}\u{74}\u{68}\u{65}\u{72}\u{54}\u{65}\u{6C}\u{65}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// pager
+    public static var _$！﹤EX﹣Pager﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{50}\u{61}\u{67}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{67}\u{65}\u{72}") }
+
+    /// primary
+    public static var _$！﹤EX﹣PrimaryPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{50}\u{72}\u{69}\u{6D}\u{61}\u{72}\u{79}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{72}\u{69}\u{6D}\u{61}\u{72}\u{79}") }
+
+    /// radio
+    public static var _$！﹤EX﹣RadioPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{52}\u{61}\u{64}\u{69}\u{6F}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{72}\u{61}\u{64}\u{69}\u{6F}") }
+
+    /// spouse
+    public static var _$！﹤EX﹣SpouseName﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{53}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{4E}\u{61}\u{6D}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}") }
+
+    /// telex
+    public static var _$！﹤EX﹣Telex﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{54}\u{65}\u{6C}\u{65}\u{78}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{74}\u{65}\u{6C}\u{65}\u{78}") }
+
+    /// RTT/TTY
+    public static var _$！﹤EX﹣TtyTddPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{58}\u{2D}\u{54}\u{74}\u{79}\u{54}\u{64}\u{64}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}") }
+
+    /// elder brother
+    public static var _$！﹤ElderBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// elder brother-in-law
+    public static var _$！﹤ElderBrotherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// elder cousin
+    public static var _$！﹤ElderCousin﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}") }
+
+    /// elder cousin (father’s brother’s daughter)
+    public static var _$！﹤ElderCousinFathersBrothersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// elder cousin (father’s brother’s son)
+    public static var _$！﹤ElderCousinFathersBrothersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// elder cousin (father’s sister’s daughter)
+    public static var _$！﹤ElderCousinFathersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// elder cousin (father’s sister’s son)
+    public static var _$！﹤ElderCousinFathersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// elder cousin (mother’s brother’s daughter)
+    public static var _$！﹤ElderCousinMothersBrothersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// elder cousin (mother’s brother’s son)
+    public static var _$！﹤ElderCousinMothersBrothersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// elder cousin (mother’s sibling’s daughter or father’s sister’s daughter)
+    public static var _$！﹤ElderCousinMothersSiblingsDaughterOrFathersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{4F}\u{72}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{20}\u{6F}\u{72}\u{20}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// elder cousin (mother’s sibling’s son or father’s sister’s son)
+    public static var _$！﹤ElderCousinMothersSiblingsSonOrFathersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{4F}\u{72}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{20}\u{6F}\u{72}\u{20}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// elder cousin (mother’s sister’s daughter)
+    public static var _$！﹤ElderCousinMothersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// elder cousin (mother’s sister’s son)
+    public static var _$！﹤ElderCousinMothersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// elder cousin (parent’s sibling’s daughter)
+    public static var _$！﹤ElderCousinParentsSiblingsDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// elder cousin (parent’s sibling’s son)
+    public static var _$！﹤ElderCousinParentsSiblingsSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// elder sibling
+    public static var _$！﹤ElderSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// elder sibling-in-law
+    public static var _$！﹤ElderSiblingInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// elder sister
+    public static var _$！﹤ElderSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}") }
+
+    /// elder-sister-in-law
+    public static var _$！﹤ElderSisterInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{72}\u{2D}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// eldest brother
+    public static var _$！﹤EldestBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{73}\u{74}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{73}\u{74}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// eldest sister
+    public static var _$！﹤EldestSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6C}\u{64}\u{65}\u{73}\u{74}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6C}\u{64}\u{65}\u{73}\u{74}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}") }
+
+    /// email
+    public static var _$！﹤Email﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{45}\u{6D}\u{61}\u{69}\u{6C}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{65}\u{6D}\u{61}\u{69}\u{6C}") }
+
+    /// father
+    public static var _$！﹤Father﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// father-in-law
+    public static var _$！﹤FatherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// father-in-law (husband’s father)
+    public static var _$！﹤FatherInLawHusbandsFather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// father-in-law or stepfather
+    public static var _$！﹤FatherInLawOrStepfather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{4F}\u{72}\u{53}\u{74}\u{65}\u{70}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{74}\u{65}\u{70}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// father-in-law (wife’s father)
+    public static var _$！﹤FatherInLawWifesFather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{57}\u{69}\u{66}\u{65}\u{73}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// cousin (female)
+    public static var _$！﹤FemaleCousin﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{65}\u{6D}\u{61}\u{6C}\u{65}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{65}\u{6D}\u{61}\u{6C}\u{65}\u{29}") }
+
+    /// friend (female)
+    public static var _$！﹤FemaleFriend﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{65}\u{6D}\u{61}\u{6C}\u{65}\u{46}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{20}\u{28}\u{66}\u{65}\u{6D}\u{61}\u{6C}\u{65}\u{29}") }
+
+    /// partner (female)
+    public static var _$！﹤FemalePartner﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{65}\u{6D}\u{61}\u{6C}\u{65}\u{50}\u{61}\u{72}\u{74}\u{6E}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{74}\u{6E}\u{65}\u{72}\u{20}\u{28}\u{66}\u{65}\u{6D}\u{61}\u{6C}\u{65}\u{29}") }
+
+    /// friend
+    public static var _$！﹤Friend﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{46}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}") }
+
+    /// girlfriend
+    public static var _$！﹤Girlfriend﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{69}\u{72}\u{6C}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{69}\u{72}\u{6C}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}") }
+
+    /// girlfriend or boyfriend
+    public static var _$！﹤GirlfriendOrBoyfriend﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{69}\u{72}\u{6C}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{4F}\u{72}\u{42}\u{6F}\u{79}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{69}\u{72}\u{6C}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{20}\u{6F}\u{72}\u{20}\u{62}\u{6F}\u{79}\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}") }
+
+    /// grandaunt
+    public static var _$！﹤Grandaunt﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{61}\u{75}\u{6E}\u{74}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{61}\u{75}\u{6E}\u{74}") }
+
+    /// grandchild
+    public static var _$！﹤Grandchild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// grandchild or sibling’s child
+    public static var _$！﹤GrandchildOrSiblingsChild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{4F}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{43}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// granddaughter
+    public static var _$！﹤Granddaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}") }
+
+    /// granddaughter (daughter’s daughter)
+    public static var _$！﹤GranddaughterDaughtersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{20}\u{28}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// granddaughter (son’s daughter)
+    public static var _$！﹤GranddaughterSonsDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{53}\u{6F}\u{6E}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{20}\u{28}\u{73}\u{6F}\u{6E}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// grandfather
+    public static var _$！﹤Grandfather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// grandfather (paternal)
+    public static var _$！﹤GrandfatherFathersFather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{20}\u{28}\u{70}\u{61}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{6C}\u{29}") }
+
+    /// grandfather (maternal)
+    public static var _$！﹤GrandfatherMothersFather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{20}\u{28}\u{6D}\u{61}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{6C}\u{29}") }
+
+    /// grandmother
+    public static var _$！﹤Grandmother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// grandmother (paternal)
+    public static var _$！﹤GrandmotherFathersMother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{28}\u{70}\u{61}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{6C}\u{29}") }
+
+    /// grandmother (maternal)
+    public static var _$！﹤GrandmotherMothersMother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{28}\u{6D}\u{61}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{6C}\u{29}") }
+
+    /// grandnephew
+    public static var _$！﹤Grandnephew﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}") }
+
+    /// grandnephew (brother’s grandson)
+    public static var _$！﹤GrandnephewBrothersGrandson﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// grandnephew (sister’s grandson)
+    public static var _$！﹤GrandnephewSistersGrandson﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// grandniece
+    public static var _$！﹤Grandniece﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{69}\u{65}\u{63}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{69}\u{65}\u{63}\u{65}") }
+
+    /// grandniece (brother’s granddaughter)
+    public static var _$！﹤GrandnieceBrothersGranddaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{69}\u{65}\u{63}\u{65}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{69}\u{65}\u{63}\u{65}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// grandniece (sister’s granddaughter)
+    public static var _$！﹤GrandnieceSistersGranddaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{69}\u{65}\u{63}\u{65}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6E}\u{69}\u{65}\u{63}\u{65}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// grandparent
+    public static var _$！﹤Grandparent﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}") }
+
+    /// grandson
+    public static var _$！﹤Grandson﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}") }
+
+    /// grandson (daughter’s son)
+    public static var _$！﹤GrandsonDaughtersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{20}\u{28}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// grandson (son’s son)
+    public static var _$！﹤GrandsonSonsSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{53}\u{6F}\u{6E}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{20}\u{28}\u{73}\u{6F}\u{6E}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// granduncle
+    public static var _$！﹤Granduncle﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{61}\u{6E}\u{64}\u{75}\u{6E}\u{63}\u{6C}\u{65}") }
+
+    /// great-grandchild
+    public static var _$！﹤GreatGrandchild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{65}\u{61}\u{74}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{65}\u{61}\u{74}\u{2D}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// great-grandchild or sibling’s grandchild
+    public static var _$！﹤GreatGrandchildOrSiblingsGrandchild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{65}\u{61}\u{74}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{4F}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{65}\u{61}\u{74}\u{2D}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// great-granddaughter
+    public static var _$！﹤GreatGranddaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{65}\u{61}\u{74}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{65}\u{61}\u{74}\u{2D}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}") }
+
+    /// great-grandfather
+    public static var _$！﹤GreatGrandfather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{65}\u{61}\u{74}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{65}\u{61}\u{74}\u{2D}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// great-grandmother
+    public static var _$！﹤GreatGrandmother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{65}\u{61}\u{74}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{65}\u{61}\u{74}\u{2D}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// great-grandparent
+    public static var _$！﹤GreatGrandparent﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{65}\u{61}\u{74}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{65}\u{61}\u{74}\u{2D}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}") }
+
+    /// great-grandson
+    public static var _$！﹤GreatGrandson﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{47}\u{72}\u{65}\u{61}\u{74}\u{47}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{67}\u{72}\u{65}\u{61}\u{74}\u{2D}\u{67}\u{72}\u{61}\u{6E}\u{64}\u{73}\u{6F}\u{6E}") }
+
+    /// home
+    public static var _$！﹤Home﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{48}\u{6F}\u{6D}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{6F}\u{6D}\u{65}") }
+
+    /// home fax
+    public static var _$！﹤HomeFAX﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{48}\u{6F}\u{6D}\u{65}\u{46}\u{41}\u{58}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{6F}\u{6D}\u{65}\u{20}\u{66}\u{61}\u{78}") }
+
+    /// homepage
+    public static var _$！﹤HomePage﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{48}\u{6F}\u{6D}\u{65}\u{50}\u{61}\u{67}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{6F}\u{6D}\u{65}\u{70}\u{61}\u{67}\u{65}") }
+
+    /// husband
+    public static var _$！﹤Husband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}") }
+
+    /// ISDN
+    public static var _$！﹤ISDN﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{49}\u{53}\u{44}\u{4E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{49}\u{53}\u{44}\u{4E}") }
+
+    /// main
+    public static var _$！﹤Main﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{61}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{61}\u{69}\u{6E}") }
+
+    /// cousin (male)
+    public static var _$！﹤MaleCousin﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{61}\u{6C}\u{65}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{61}\u{6C}\u{65}\u{29}") }
+
+    /// friend (male)
+    public static var _$！﹤MaleFriend﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{61}\u{6C}\u{65}\u{46}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{72}\u{69}\u{65}\u{6E}\u{64}\u{20}\u{28}\u{6D}\u{61}\u{6C}\u{65}\u{29}") }
+
+    /// partner (male)
+    public static var _$！﹤MalePartner﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{61}\u{6C}\u{65}\u{50}\u{61}\u{72}\u{74}\u{6E}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{74}\u{6E}\u{65}\u{72}\u{20}\u{28}\u{6D}\u{61}\u{6C}\u{65}\u{29}") }
+
+    /// manager
+    public static var _$！﹤Manager﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{72}") }
+
+    /// mobile
+    public static var _$！﹤Mobile﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{62}\u{69}\u{6C}\u{65}") }
+
+    /// MobileMe
+    public static var _$！﹤MobileMe﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{4D}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{4D}\u{65}") }
+
+    /// mother
+    public static var _$！﹤Mother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// mother-in-law
+    public static var _$！﹤MotherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// mother-in-law (husband’s mother)
+    public static var _$！﹤MotherInLawHusbandsMother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// mother-in-law or stepmother
+    public static var _$！﹤MotherInLawOrStepmother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{4F}\u{72}\u{53}\u{74}\u{65}\u{70}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{74}\u{65}\u{70}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// mother-in-law (wife’s mother)
+    public static var _$！﹤MotherInLawWifesMother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{57}\u{69}\u{66}\u{65}\u{73}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// nephew
+    public static var _$！﹤Nephew﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}") }
+
+    /// nephew (brother’s son)
+    public static var _$！﹤NephewBrothersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// nephew (brother’s son or husband’s sibling’s son)
+    public static var _$！﹤NephewBrothersSonOrHusbandsSiblingsSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{4F}\u{72}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{20}\u{6F}\u{72}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// nephew or cousin
+    public static var _$！﹤NephewOrCousin﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{4F}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{20}\u{6F}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}") }
+
+    /// nephew (sister’s son)
+    public static var _$！﹤NephewSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// nephew (sister’s son or wife’s sibling’s son)
+    public static var _$！﹤NephewSistersSonOrWifesSiblingsSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{4F}\u{72}\u{57}\u{69}\u{66}\u{65}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{65}\u{70}\u{68}\u{65}\u{77}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{20}\u{6F}\u{72}\u{20}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// niece
+    public static var _$！﹤Niece﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{69}\u{65}\u{63}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{69}\u{65}\u{63}\u{65}") }
+
+    /// niece (brother’s daughter)
+    public static var _$！﹤NieceBrothersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{69}\u{65}\u{63}\u{65}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{69}\u{65}\u{63}\u{65}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// niece (brother’s daughter or husband’s sibling’s daughter)
+    public static var _$！﹤NieceBrothersDaughterOrHusbandsSiblingsDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{69}\u{65}\u{63}\u{65}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{4F}\u{72}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{69}\u{65}\u{63}\u{65}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{20}\u{6F}\u{72}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// niece or cousin
+    public static var _$！﹤NieceOrCousin﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{69}\u{65}\u{63}\u{65}\u{4F}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{69}\u{65}\u{63}\u{65}\u{20}\u{6F}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}") }
+
+    /// niece (sister’s daughter)
+    public static var _$！﹤NieceSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{69}\u{65}\u{63}\u{65}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{69}\u{65}\u{63}\u{65}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// niece (sister’s daughter or wife’s sibling’s daughter)
+    public static var _$！﹤NieceSistersDaughterOrWifesSiblingsDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{69}\u{65}\u{63}\u{65}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{4F}\u{72}\u{57}\u{69}\u{66}\u{65}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{69}\u{65}\u{63}\u{65}\u{20}\u{28}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{20}\u{6F}\u{72}\u{20}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// note
+    public static var _$！﹤Note﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4E}\u{6F}\u{74}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6E}\u{6F}\u{74}\u{65}") }
+
+    /// other
+    public static var _$！﹤Other﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// other fax
+    public static var _$！﹤OtherFAX﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{4F}\u{74}\u{68}\u{65}\u{72}\u{46}\u{41}\u{58}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{66}\u{61}\u{78}") }
+
+    /// pager
+    public static var _$！﹤Pager﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{67}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{67}\u{65}\u{72}") }
+
+    /// parent
+    public static var _$！﹤Parent﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}") }
+
+    /// parent-in-law
+    public static var _$！﹤ParentInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// parent’s elder sibling
+    public static var _$！﹤ParentsElderSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// parent’s sibling
+    public static var _$！﹤ParentsSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// father’s elder sibling
+    public static var _$！﹤ParentsSiblingFathersElderSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// father’s sibling
+    public static var _$！﹤ParentsSiblingFathersSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// father’s younger sibling
+    public static var _$！﹤ParentsSiblingFathersYoungerSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// mother’s elder sibling
+    public static var _$！﹤ParentsSiblingMothersElderSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// mother’s sibling
+    public static var _$！﹤ParentsSiblingMothersSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// mother’s younger sibling
+    public static var _$！﹤ParentsSiblingMothersYoungerSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// parent’s younger sibling
+    public static var _$！﹤ParentsYoungerSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// partner
+    public static var _$！﹤Partner﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{50}\u{61}\u{72}\u{74}\u{6E}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{61}\u{72}\u{74}\u{6E}\u{65}\u{72}") }
+
+    /// radio
+    public static var _$！﹤Radio﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{52}\u{61}\u{64}\u{69}\u{6F}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{72}\u{61}\u{64}\u{69}\u{6F}") }
+
+    /// school
+    public static var _$！﹤School﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{63}\u{68}\u{6F}\u{6F}\u{6C}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{63}\u{68}\u{6F}\u{6F}\u{6C}") }
+
+    /// sibling
+    public static var _$！﹤Sibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// sibling-in-law
+    public static var _$！﹤SiblingInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// sibling’s child
+    public static var _$！﹤SiblingsChild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{43}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// sister
+    public static var _$！﹤Sister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}") }
+
+    /// sister-in-law
+    public static var _$！﹤SisterInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// sister-in-law (brother’s wife)
+    public static var _$！﹤SisterInLawBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// sister-in-law (elder brother’s wife)
+    public static var _$！﹤SisterInLawElderBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// sister-in-law (husband’s brother’s wife)
+    public static var _$！﹤SisterInLawHusbandsBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// sister-in-law (husband’s sister)
+    public static var _$！﹤SisterInLawHusbandsSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// sister-in-law (spouse’s sister)
+    public static var _$！﹤SisterInLawSpousesSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{53}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// sister-in-law (wife’s brother’s wife)
+    public static var _$！﹤SisterInLawWifesBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{57}\u{69}\u{66}\u{65}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// sister-in-law (wife’s sister)
+    public static var _$！﹤SisterInLawWifesSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{57}\u{69}\u{66}\u{65}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{77}\u{69}\u{66}\u{65}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// sister-in-law (younger brother’s wife)
+    public static var _$！﹤SisterInLawYoungerBrothersWife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{28}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{77}\u{69}\u{66}\u{65}\u{29}") }
+
+    /// profile
+    public static var _$！﹤SocialProfile﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{6F}\u{63}\u{69}\u{61}\u{6C}\u{50}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{70}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}") }
+
+    /// son
+    public static var _$！﹤Son﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{6F}\u{6E}") }
+
+    /// son-in-law
+    public static var _$！﹤SonInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{6F}\u{6E}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{6F}\u{6E}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// son-in-law or brother-in-law
+    public static var _$！﹤SonInLawOrBrotherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{6F}\u{6E}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{4F}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{6F}\u{6E}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{6F}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// son-in-law or stepson
+    public static var _$！﹤SonInLawOrStepson﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{6F}\u{6E}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{4F}\u{72}\u{53}\u{74}\u{65}\u{70}\u{73}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{6F}\u{6E}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{74}\u{65}\u{70}\u{73}\u{6F}\u{6E}") }
+
+    /// spouse
+    public static var _$！﹤Spouse﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{70}\u{6F}\u{75}\u{73}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{70}\u{6F}\u{75}\u{73}\u{65}") }
+
+    /// stepbrother
+    public static var _$！﹤Stepbrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// stepchild
+    public static var _$！﹤Stepchild﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{63}\u{68}\u{69}\u{6C}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{63}\u{68}\u{69}\u{6C}\u{64}") }
+
+    /// stepdaughter
+    public static var _$！﹤Stepdaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}") }
+
+    /// stepfather
+    public static var _$！﹤Stepfather﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// stepmother
+    public static var _$！﹤Stepmother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// stepparent
+    public static var _$！﹤Stepparent﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}") }
+
+    /// stepsister
+    public static var _$！﹤Stepsister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}") }
+
+    /// stepson
+    public static var _$！﹤Stepson﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{53}\u{74}\u{65}\u{70}\u{73}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{73}\u{74}\u{65}\u{70}\u{73}\u{6F}\u{6E}") }
+
+    /// RTT/TTY
+    public static var _$！﹤TTY﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{54}\u{54}\u{59}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}") }
+
+    /// teacher
+    public static var _$！﹤Teacher﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{54}\u{65}\u{61}\u{63}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{74}\u{65}\u{61}\u{63}\u{68}\u{65}\u{72}") }
+
+    /// telex
+    public static var _$！﹤Telex﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{54}\u{65}\u{6C}\u{65}\u{78}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{74}\u{65}\u{6C}\u{65}\u{78}") }
+
+    /// uncle
+    public static var _$！﹤Uncle﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}") }
+
+    /// uncle (father’s brother)
+    public static var _$！﹤UncleFathersBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (father’s elder brother)
+    public static var _$！﹤UncleFathersElderBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (father’s elder sister’s husband)
+    public static var _$！﹤UncleFathersElderSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// uncle (father’s sister’s husband)
+    public static var _$！﹤UncleFathersSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// uncle (father’s younger brother)
+    public static var _$！﹤UncleFathersYoungerBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (father’s younger sister’s husband)
+    public static var _$！﹤UncleFathersYoungerSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// uncle (mother’s brother)
+    public static var _$！﹤UncleMothersBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (mother’s elder brother)
+    public static var _$！﹤UncleMothersElderBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (mother’s sister’s husband)
+    public static var _$！﹤UncleMothersSistersHusband﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{48}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{68}\u{75}\u{73}\u{62}\u{61}\u{6E}\u{64}\u{29}") }
+
+    /// uncle (mother’s younger brother)
+    public static var _$！﹤UncleMothersYoungerBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (parent’s brother)
+    public static var _$！﹤UncleParentsBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (parent’s elder brother)
+    public static var _$！﹤UncleParentsElderBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{45}\u{6C}\u{64}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{65}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// uncle (parent’s younger brother)
+    public static var _$！﹤UncleParentsYoungerBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{55}\u{6E}\u{63}\u{6C}\u{65}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{75}\u{6E}\u{63}\u{6C}\u{65}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{29}") }
+
+    /// wife
+    public static var _$！﹤Wife﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{57}\u{69}\u{66}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{77}\u{69}\u{66}\u{65}") }
+
+    /// work
+    public static var _$！﹤Work﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{57}\u{6F}\u{72}\u{6B}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{77}\u{6F}\u{72}\u{6B}") }
+
+    /// work fax
+    public static var _$！﹤WorkFAX﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{57}\u{6F}\u{72}\u{6B}\u{46}\u{41}\u{58}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{77}\u{6F}\u{72}\u{6B}\u{20}\u{66}\u{61}\u{78}") }
+
+    /// younger brother
+    public static var _$！﹤YoungerBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// younger brother-in-law
+    public static var _$！﹤YoungerBrotherInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// younger cousin
+    public static var _$！﹤YoungerCousin﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}") }
+
+    /// younger cousin (father’s brother’s daughter)
+    public static var _$！﹤YoungerCousinFathersBrothersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// younger cousin (father’s brother’s son)
+    public static var _$！﹤YoungerCousinFathersBrothersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// younger cousin (father’s sister’s daughter)
+    public static var _$！﹤YoungerCousinFathersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// younger cousin (father’s sister’s son)
+    public static var _$！﹤YoungerCousinFathersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// younger cousin (mother’s brother’s daughter)
+    public static var _$！﹤YoungerCousinMothersBrothersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// younger cousin (mother’s brother’s son)
+    public static var _$！﹤YoungerCousinMothersBrothersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// younger cousin (mother’s sibling’s daughter or father’s sister’s daughter)
+    public static var _$！﹤YoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{4F}\u{72}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{20}\u{6F}\u{72}\u{20}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// younger cousin (mother’s sibling’s son or father’s sister’s son)
+    public static var _$！﹤YoungerCousinMothersSiblingsSonOrFathersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{4F}\u{72}\u{46}\u{61}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{20}\u{6F}\u{72}\u{20}\u{66}\u{61}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// younger cousin (mother’s sister’s daughter)
+    public static var _$！﹤YoungerCousinMothersSistersDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// younger cousin (mother’s sister’s son)
+    public static var _$！﹤YoungerCousinMothersSistersSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{4D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{6D}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// younger cousin (parent’s sibling’s daughter)
+    public static var _$！﹤YoungerCousinParentsSiblingsDaughter﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{44}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{64}\u{61}\u{75}\u{67}\u{68}\u{74}\u{65}\u{72}\u{29}") }
+
+    /// younger cousin (parent’s sibling’s son)
+    public static var _$！﹤YoungerCousinParentsSiblingsSon﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{43}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{73}\u{53}\u{6F}\u{6E}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{63}\u{6F}\u{75}\u{73}\u{69}\u{6E}\u{20}\u{28}\u{70}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2019}\u{73}\u{20}\u{73}\u{6F}\u{6E}\u{29}") }
+
+    /// younger sibling
+    public static var _$！﹤YoungerSibling﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}") }
+
+    /// younger sibling-in-law
+    public static var _$！﹤YoungerSiblingInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{62}\u{6C}\u{69}\u{6E}\u{67}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// younger sister
+    public static var _$！﹤YoungerSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}") }
+
+    /// younger sister-in-law
+    public static var _$！﹤YoungerSisterInLaw﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{49}\u{6E}\u{4C}\u{61}\u{77}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}\u{2D}\u{69}\u{6E}\u{2D}\u{6C}\u{61}\u{77}") }
+
+    /// youngest brother
+    public static var _$！﹤YoungestBrother﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{73}\u{74}\u{42}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{73}\u{74}\u{20}\u{62}\u{72}\u{6F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// youngest sister
+    public static var _$！﹤YoungestSister﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{59}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{73}\u{74}\u{53}\u{69}\u{73}\u{74}\u{65}\u{72}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{79}\u{6F}\u{75}\u{6E}\u{67}\u{65}\u{73}\u{74}\u{20}\u{73}\u{69}\u{73}\u{74}\u{65}\u{72}") }
+
+    /// iCloud
+    public static var _$！﹤iCloud﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}") }
+
+    /// iPhone
+    public static var _$！﹤iPhone﹥！$_｜Contacts: String { Util｜Contacts.systemString("\u{5F}\u{24}\u{21}\u{3C}\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{3E}\u{21}\u{24}\u{5F}", value: "\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// birthday
+    public static var birthday｜Contacts: String { Util｜Contacts.systemString("\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}", value: "\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// Calendar URI
+    public static var calendarURIs｜Contacts: String { Util｜Contacts.systemString("\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{55}\u{52}\u{49}\u{73}", value: "\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{55}\u{52}\u{49}") }
+
+    /// City
+    public static var city｜Contacts: String { Util｜Contacts.systemString("\u{63}\u{69}\u{74}\u{79}", value: "\u{43}\u{69}\u{74}\u{79}") }
+
+    /// Related name
+    public static var contactRelations｜Contacts: String { Util｜Contacts.systemString("\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{52}\u{65}\u{6C}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{52}\u{65}\u{6C}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Contact type
+    public static var contactType｜Contacts: String { Util｜Contacts.systemString("\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{54}\u{79}\u{70}\u{65}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{74}\u{79}\u{70}\u{65}") }
+
+    /// Country
+    public static var country｜Contacts: String { Util｜Contacts.systemString("\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{72}\u{79}", value: "\u{43}\u{6F}\u{75}\u{6E}\u{74}\u{72}\u{79}") }
+
+    /// Date
+    public static var dates｜Contacts: String { Util｜Contacts.systemString("\u{64}\u{61}\u{74}\u{65}\u{73}", value: "\u{44}\u{61}\u{74}\u{65}") }
+
+    /// Department
+    public static var departmentName｜Contacts: String { Util｜Contacts.systemString("\u{64}\u{65}\u{70}\u{61}\u{72}\u{74}\u{6D}\u{65}\u{6E}\u{74}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{44}\u{65}\u{70}\u{61}\u{72}\u{74}\u{6D}\u{65}\u{6E}\u{74}") }
+
+    /// Name order
+    public static var displayNameOrder｜Contacts: String { Util｜Contacts.systemString("\u{64}\u{69}\u{73}\u{70}\u{6C}\u{61}\u{79}\u{4E}\u{61}\u{6D}\u{65}\u{4F}\u{72}\u{64}\u{65}\u{72}", value: "\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{6F}\u{72}\u{64}\u{65}\u{72}") }
+
+    /// Display name
+    public static var displayname｜Contacts: String { Util｜Contacts.systemString("\u{64}\u{69}\u{73}\u{70}\u{6C}\u{61}\u{79}\u{6E}\u{61}\u{6D}\u{65}", value: "\u{44}\u{69}\u{73}\u{70}\u{6C}\u{61}\u{79}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Email
+    public static var emailAddresses｜Contacts: String { Util｜Contacts.systemString("\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{45}\u{6D}\u{61}\u{69}\u{6C}") }
+
+    /// Last name
+    public static var familyName｜Contacts: String { Util｜Contacts.systemString("\u{66}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{4C}\u{61}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// First name
+    public static var givenName｜Contacts: String { Util｜Contacts.systemString("\u{67}\u{69}\u{76}\u{65}\u{6E}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{46}\u{69}\u{72}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// iCloud
+    public static var iCloud｜Contacts: String { Util｜Contacts.systemString("\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}", value: "\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}") }
+
+    /// iPhone
+    public static var iPhone｜Contacts: String { Util｜Contacts.systemString("\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}", value: "\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// Image
+    public static var imageData｜Contacts: String { Util｜Contacts.systemString("\u{69}\u{6D}\u{61}\u{67}\u{65}\u{44}\u{61}\u{74}\u{61}", value: "\u{49}\u{6D}\u{61}\u{67}\u{65}") }
+
+    /// Instant message
+    public static var instantMessageAddresses｜Contacts: String { Util｜Contacts.systemString("\u{69}\u{6E}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{49}\u{6E}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// Job title
+    public static var jobTitle｜Contacts: String { Util｜Contacts.systemString("\u{6A}\u{6F}\u{62}\u{54}\u{69}\u{74}\u{6C}\u{65}", value: "\u{4A}\u{6F}\u{62}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}") }
+
+    /// Middle name
+    public static var middleName｜Contacts: String { Util｜Contacts.systemString("\u{6D}\u{69}\u{64}\u{64}\u{6C}\u{65}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{4D}\u{69}\u{64}\u{64}\u{6C}\u{65}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Group name
+    public static var name｜Contacts: String { Util｜Contacts.systemString("\u{6E}\u{61}\u{6D}\u{65}", value: "\u{47}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Prefix
+    public static var namePrefix｜Contacts: String { Util｜Contacts.systemString("\u{6E}\u{61}\u{6D}\u{65}\u{50}\u{72}\u{65}\u{66}\u{69}\u{78}", value: "\u{50}\u{72}\u{65}\u{66}\u{69}\u{78}") }
+
+    /// Suffix
+    public static var nameSuffix｜Contacts: String { Util｜Contacts.systemString("\u{6E}\u{61}\u{6D}\u{65}\u{53}\u{75}\u{66}\u{66}\u{69}\u{78}", value: "\u{53}\u{75}\u{66}\u{66}\u{69}\u{78}") }
+
+    /// Nickname
+    public static var nickname｜Contacts: String { Util｜Contacts.systemString("\u{6E}\u{69}\u{63}\u{6B}\u{6E}\u{61}\u{6D}\u{65}", value: "\u{4E}\u{69}\u{63}\u{6B}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Alternate calendar birthday
+    public static var nonGregorianBirthday｜Contacts: String { Util｜Contacts.systemString("\u{6E}\u{6F}\u{6E}\u{47}\u{72}\u{65}\u{67}\u{6F}\u{72}\u{69}\u{61}\u{6E}\u{42}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}", value: "\u{41}\u{6C}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{74}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// Note
+    public static var note｜Contacts: String { Util｜Contacts.systemString("\u{6E}\u{6F}\u{74}\u{65}", value: "\u{4E}\u{6F}\u{74}\u{65}") }
+
+    /// Company
+    public static var organizationName｜Contacts: String { Util｜Contacts.systemString("\u{6F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{43}\u{6F}\u{6D}\u{70}\u{61}\u{6E}\u{79}") }
+
+    /// Phone
+    public static var phoneNumbers｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{4E}\u{75}\u{6D}\u{62}\u{65}\u{72}\u{73}", value: "\u{50}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// Phonetic last name
+    public static var phoneticFamilyName｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{46}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Phonetic first name
+    public static var phoneticGivenName｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{47}\u{69}\u{76}\u{65}\u{6E}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Phonetic middle name
+    public static var phoneticMiddleName｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{4D}\u{69}\u{64}\u{64}\u{6C}\u{65}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{20}\u{6D}\u{69}\u{64}\u{64}\u{6C}\u{65}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Phonetic company name
+    public static var phoneticOrganizationName｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{4F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{74}\u{69}\u{63}\u{20}\u{63}\u{6F}\u{6D}\u{70}\u{61}\u{6E}\u{79}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Address
+    public static var postalAddresses｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{6F}\u{73}\u{74}\u{61}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}") }
+
+    /// ZIP
+    public static var postalCode｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{6F}\u{73}\u{74}\u{61}\u{6C}\u{43}\u{6F}\u{64}\u{65}", value: "\u{5A}\u{49}\u{50}") }
+
+    /// Maiden name
+    public static var previousFamilyName｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{72}\u{65}\u{76}\u{69}\u{6F}\u{75}\u{73}\u{46}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{4D}\u{61}\u{69}\u{64}\u{65}\u{6E}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Pronunciation last name
+    public static var pronunciationFamilyName｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{72}\u{6F}\u{6E}\u{75}\u{6E}\u{63}\u{69}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{46}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{50}\u{72}\u{6F}\u{6E}\u{75}\u{6E}\u{63}\u{69}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Pronunciation first name
+    public static var pronunciationGivenName｜Contacts: String { Util｜Contacts.systemString("\u{70}\u{72}\u{6F}\u{6E}\u{75}\u{6E}\u{63}\u{69}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{47}\u{69}\u{76}\u{65}\u{6E}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{50}\u{72}\u{6F}\u{6E}\u{75}\u{6E}\u{63}\u{69}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// Service
+    public static var service｜Contacts: String { Util｜Contacts.systemString("\u{73}\u{65}\u{72}\u{76}\u{69}\u{63}\u{65}", value: "\u{53}\u{65}\u{72}\u{76}\u{69}\u{63}\u{65}") }
+
+    /// Social profile
+    public static var socialProfiles｜Contacts: String { Util｜Contacts.systemString("\u{73}\u{6F}\u{63}\u{69}\u{61}\u{6C}\u{50}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}\u{73}", value: "\u{53}\u{6F}\u{63}\u{69}\u{61}\u{6C}\u{20}\u{70}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}") }
+
+    /// State
+    public static var state｜Contacts: String { Util｜Contacts.systemString("\u{73}\u{74}\u{61}\u{74}\u{65}", value: "\u{53}\u{74}\u{61}\u{74}\u{65}") }
+
+    /// Street
+    public static var street｜Contacts: String { Util｜Contacts.systemString("\u{73}\u{74}\u{72}\u{65}\u{65}\u{74}", value: "\u{53}\u{74}\u{72}\u{65}\u{65}\u{74}") }
+
+    /// County
+    public static var subAdministrativeArea｜Contacts: String { Util｜Contacts.systemString("\u{73}\u{75}\u{62}\u{41}\u{64}\u{6D}\u{69}\u{6E}\u{69}\u{73}\u{74}\u{72}\u{61}\u{74}\u{69}\u{76}\u{65}\u{41}\u{72}\u{65}\u{61}", value: "\u{43}\u{6F}\u{75}\u{6E}\u{74}\u{79}") }
+
+    /// District
+    public static var subLocality｜Contacts: String { Util｜Contacts.systemString("\u{73}\u{75}\u{62}\u{4C}\u{6F}\u{63}\u{61}\u{6C}\u{69}\u{74}\u{79}", value: "\u{44}\u{69}\u{73}\u{74}\u{72}\u{69}\u{63}\u{74}") }
+
+    /// URL
+    public static var urlAddresses｜Contacts: String { Util｜Contacts.systemString("\u{75}\u{72}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{55}\u{52}\u{4C}") }
+
+    /// URL
+    public static var urlString｜Contacts: String { Util｜Contacts.systemString("\u{75}\u{72}\u{6C}\u{53}\u{74}\u{72}\u{69}\u{6E}\u{67}", value: "\u{55}\u{52}\u{4C}") }
+
+    /// Identifier
+    public static var userIdentifier｜Contacts: String { Util｜Contacts.systemString("\u{75}\u{73}\u{65}\u{72}\u{49}\u{64}\u{65}\u{6E}\u{74}\u{69}\u{66}\u{69}\u{65}\u{72}", value: "\u{49}\u{64}\u{65}\u{6E}\u{74}\u{69}\u{66}\u{69}\u{65}\u{72}") }
+
+    /// User name
+    public static var username｜Contacts: String { Util｜Contacts.systemString("\u{75}\u{73}\u{65}\u{72}\u{6E}\u{61}\u{6D}\u{65}", value: "\u{55}\u{73}\u{65}\u{72}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+}
+
+// MARK: - Contacts Utilities
+
+@available(iOS 9.0, *)
+enum Util｜Contacts {
+
+    /// For testing: The preferred localization for Contacts strings (`nil` means use the current system locale)
+    static var preferredLocalization: String? = nil
+
+    /// Preferred available localization, depending on current value of `localization`
+    private static var preferredAvailableLocalization: String? {
+        Bundle.preferredLocalizations(from: availableLocalizations, forPreferences: preferredLocalization.flatMap { [$0] }).first
+    }
+
+    /// Localizations available in Contacts framework
+    private static let availableLocalizations = ["ar", "bn_Latn", "ca", "cs", "da", "de", "el", "en", "en_AU", "en_GB", "en_IN", "es", "es_419", "fi", "fr", "fr_CA", "gu_Latn", "he", "hi", "hi_Latn", "hr", "hu", "id", "it", "ja", "kn_Latn", "ko", "ml_Latn", "mr_Latn", "ms", "nl", "no", "or_Latn", "pa_Latn", "pl", "pt", "pt_PT", "ro", "ru", "sk", "sv", "ta_Latn", "te_Latn", "th", "tr", "uk", "vi", "zh_CN", "zh_HK", "zh_TW"]
+
+    /// Loads the Contacts string for the specified key
+    fileprivate static func systemString(_ key: String, value: String) -> String {
+        preferredAvailableLocalization.flatMap { bundle(for: $0)?.localizedString(forKey: key, value: value, table: nil) } ?? value
+    }
+
+    /// Utility method for accessing static (= lazy) properties
+    static func bundle(for localization: String) -> Bundle? {
+        switch localization {
+        case "ar": return ar｜Contacts
+        case "bn_Latn": return bn_Latn｜Contacts
+        case "ca": return ca｜Contacts
+        case "cs": return cs｜Contacts
+        case "da": return da｜Contacts
+        case "de": return de｜Contacts
+        case "el": return el｜Contacts
+        case "en": return en｜Contacts
+        case "en_AU": return en_AU｜Contacts
+        case "en_GB": return en_GB｜Contacts
+        case "en_IN": return en_IN｜Contacts
+        case "es": return es｜Contacts
+        case "es_419": return es_419｜Contacts
+        case "fi": return fi｜Contacts
+        case "fr": return fr｜Contacts
+        case "fr_CA": return fr_CA｜Contacts
+        case "gu_Latn": return gu_Latn｜Contacts
+        case "he": return he｜Contacts
+        case "hi": return hi｜Contacts
+        case "hi_Latn": return hi_Latn｜Contacts
+        case "hr": return hr｜Contacts
+        case "hu": return hu｜Contacts
+        case "id": return id｜Contacts
+        case "it": return it｜Contacts
+        case "ja": return ja｜Contacts
+        case "kn_Latn": return kn_Latn｜Contacts
+        case "ko": return ko｜Contacts
+        case "ml_Latn": return ml_Latn｜Contacts
+        case "mr_Latn": return mr_Latn｜Contacts
+        case "ms": return ms｜Contacts
+        case "nl": return nl｜Contacts
+        case "no": return no｜Contacts
+        case "or_Latn": return or_Latn｜Contacts
+        case "pa_Latn": return pa_Latn｜Contacts
+        case "pl": return pl｜Contacts
+        case "pt": return pt｜Contacts
+        case "pt_PT": return pt_PT｜Contacts
+        case "ro": return ro｜Contacts
+        case "ru": return ru｜Contacts
+        case "sk": return sk｜Contacts
+        case "sv": return sv｜Contacts
+        case "ta_Latn": return ta_Latn｜Contacts
+        case "te_Latn": return te_Latn｜Contacts
+        case "th": return th｜Contacts
+        case "tr": return tr｜Contacts
+        case "uk": return uk｜Contacts
+        case "vi": return vi｜Contacts
+        case "zh_CN": return zh_CN｜Contacts
+        case "zh_HK": return zh_HK｜Contacts
+        case "zh_TW": return zh_TW｜Contacts
+        default: return nil
+        }
+    }
+
+    /// Localized bundle for ar strings. Kept static so that it's loaded lazily.
+    private static let ar｜Contacts = loadBundle(for: "ar")
+
+    /// Localized bundle for bn_Latn strings. Kept static so that it's loaded lazily.
+    private static let bn_Latn｜Contacts = loadBundle(for: "bn_Latn")
+
+    /// Localized bundle for ca strings. Kept static so that it's loaded lazily.
+    private static let ca｜Contacts = loadBundle(for: "ca")
+
+    /// Localized bundle for cs strings. Kept static so that it's loaded lazily.
+    private static let cs｜Contacts = loadBundle(for: "cs")
+
+    /// Localized bundle for da strings. Kept static so that it's loaded lazily.
+    private static let da｜Contacts = loadBundle(for: "da")
+
+    /// Localized bundle for de strings. Kept static so that it's loaded lazily.
+    private static let de｜Contacts = loadBundle(for: "de")
+
+    /// Localized bundle for el strings. Kept static so that it's loaded lazily.
+    private static let el｜Contacts = loadBundle(for: "el")
+
+    /// Localized bundle for en strings. Kept static so that it's loaded lazily.
+    private static let en｜Contacts = loadBundle(for: "en")
+
+    /// Localized bundle for en_AU strings. Kept static so that it's loaded lazily.
+    private static let en_AU｜Contacts = loadBundle(for: "en_AU")
+
+    /// Localized bundle for en_GB strings. Kept static so that it's loaded lazily.
+    private static let en_GB｜Contacts = loadBundle(for: "en_GB")
+
+    /// Localized bundle for en_IN strings. Kept static so that it's loaded lazily.
+    private static let en_IN｜Contacts = loadBundle(for: "en_IN")
+
+    /// Localized bundle for es strings. Kept static so that it's loaded lazily.
+    private static let es｜Contacts = loadBundle(for: "es")
+
+    /// Localized bundle for es_419 strings. Kept static so that it's loaded lazily.
+    private static let es_419｜Contacts = loadBundle(for: "es_419")
+
+    /// Localized bundle for fi strings. Kept static so that it's loaded lazily.
+    private static let fi｜Contacts = loadBundle(for: "fi")
+
+    /// Localized bundle for fr strings. Kept static so that it's loaded lazily.
+    private static let fr｜Contacts = loadBundle(for: "fr")
+
+    /// Localized bundle for fr_CA strings. Kept static so that it's loaded lazily.
+    private static let fr_CA｜Contacts = loadBundle(for: "fr_CA")
+
+    /// Localized bundle for gu_Latn strings. Kept static so that it's loaded lazily.
+    private static let gu_Latn｜Contacts = loadBundle(for: "gu_Latn")
+
+    /// Localized bundle for he strings. Kept static so that it's loaded lazily.
+    private static let he｜Contacts = loadBundle(for: "he")
+
+    /// Localized bundle for hi strings. Kept static so that it's loaded lazily.
+    private static let hi｜Contacts = loadBundle(for: "hi")
+
+    /// Localized bundle for hi_Latn strings. Kept static so that it's loaded lazily.
+    private static let hi_Latn｜Contacts = loadBundle(for: "hi_Latn")
+
+    /// Localized bundle for hr strings. Kept static so that it's loaded lazily.
+    private static let hr｜Contacts = loadBundle(for: "hr")
+
+    /// Localized bundle for hu strings. Kept static so that it's loaded lazily.
+    private static let hu｜Contacts = loadBundle(for: "hu")
+
+    /// Localized bundle for id strings. Kept static so that it's loaded lazily.
+    private static let id｜Contacts = loadBundle(for: "id")
+
+    /// Localized bundle for it strings. Kept static so that it's loaded lazily.
+    private static let it｜Contacts = loadBundle(for: "it")
+
+    /// Localized bundle for ja strings. Kept static so that it's loaded lazily.
+    private static let ja｜Contacts = loadBundle(for: "ja")
+
+    /// Localized bundle for kn_Latn strings. Kept static so that it's loaded lazily.
+    private static let kn_Latn｜Contacts = loadBundle(for: "kn_Latn")
+
+    /// Localized bundle for ko strings. Kept static so that it's loaded lazily.
+    private static let ko｜Contacts = loadBundle(for: "ko")
+
+    /// Localized bundle for ml_Latn strings. Kept static so that it's loaded lazily.
+    private static let ml_Latn｜Contacts = loadBundle(for: "ml_Latn")
+
+    /// Localized bundle for mr_Latn strings. Kept static so that it's loaded lazily.
+    private static let mr_Latn｜Contacts = loadBundle(for: "mr_Latn")
+
+    /// Localized bundle for ms strings. Kept static so that it's loaded lazily.
+    private static let ms｜Contacts = loadBundle(for: "ms")
+
+    /// Localized bundle for nl strings. Kept static so that it's loaded lazily.
+    private static let nl｜Contacts = loadBundle(for: "nl")
+
+    /// Localized bundle for no strings. Kept static so that it's loaded lazily.
+    private static let no｜Contacts = loadBundle(for: "no")
+
+    /// Localized bundle for or_Latn strings. Kept static so that it's loaded lazily.
+    private static let or_Latn｜Contacts = loadBundle(for: "or_Latn")
+
+    /// Localized bundle for pa_Latn strings. Kept static so that it's loaded lazily.
+    private static let pa_Latn｜Contacts = loadBundle(for: "pa_Latn")
+
+    /// Localized bundle for pl strings. Kept static so that it's loaded lazily.
+    private static let pl｜Contacts = loadBundle(for: "pl")
+
+    /// Localized bundle for pt strings. Kept static so that it's loaded lazily.
+    private static let pt｜Contacts = loadBundle(for: "pt")
+
+    /// Localized bundle for pt_PT strings. Kept static so that it's loaded lazily.
+    private static let pt_PT｜Contacts = loadBundle(for: "pt_PT")
+
+    /// Localized bundle for ro strings. Kept static so that it's loaded lazily.
+    private static let ro｜Contacts = loadBundle(for: "ro")
+
+    /// Localized bundle for ru strings. Kept static so that it's loaded lazily.
+    private static let ru｜Contacts = loadBundle(for: "ru")
+
+    /// Localized bundle for sk strings. Kept static so that it's loaded lazily.
+    private static let sk｜Contacts = loadBundle(for: "sk")
+
+    /// Localized bundle for sv strings. Kept static so that it's loaded lazily.
+    private static let sv｜Contacts = loadBundle(for: "sv")
+
+    /// Localized bundle for ta_Latn strings. Kept static so that it's loaded lazily.
+    private static let ta_Latn｜Contacts = loadBundle(for: "ta_Latn")
+
+    /// Localized bundle for te_Latn strings. Kept static so that it's loaded lazily.
+    private static let te_Latn｜Contacts = loadBundle(for: "te_Latn")
+
+    /// Localized bundle for th strings. Kept static so that it's loaded lazily.
+    private static let th｜Contacts = loadBundle(for: "th")
+
+    /// Localized bundle for tr strings. Kept static so that it's loaded lazily.
+    private static let tr｜Contacts = loadBundle(for: "tr")
+
+    /// Localized bundle for uk strings. Kept static so that it's loaded lazily.
+    private static let uk｜Contacts = loadBundle(for: "uk")
+
+    /// Localized bundle for vi strings. Kept static so that it's loaded lazily.
+    private static let vi｜Contacts = loadBundle(for: "vi")
+
+    /// Localized bundle for zh_CN strings. Kept static so that it's loaded lazily.
+    private static let zh_CN｜Contacts = loadBundle(for: "zh_CN")
+
+    /// Localized bundle for zh_HK strings. Kept static so that it's loaded lazily.
+    private static let zh_HK｜Contacts = loadBundle(for: "zh_HK")
+
+    /// Localized bundle for zh_TW strings. Kept static so that it's loaded lazily.
+    private static let zh_TW｜Contacts = loadBundle(for: "zh_TW")
+
+    /// Convenience method for loading localized bundles
+    private static func loadBundle(for localization: String) -> Bundle? {
+        _ = Contacts.CNContact.self // Force bundle load
+        return Bundle(identifier: "com.apple.contacts")?
+            .path(forResource: localization, ofType: "lproj")
+            .flatMap { Bundle(path: $0) }
+    }
+
+}

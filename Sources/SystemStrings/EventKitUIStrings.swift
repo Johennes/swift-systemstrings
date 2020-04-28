@@ -1,0 +1,1950 @@
+/// Copyright 2020 Johannes Marbach
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+
+import EventKitUI
+import Foundation
+
+// MARK: - EventKitUI Strings
+
+@available(iOS 4.0, *)
+extension String {
+
+    ///  %@ more…
+    public static var _％＠_more．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{20}\u{25}\u{40}\u{20}\u{6D}\u{6F}\u{72}\u{65}\u{2026}", value: "\u{20}\u{25}\u{40}\u{20}\u{6D}\u{6F}\u{72}\u{65}\u{2026}") }
+
+    ///  and %@
+    public static var _and_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}", value: "\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}") }
+
+    /// "%@"
+    public static var ＂％＠＂｜EventKitUI: String { Util｜EventKitUI.systemString("\u{22}\u{25}\u{40}\u{22}", value: "\u{22}\u{25}\u{40}\u{22}") }
+
+    /// "%@" does not appear to be a valid email address.
+    public static var ＂％＠＂_does_not_appear_to_be_a_valid_email_address．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{22}\u{25}\u{40}\u{22}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{61}\u{70}\u{70}\u{65}\u{61}\u{72}\u{20}\u{74}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{61}\u{20}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{20}\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{2E}", value: "\u{22}\u{25}\u{40}\u{22}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{61}\u{70}\u{70}\u{65}\u{61}\u{72}\u{20}\u{74}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{61}\u{20}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{20}\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{2E}") }
+
+    /// %@
+    /// to %@
+    public static var ％＠﹨nto_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{A}\u{74}\u{6F}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{A}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// %@ (%@) to %@ (%@)
+    public static var ％＠_（％＠）_to_％＠_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// %@ -
+    public static var ％＠_﹣｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{2D}", value: "\u{25}\u{40}\u{20}\u{2D}") }
+
+    /// %@ - %@
+    public static var ％＠_﹣_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{2D}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{2D}\u{20}\u{25}\u{40}") }
+
+    /// %@ Conflict
+    public static var ％＠_Conflict｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{43}\u{6F}\u{6E}\u{66}\u{6C}\u{69}\u{63}\u{74}", value: "\u{25}\u{40}\u{20}\u{43}\u{6F}\u{6E}\u{66}\u{6C}\u{69}\u{63}\u{74}") }
+
+    /// %@ Conflicts
+    public static var ％＠_Conflicts｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{43}\u{6F}\u{6E}\u{66}\u{6C}\u{69}\u{63}\u{74}\u{73}", value: "\u{25}\u{40}\u{20}\u{43}\u{6F}\u{6E}\u{66}\u{6C}\u{69}\u{63}\u{74}\u{73}") }
+
+    /// %@ Events
+    public static var ％＠_Events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{25}\u{40}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// %@ after
+    public static var ％＠_after｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{61}\u{66}\u{74}\u{65}\u{72}", value: "\u{25}\u{40}\u{20}\u{61}\u{66}\u{74}\u{65}\u{72}") }
+
+    /// %@ at %@
+    public static var ％＠_at_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{61}\u{74}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{61}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// %@ before
+    public static var ％＠_before｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{62}\u{65}\u{66}\u{6F}\u{72}\u{65}", value: "\u{25}\u{40}\u{20}\u{62}\u{65}\u{66}\u{6F}\u{72}\u{65}") }
+
+    /// %@ before travel time
+    public static var ％＠_before_travel_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{62}\u{65}\u{66}\u{6F}\u{72}\u{65}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{40}\u{20}\u{62}\u{65}\u{66}\u{6F}\u{72}\u{65}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %@ birthdays
+    public static var ％＠_birthdays｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}\u{73}", value: "\u{25}\u{40}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// %@ commented
+    public static var ％＠_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{40}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %@ days
+    public static var ％＠_days｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{64}\u{61}\u{79}\u{73}", value: "\u{25}\u{40}\u{20}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// %@ days
+    public static var ％＠_days_format_label｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{64}\u{61}\u{79}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{20}\u{6C}\u{61}\u{62}\u{65}\u{6C}", value: "\u{25}\u{40}\u{20}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// %@ declined
+    public static var ％＠_declined｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}", value: "\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}") }
+
+    /// %@ declined to move the event to your proposed time
+    public static var ％＠_declined_to_move_the_event_to_your_proposed_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %@ declined, but proposed moving event to %@
+    public static var ％＠_declined，_but_proposed_moving_event_to_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{62}\u{75}\u{74}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{62}\u{75}\u{74}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// %@ declined, but proposed moving event to %@: "%@"
+    public static var ％＠_declined，_but_proposed_moving_event_to_％＠：_＂％＠＂｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{62}\u{75}\u{74}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}", value: "\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{62}\u{75}\u{74}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}") }
+
+    /// %@ declined: "%@"
+    public static var ％＠_declined：_＂％＠＂｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}", value: "\u{25}\u{40}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}") }
+
+    /// %@ from %@ (%@)
+    public static var ％＠_from_％＠_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{25}\u{40}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// %@ from %@ to %@
+    public static var ％＠_from_％＠_to_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// %@ hours
+    public static var ％＠_hours｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{68}\u{6F}\u{75}\u{72}\u{73}", value: "\u{25}\u{40}\u{20}\u{68}\u{6F}\u{75}\u{72}\u{73}") }
+
+    /// %@ hr
+    public static var ％＠_hr｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{68}\u{72}", value: "\u{25}\u{40}\u{20}\u{68}\u{72}") }
+
+    /// %@ min
+    public static var ％＠_min｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}", value: "\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}") }
+
+    /// %@ minutes
+    public static var ％＠_minutes｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}", value: "\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}") }
+
+    /// %@ months
+    public static var ％＠_months｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}", value: "\u{25}\u{40}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}") }
+
+    /// %@ of %@
+    public static var ％＠_of_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{6F}\u{66}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{6F}\u{66}\u{20}\u{25}\u{40}") }
+
+    /// %@ proposed a new time
+    public static var ％＠_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{40}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %@ proposed moving event to %@
+    public static var ％＠_proposed_moving_event_to_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// %@ proposed moving event to %@: "%@"
+    public static var ％＠_proposed_moving_event_to_％＠：_＂％＠＂｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}", value: "\u{25}\u{40}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{6D}\u{6F}\u{76}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}") }
+
+    /// %@ seconds
+    public static var ％＠_seconds｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{73}\u{65}\u{63}\u{6F}\u{6E}\u{64}\u{73}", value: "\u{25}\u{40}\u{20}\u{73}\u{65}\u{63}\u{6F}\u{6E}\u{64}\u{73}") }
+
+    /// %@ to %@
+    public static var ％＠_to_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// %@ to %@ (%@)
+    public static var ％＠_to_％＠_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// %@ travel time
+    public static var ％＠_travel_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{40}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %@ weeks
+    public static var ％＠_weeks｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{73}", value: "\u{25}\u{40}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{73}") }
+
+    /// %@ will immediately lose access to this calendar.
+    public static var ％＠_will_immediately_lose_access_to_this_calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{69}\u{6D}\u{6D}\u{65}\u{64}\u{69}\u{61}\u{74}\u{65}\u{6C}\u{79}\u{20}\u{6C}\u{6F}\u{73}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{25}\u{40}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{69}\u{6D}\u{6D}\u{65}\u{64}\u{69}\u{61}\u{74}\u{65}\u{6C}\u{79}\u{20}\u{6C}\u{6F}\u{73}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// %@ years
+    public static var ％＠_years｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}", value: "\u{25}\u{40}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}") }
+
+    /// %@, 
+    public static var ％＠，_｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{2C}\u{20}", value: "\u{25}\u{40}\u{2C}\u{20}") }
+
+    /// %@, %@
+    public static var ％＠，_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{2C}\u{20}\u{25}\u{40}", value: "\u{25}\u{40}\u{2C}\u{20}\u{25}\u{40}") }
+
+    /// %@: "%@"
+    public static var ％＠：_＂％＠＂｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}", value: "\u{25}\u{40}\u{3A}\u{20}\u{22}\u{25}\u{40}\u{22}") }
+
+    /// %@’s Calendar
+    public static var ％＠ߴs_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{40}\u{2019}\u{73}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{25}\u{40}\u{2019}\u{73}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// %d day
+    public static var ％d_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{20}\u{64}\u{61}\u{79}", value: "\u{25}\u{64}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// %d hour
+    public static var ％d_hour｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{20}\u{68}\u{6F}\u{75}\u{72}", value: "\u{25}\u{64}\u{20}\u{68}\u{6F}\u{75}\u{72}") }
+
+    /// %d hr
+    public static var ％d_hr｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{20}\u{68}\u{72}", value: "\u{25}\u{64}\u{20}\u{68}\u{72}") }
+
+    /// %d invitees
+    public static var ％d_invitees｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}", value: "\u{25}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}") }
+
+    /// %d min
+    public static var ％d_min｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{20}\u{6D}\u{69}\u{6E}", value: "\u{25}\u{64}\u{20}\u{6D}\u{69}\u{6E}") }
+
+    /// %d minute
+    public static var ％d_minute｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}", value: "\u{25}\u{64}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}") }
+
+    /// %d second
+    public static var ％d_second｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{20}\u{73}\u{65}\u{63}\u{6F}\u{6E}\u{64}", value: "\u{25}\u{64}\u{20}\u{73}\u{65}\u{63}\u{6F}\u{6E}\u{64}") }
+
+    /// %d°%d'%.0f'' %@
+    public static var ％ddeg％d＇％．0f＇＇_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{64}\u{B0}\u{25}\u{64}\u{27}\u{25}\u{2E}\u{30}\u{66}\u{27}\u{27}\u{20}\u{25}\u{40}", value: "\u{25}\u{64}\u{B0}\u{25}\u{64}\u{27}\u{25}\u{2E}\u{30}\u{66}\u{27}\u{27}\u{20}\u{25}\u{40}") }
+
+    /// %ld invitee commented
+    public static var ％ld_invitee_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %ld invitee commented, %ld invitee declined and proposed a new time
+    public static var ％ld_invitee_commented，_％ld_invitee_declined_and_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee commented, %ld invitee proposed a new time
+    public static var ％ld_invitee_commented，_％ld_invitee_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee commented, %ld invitees proposed a new time
+    public static var ％ld_invitee_commented，_％ld_invitees_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee declined, %ld invitee commented
+    public static var ％ld_invitee_declined，_％ld_invitee_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %ld invitee declined, %ld invitee commented and proposed a new time
+    public static var ％ld_invitee_declined，_％ld_invitee_commented_and_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee declined, %ld invitee commented, %ld invitee proposed a new time
+    public static var ％ld_invitee_declined，_％ld_invitee_commented，_％ld_invitee_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee declined, %ld invitee proposed a new time
+    public static var ％ld_invitee_declined，_％ld_invitee_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee declined, %ld invitees commented
+    public static var ％ld_invitee_declined，_％ld_invitees_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %ld invitee declined, %ld invitees proposed a new time
+    public static var ％ld_invitee_declined，_％ld_invitees_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee proposed a new time
+    public static var ％ld_invitee_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitee proposed a new time, %ld invitee declined and commented
+    public static var ％ld_invitee_proposed_a_new_time，_％ld_invitee_declined_and_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %ld invitees commented
+    public static var ％ld_invitees_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %ld invitees commented, %ld invitee proposed a new time
+    public static var ％ld_invitees_commented，_％ld_invitee_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitees commented, %ld invitees proposed a new time
+    public static var ％ld_invitees_commented，_％ld_invitees_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitees declined
+    public static var ％ld_invitees_declined｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}") }
+
+    /// %ld invitees declined, %ld invitee commented
+    public static var ％ld_invitees_declined，_％ld_invitee_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %ld invitees declined, %ld invitee proposed a new time
+    public static var ％ld_invitees_declined，_％ld_invitee_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitees declined, %ld invitees commented
+    public static var ％ld_invitees_declined，_％ld_invitees_commented｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}") }
+
+    /// %ld invitees declined, %ld invitees commented, %ld invitees proposed a new time
+    public static var ％ld_invitees_declined，_％ld_invitees_commented，_％ld_invitees_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitees declined, %ld invitees proposed a new time
+    public static var ％ld_invitees_declined，_％ld_invitees_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{2C}\u{20}\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// %ld invitees proposed a new time
+    public static var ％ld_invitees_proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{6C}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// & %@ more…
+    public static var ＆_％＠_more．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{26}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{6F}\u{72}\u{65}\u{2026}", value: "\u{26}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{6F}\u{72}\u{65}\u{2026}") }
+
+    /// Facebook
+    public static var ＇Facebook＇_group_mid_sentence_title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{27}\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}\u{27}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{6D}\u{69}\u{64}\u{20}\u{73}\u{65}\u{6E}\u{74}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}", value: "\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}") }
+
+    /// Facebook
+    public static var ＇Facebook＇_group_title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{27}\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}\u{27}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}", value: "\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}") }
+
+    /// Other
+    public static var ＇Other＇_group_mid_sentence_title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{27}\u{4F}\u{74}\u{68}\u{65}\u{72}\u{27}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{6D}\u{69}\u{64}\u{20}\u{73}\u{65}\u{6E}\u{74}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}", value: "\u{4F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// Other
+    public static var ＇Other＇_group_title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{27}\u{4F}\u{74}\u{68}\u{65}\u{72}\u{27}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}", value: "\u{4F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// , 
+    public static var ，_｜EventKitUI: String { Util｜EventKitUI.systemString("\u{2C}\u{20}", value: "\u{2C}\u{20}") }
+
+    /// , and %@
+    public static var ，_and_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{2C}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}", value: "\u{2C}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}") }
+
+    /// 1 day
+    public static var _1_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{20}\u{64}\u{61}\u{79}", value: "\u{31}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// 1 week
+    public static var _1_week｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{20}\u{77}\u{65}\u{65}\u{6B}", value: "\u{31}\u{20}\u{77}\u{65}\u{65}\u{6B}") }
+
+    /// 1 week
+    public static var _1_week_interval｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{20}\u{69}\u{6E}\u{74}\u{65}\u{72}\u{76}\u{61}\u{6C}", value: "\u{31}\u{20}\u{77}\u{65}\u{65}\u{6B}") }
+
+    /// 10th
+    public static var _10th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{30}\u{74}\u{68}", value: "\u{31}\u{30}\u{74}\u{68}") }
+
+    /// 11th
+    public static var _11th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{31}\u{74}\u{68}", value: "\u{31}\u{31}\u{74}\u{68}") }
+
+    /// 12th
+    public static var _12th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{32}\u{74}\u{68}", value: "\u{31}\u{32}\u{74}\u{68}") }
+
+    /// 13th
+    public static var _13th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{33}\u{74}\u{68}", value: "\u{31}\u{33}\u{74}\u{68}") }
+
+    /// 14th
+    public static var _14th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{34}\u{74}\u{68}", value: "\u{31}\u{34}\u{74}\u{68}") }
+
+    /// 15th
+    public static var _15th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{35}\u{74}\u{68}", value: "\u{31}\u{35}\u{74}\u{68}") }
+
+    /// 16th
+    public static var _16th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{36}\u{74}\u{68}", value: "\u{31}\u{36}\u{74}\u{68}") }
+
+    /// 17th
+    public static var _17th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{37}\u{74}\u{68}", value: "\u{31}\u{37}\u{74}\u{68}") }
+
+    /// 18th
+    public static var _18th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{38}\u{74}\u{68}", value: "\u{31}\u{38}\u{74}\u{68}") }
+
+    /// 19th
+    public static var _19th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{39}\u{74}\u{68}", value: "\u{31}\u{39}\u{74}\u{68}") }
+
+    /// 1st
+    public static var _1st｜EventKitUI: String { Util｜EventKitUI.systemString("\u{31}\u{73}\u{74}", value: "\u{31}\u{73}\u{74}") }
+
+    /// 20th
+    public static var _20th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{30}\u{74}\u{68}", value: "\u{32}\u{30}\u{74}\u{68}") }
+
+    /// 21st
+    public static var _21st｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{31}\u{73}\u{74}", value: "\u{32}\u{31}\u{73}\u{74}") }
+
+    /// 22nd
+    public static var _22nd｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{32}\u{6E}\u{64}", value: "\u{32}\u{32}\u{6E}\u{64}") }
+
+    /// 23rd
+    public static var _23rd｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{33}\u{72}\u{64}", value: "\u{32}\u{33}\u{72}\u{64}") }
+
+    /// 24th
+    public static var _24th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{34}\u{74}\u{68}", value: "\u{32}\u{34}\u{74}\u{68}") }
+
+    /// 25th
+    public static var _25th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{35}\u{74}\u{68}", value: "\u{32}\u{35}\u{74}\u{68}") }
+
+    /// 26th
+    public static var _26th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{36}\u{74}\u{68}", value: "\u{32}\u{36}\u{74}\u{68}") }
+
+    /// 27th
+    public static var _27th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{37}\u{74}\u{68}", value: "\u{32}\u{37}\u{74}\u{68}") }
+
+    /// 28th
+    public static var _28th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{38}\u{74}\u{68}", value: "\u{32}\u{38}\u{74}\u{68}") }
+
+    /// 29th
+    public static var _29th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{39}\u{74}\u{68}", value: "\u{32}\u{39}\u{74}\u{68}") }
+
+    /// 2nd
+    public static var _2nd｜EventKitUI: String { Util｜EventKitUI.systemString("\u{32}\u{6E}\u{64}", value: "\u{32}\u{6E}\u{64}") }
+
+    /// 30th
+    public static var _30th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{33}\u{30}\u{74}\u{68}", value: "\u{33}\u{30}\u{74}\u{68}") }
+
+    /// 31st
+    public static var _31st｜EventKitUI: String { Util｜EventKitUI.systemString("\u{33}\u{31}\u{73}\u{74}", value: "\u{33}\u{31}\u{73}\u{74}") }
+
+    /// 3rd
+    public static var _3rd｜EventKitUI: String { Util｜EventKitUI.systemString("\u{33}\u{72}\u{64}", value: "\u{33}\u{72}\u{64}") }
+
+    /// 4th
+    public static var _4th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{34}\u{74}\u{68}", value: "\u{34}\u{74}\u{68}") }
+
+    /// 5th
+    public static var _5th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{35}\u{74}\u{68}", value: "\u{35}\u{74}\u{68}") }
+
+    /// 6th
+    public static var _6th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{36}\u{74}\u{68}", value: "\u{36}\u{74}\u{68}") }
+
+    /// 7th
+    public static var _7th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{37}\u{74}\u{68}", value: "\u{37}\u{74}\u{68}") }
+
+    /// 8th
+    public static var _8th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{38}\u{74}\u{68}", value: "\u{38}\u{74}\u{68}") }
+
+    /// 9th
+    public static var _9th｜EventKitUI: String { Util｜EventKitUI.systemString("\u{39}\u{74}\u{68}", value: "\u{39}\u{74}\u{68}") }
+
+    /// <inline attachment not shown>
+    public static var ﹤inline_attachment_not_shown﹥｜EventKitUI: String { Util｜EventKitUI.systemString("\u{3C}\u{69}\u{6E}\u{6C}\u{69}\u{6E}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{73}\u{68}\u{6F}\u{77}\u{6E}\u{3E}", value: "\u{3C}\u{69}\u{6E}\u{6C}\u{69}\u{6E}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{73}\u{68}\u{6F}\u{77}\u{6E}\u{3E}") }
+
+    /// Accept
+    public static var Accept｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{63}\u{63}\u{65}\u{70}\u{74}", value: "\u{41}\u{63}\u{63}\u{65}\u{70}\u{74}") }
+
+    /// Accept Proposed Time
+    public static var Accept_Proposed_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{63}\u{63}\u{65}\u{70}\u{74}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{41}\u{63}\u{63}\u{65}\u{70}\u{74}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Accepted
+    public static var Accepted｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{63}\u{63}\u{65}\u{70}\u{74}\u{65}\u{64}", value: "\u{41}\u{63}\u{63}\u{65}\u{70}\u{74}\u{65}\u{64}") }
+
+    /// Account
+    public static var Account｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}", value: "\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}") }
+
+    /// Accounts
+    public static var Accounts_﹣_Account_Picker｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{73}\u{20}\u{2D}\u{20}\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{20}\u{50}\u{69}\u{63}\u{6B}\u{65}\u{72}", value: "\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{73}") }
+
+    /// Add
+    public static var Add｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}", value: "\u{41}\u{64}\u{64}") }
+
+    /// Add (%@)
+    public static var Add_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{41}\u{64}\u{64}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// Add All
+    public static var Add_All｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{41}\u{6C}\u{6C}", value: "\u{41}\u{64}\u{64}\u{20}\u{41}\u{6C}\u{6C}") }
+
+    /// Add Calendar
+    public static var Add_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{41}\u{64}\u{64}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Add Invitees
+    public static var Add_Invitees｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}", value: "\u{41}\u{64}\u{64}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}") }
+
+    /// Add Location
+    public static var Add_Location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{41}\u{64}\u{64}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Add Person
+    public static var Add_Person｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{50}\u{65}\u{72}\u{73}\u{6F}\u{6E}", value: "\u{41}\u{64}\u{64}\u{20}\u{50}\u{65}\u{72}\u{73}\u{6F}\u{6E}") }
+
+    /// Add To Calendar
+    public static var Add_To_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{54}\u{6F}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{41}\u{64}\u{64}\u{20}\u{54}\u{6F}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Add attachment…
+    public static var Add_attachment｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}", value: "\u{41}\u{64}\u{64}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{2026}") }
+
+    /// Add invitees
+    public static var Add_invitees｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}", value: "\u{41}\u{64}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}") }
+
+    /// Add invitees to this Event.
+    public static var Add_invitees_to_this_Event．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{2E}", value: "\u{41}\u{64}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{2E}") }
+
+    /// Add participants to this Calendar.
+    public static var Add_participants_to_this_Calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{70}\u{61}\u{72}\u{74}\u{69}\u{63}\u{69}\u{70}\u{61}\u{6E}\u{74}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{41}\u{64}\u{64}\u{20}\u{70}\u{61}\u{72}\u{74}\u{69}\u{63}\u{69}\u{70}\u{61}\u{6E}\u{74}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// Add travel time for this event to your calendar. Event alerts will take this time into account and your calendar will be blocked during this time.
+    public static var Add_travel_time_for_this_event_to_your_calendar．_Event_alerts_will_take_this_time_into_account_and_your_calendar_will_be_blocked_during_this_time．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{74}\u{61}\u{6B}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{69}\u{6E}\u{74}\u{6F}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{62}\u{6C}\u{6F}\u{63}\u{6B}\u{65}\u{64}\u{20}\u{64}\u{75}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2E}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{74}\u{61}\u{6B}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{69}\u{6E}\u{74}\u{6F}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{62}\u{6C}\u{6F}\u{63}\u{6B}\u{65}\u{64}\u{20}\u{64}\u{75}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2E}") }
+
+    /// Address Not Recognized
+    public static var Address_Not_Recognized｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{4E}\u{6F}\u{74}\u{20}\u{52}\u{65}\u{63}\u{6F}\u{67}\u{6E}\u{69}\u{7A}\u{65}\u{64}", value: "\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{4E}\u{6F}\u{74}\u{20}\u{52}\u{65}\u{63}\u{6F}\u{67}\u{6E}\u{69}\u{7A}\u{65}\u{64}") }
+
+    /// Alert
+    public static var Alert｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{65}\u{72}\u{74}", value: "\u{41}\u{6C}\u{65}\u{72}\u{74}") }
+
+    /// Alert Time
+    public static var Alert_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{41}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Alerts for this calendar are disabled.
+    /// To allow this alert to fire, enable ‘%@’ in the calendar settings for ‘%@’.
+    public static var Alerts_for_this_calendar_are_disabled．﹨nTo_allow_this_alert_to_fire，_enable_ߴ％＠ߴ_in_the_calendar_settings_for_ߴ％＠ߴ．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{61}\u{72}\u{65}\u{20}\u{64}\u{69}\u{73}\u{61}\u{62}\u{6C}\u{65}\u{64}\u{2E}\u{A}\u{54}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{66}\u{69}\u{72}\u{65}\u{2C}\u{20}\u{65}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{2018}\u{25}\u{40}\u{2019}\u{20}\u{69}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{73}\u{65}\u{74}\u{74}\u{69}\u{6E}\u{67}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{2018}\u{25}\u{40}\u{2019}\u{2E}", value: "\u{41}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{61}\u{72}\u{65}\u{20}\u{64}\u{69}\u{73}\u{61}\u{62}\u{6C}\u{65}\u{64}\u{2E}\u{A}\u{54}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{66}\u{69}\u{72}\u{65}\u{2C}\u{20}\u{65}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{2018}\u{25}\u{40}\u{2019}\u{20}\u{69}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{73}\u{65}\u{74}\u{74}\u{69}\u{6E}\u{67}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{2018}\u{25}\u{40}\u{2019}\u{2E}") }
+
+    /// All Invitees Can Attend
+    public static var All_Invitees_Can_Attend｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{43}\u{61}\u{6E}\u{20}\u{41}\u{74}\u{74}\u{65}\u{6E}\u{64}", value: "\u{41}\u{6C}\u{6C}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{43}\u{61}\u{6E}\u{20}\u{41}\u{74}\u{74}\u{65}\u{6E}\u{64}") }
+
+    /// All day
+    public static var All_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{20}\u{64}\u{61}\u{79}", value: "\u{41}\u{6C}\u{6C}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// All day from %@
+    public static var All_day_from_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{20}\u{64}\u{61}\u{79}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}", value: "\u{41}\u{6C}\u{6C}\u{20}\u{64}\u{61}\u{79}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}") }
+
+    /// All-day
+    public static var All﹣day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{2D}\u{64}\u{61}\u{79}", value: "\u{41}\u{6C}\u{6C}\u{2D}\u{64}\u{61}\u{79}") }
+
+    /// %@ (%@)
+    public static var All﹣day_alarm_format｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{2D}\u{64}\u{61}\u{79}\u{20}\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// Allow Editing
+    public static var Allow_Editing｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{45}\u{64}\u{69}\u{74}\u{69}\u{6E}\u{67}", value: "\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{45}\u{64}\u{69}\u{74}\u{69}\u{6E}\u{67}") }
+
+    /// Allow anyone to subscribe to a read-only version of this calendar.
+    public static var Allow_anyone_to_subscribe_to_a_read﹣only_version_of_this_calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{61}\u{6E}\u{79}\u{6F}\u{6E}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{73}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{20}\u{72}\u{65}\u{61}\u{64}\u{2D}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6F}\u{6E}\u{20}\u{6F}\u{66}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{61}\u{6E}\u{79}\u{6F}\u{6E}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{73}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{20}\u{72}\u{65}\u{61}\u{64}\u{2D}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6F}\u{6E}\u{20}\u{6F}\u{66}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// Allow events on this calendar to display alerts.
+    public static var Allow_events_on_this_calendar_to_display_alerts．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{70}\u{6C}\u{61}\u{79}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{2E}", value: "\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{70}\u{6C}\u{61}\u{79}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{2E}") }
+
+    /// Allow this person to make changes to the calendar.
+    public static var Allow_this_person_to_make_changes_to_the_calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{70}\u{65}\u{72}\u{73}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{61}\u{6B}\u{65}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{70}\u{65}\u{72}\u{73}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{61}\u{6B}\u{65}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// An error occurred while downloading the attachment.
+    public static var An_error_occurred_while_downloading_the_attachment．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{6F}\u{63}\u{63}\u{75}\u{72}\u{72}\u{65}\u{64}\u{20}\u{77}\u{68}\u{69}\u{6C}\u{65}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{2E}", value: "\u{41}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{6F}\u{63}\u{63}\u{75}\u{72}\u{72}\u{65}\u{64}\u{20}\u{77}\u{68}\u{69}\u{6C}\u{65}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{2E}") }
+
+    /// An unknown error occurred.
+    public static var An_unknown_error_occurred．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{6E}\u{20}\u{75}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{6F}\u{63}\u{63}\u{75}\u{72}\u{72}\u{65}\u{64}\u{2E}", value: "\u{41}\u{6E}\u{20}\u{75}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{6F}\u{63}\u{63}\u{75}\u{72}\u{72}\u{65}\u{64}\u{2E}") }
+
+    /// Apply
+    public static var Apply｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{70}\u{70}\u{6C}\u{79}", value: "\u{41}\u{70}\u{70}\u{6C}\u{79}") }
+
+    /// Are you sure you want to delete this calendar? All events and reminders associated with the calendar will also be deleted.
+    public static var Are_you_sure_you_want_to_delete_this_calendar？_All_events_and_reminders_associated_with_the_calendar_will_also_be_deleted．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3F}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{72}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}\u{73}\u{20}\u{61}\u{73}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{6C}\u{73}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3F}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{72}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}\u{73}\u{20}\u{61}\u{73}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{6C}\u{73}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}") }
+
+    /// Are you sure you want to delete this calendar? All events associated with the calendar will also be deleted.
+    public static var Are_you_sure_you_want_to_delete_this_calendar？_All_events_associated_with_the_calendar_will_also_be_deleted．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3F}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{61}\u{73}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{6C}\u{73}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3F}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{61}\u{73}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{6C}\u{73}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}") }
+
+    /// Are you sure you want to delete this calendar? All reminders associated with the calendar will also be deleted.
+    public static var Are_you_sure_you_want_to_delete_this_calendar？_All_reminders_associated_with_the_calendar_will_also_be_deleted．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3F}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}\u{73}\u{20}\u{61}\u{73}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{6C}\u{73}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3F}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}\u{73}\u{20}\u{61}\u{73}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{6C}\u{73}\u{6F}\u{20}\u{62}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}") }
+
+    /// Are you sure you want to delete this event?
+    public static var Are_you_sure_you_want_to_delete_this_event？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{3F}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{3F}") }
+
+    /// Are you sure you want to delete this event? This is a repeating event.
+    public static var Are_you_sure_you_want_to_delete_this_event？_This_is_a_repeating_event．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{3F}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{73}\u{20}\u{61}\u{20}\u{72}\u{65}\u{70}\u{65}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2E}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{3F}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{73}\u{20}\u{61}\u{20}\u{72}\u{65}\u{70}\u{65}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2E}") }
+
+    /// Are you sure you want to discard this new event?
+    public static var Are_you_sure_you_want_to_discard_this_new_event？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{3F}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{3F}") }
+
+    /// Are you sure you want to discard your changes?
+    public static var Are_you_sure_you_want_to_discard_your_changes？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{3F}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{3F}") }
+
+    /// Ask %@ to move "%@" to %@ at %@
+    public static var Ask_％＠_to_move_＂％＠＂_to_％＠_at_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{73}\u{6B}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{22}\u{25}\u{40}\u{22}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{61}\u{74}\u{20}\u{25}\u{40}", value: "\u{41}\u{73}\u{6B}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{22}\u{25}\u{40}\u{22}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{61}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// At start of travel time
+    public static var At_start_of_travel_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{74}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{41}\u{74}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// At time of event
+    public static var At_time_of_event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{74}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}", value: "\u{41}\u{74}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Attachment changes must be applied to all recurrences.
+    public static var Attachment_changes_must_be_applied_to_all_recurrences．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{6D}\u{75}\u{73}\u{74}\u{20}\u{62}\u{65}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{69}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}\u{2E}", value: "\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{6D}\u{75}\u{73}\u{74}\u{20}\u{62}\u{65}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{69}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}\u{2E}") }
+
+    /// Attachments
+    public static var Attachments｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}", value: "\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Attachments on subscribed calendar events cannot be downloaded.
+    public static var Attachments_on_subscribed_calendar_events_cannot_be_downloaded．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{73}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{63}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{65}\u{64}\u{2E}", value: "\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{73}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{63}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{65}\u{64}\u{2E}") }
+
+    /// Attachments will be applied to all recurrences
+    public static var Attachments_will_be_applied_to_all_recurrences｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{69}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}", value: "\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{69}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}") }
+
+    /// Availability
+    public static var Availability｜EventKitUI: String { Util｜EventKitUI.systemString("\u{41}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{69}\u{6C}\u{69}\u{74}\u{79}", value: "\u{41}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{69}\u{6C}\u{69}\u{74}\u{79}") }
+
+    /// Based on location
+    public static var Based_on_location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{42}\u{61}\u{73}\u{65}\u{64}\u{20}\u{6F}\u{6E}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{42}\u{61}\u{73}\u{65}\u{64}\u{20}\u{6F}\u{6E}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Beginning now
+    public static var Beginning_now｜EventKitUI: String { Util｜EventKitUI.systemString("\u{42}\u{65}\u{67}\u{69}\u{6E}\u{6E}\u{69}\u{6E}\u{67}\u{20}\u{6E}\u{6F}\u{77}", value: "\u{42}\u{65}\u{67}\u{69}\u{6E}\u{6E}\u{69}\u{6E}\u{67}\u{20}\u{6E}\u{6F}\u{77}") }
+
+    /// Birthdays
+    public static var Birthdays｜EventKitUI: String { Util｜EventKitUI.systemString("\u{42}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}\u{73}", value: "\u{42}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// Biweekly
+    public static var Biweekly｜EventKitUI: String { Util｜EventKitUI.systemString("\u{42}\u{69}\u{77}\u{65}\u{65}\u{6B}\u{6C}\u{79}", value: "\u{42}\u{69}\u{77}\u{65}\u{65}\u{6B}\u{6C}\u{79}") }
+
+    /// Blue
+    public static var Blue｜EventKitUI: String { Util｜EventKitUI.systemString("\u{42}\u{6C}\u{75}\u{65}", value: "\u{42}\u{6C}\u{75}\u{65}") }
+
+    /// Brown
+    public static var Brown｜EventKitUI: String { Util｜EventKitUI.systemString("\u{42}\u{72}\u{6F}\u{77}\u{6E}", value: "\u{42}\u{72}\u{6F}\u{77}\u{6E}") }
+
+    /// Busy
+    public static var Busy｜EventKitUI: String { Util｜EventKitUI.systemString("\u{42}\u{75}\u{73}\u{79}", value: "\u{42}\u{75}\u{73}\u{79}") }
+
+    /// CANCELED
+    public static var CANCELED｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}\u{45}\u{44}", value: "\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}\u{45}\u{44}") }
+
+    /// Calendar
+    public static var Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Calendar Name
+    public static var Calendar_Name｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{4E}\u{61}\u{6D}\u{65}", value: "\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{4E}\u{61}\u{6D}\u{65}") }
+
+    /// %@ (%@)
+    public static var Calendar_disambiguation_format｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{64}\u{69}\u{73}\u{61}\u{6D}\u{62}\u{69}\u{67}\u{75}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// Calendar uses your location, this event’s location, and traffic conditions to tell you when you need to leave.
+    public static var Calendar_uses_your_location，_this_eventߴs_location，_and_traffic_conditions_to_tell_you_when_you_need_to_leave．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{75}\u{73}\u{65}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{74}\u{72}\u{61}\u{66}\u{66}\u{69}\u{63}\u{20}\u{63}\u{6F}\u{6E}\u{64}\u{69}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{65}\u{6C}\u{6C}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{68}\u{65}\u{6E}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{6E}\u{65}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{6C}\u{65}\u{61}\u{76}\u{65}\u{2E}", value: "\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{75}\u{73}\u{65}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2019}\u{73}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{74}\u{72}\u{61}\u{66}\u{66}\u{69}\u{63}\u{20}\u{63}\u{6F}\u{6E}\u{64}\u{69}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{65}\u{6C}\u{6C}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{68}\u{65}\u{6E}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{6E}\u{65}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{6C}\u{65}\u{61}\u{76}\u{65}\u{2E}") }
+
+    /// Calendars
+    public static var Calendars｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}", value: "\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}") }
+
+    /// Can we move this event to <b>%@</b>?
+    public static var Can_we_move_this_event_to_﹤b﹥％＠﹤／b﹥？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{20}\u{77}\u{65}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{3C}\u{62}\u{3E}\u{25}\u{40}\u{3C}\u{2F}\u{62}\u{3E}\u{3F}", value: "\u{43}\u{61}\u{6E}\u{20}\u{77}\u{65}\u{20}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{3C}\u{62}\u{3E}\u{25}\u{40}\u{3C}\u{2F}\u{62}\u{3E}\u{3F}") }
+
+    /// Cancel
+    public static var Cancel｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel
+    public static var Cancel_﹣_delete_clicked｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{63}\u{6C}\u{69}\u{63}\u{6B}\u{65}\u{64}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel
+    public static var Cancel_﹣_location_search_model_﹣_selected_location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{73}\u{65}\u{61}\u{72}\u{63}\u{68}\u{20}\u{6D}\u{6F}\u{64}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{73}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{65}\u{64}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel
+    public static var Cancel_﹣_prompt_user_for_propose_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{70}\u{72}\u{6F}\u{6D}\u{70}\u{74}\u{20}\u{75}\u{73}\u{65}\u{72}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{70}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel
+    public static var Cancel_﹣_recurrence_alert_controller｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{72}\u{6F}\u{6C}\u{6C}\u{65}\u{72}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel
+    public static var Cancel_﹣_remove_clicked｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{72}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{63}\u{6C}\u{69}\u{63}\u{6B}\u{65}\u{64}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel
+    public static var Cancel_﹣_report_as_spam｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{72}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{61}\u{73}\u{20}\u{73}\u{70}\u{61}\u{6D}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel
+    public static var Cancel_﹣_send_invite_alert_controller｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{2D}\u{20}\u{73}\u{65}\u{6E}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{72}\u{6F}\u{6C}\u{6C}\u{65}\u{72}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Cancel Proposed Time
+    public static var Cancel_Proposed_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Cancel
+    public static var Cancel_decline｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{20}\u{64}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Canceled
+    public static var Canceled｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{65}\u{64}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{65}\u{64}") }
+
+    /// Canceled by
+    public static var Canceled_by｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{79}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{65}\u{64}\u{20}\u{62}\u{79}") }
+
+    /// Cannot Open Attachment
+    public static var Cannot_Open_Attachment｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{4F}\u{70}\u{65}\u{6E}\u{20}\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}", value: "\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{4F}\u{70}\u{65}\u{6E}\u{20}\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}") }
+
+    /// Cannot Provide Directions
+    public static var Cannot_Provide_Directions｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{50}\u{72}\u{6F}\u{76}\u{69}\u{64}\u{65}\u{20}\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{50}\u{72}\u{6F}\u{76}\u{69}\u{64}\u{65}\u{20}\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}") }
+
+    /// Cannot Repeat Event
+    public static var Cannot_Repeat_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Cannot Save Event
+    public static var Cannot_Save_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{53}\u{61}\u{76}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{53}\u{61}\u{76}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Cannot Send Invitation
+    public static var Cannot_Send_Invitation｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{53}\u{65}\u{6E}\u{64}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{53}\u{65}\u{6E}\u{64}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Cannot get directions to and from the same location.
+    public static var Cannot_get_directions_to_and_from_the_same_location．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{67}\u{65}\u{74}\u{20}\u{64}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{74}\u{68}\u{65}\u{20}\u{73}\u{61}\u{6D}\u{65}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2E}", value: "\u{43}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{20}\u{67}\u{65}\u{74}\u{20}\u{64}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{74}\u{68}\u{65}\u{20}\u{73}\u{61}\u{6D}\u{65}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2E}") }
+
+    /// Changes to attachments will apply to all recurrences.
+    public static var Changes_to_attachments_will_apply_to_all_recurrences．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{79}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}\u{2E}", value: "\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{79}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}\u{2E}") }
+
+    /// Choose Calendar
+    public static var Choose_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Color
+    public static var Color｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{6F}\u{6C}\u{6F}\u{72}", value: "\u{43}\u{6F}\u{6C}\u{6F}\u{72}") }
+
+    /// Comment to Organizer
+    public static var Comment_to_Organizer｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{4F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{65}\u{72}", value: "\u{43}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{4F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{65}\u{72}") }
+
+    /// Conference Rooms
+    public static var Conference_Rooms｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{6F}\u{6E}\u{66}\u{65}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{52}\u{6F}\u{6F}\u{6D}\u{73}", value: "\u{43}\u{6F}\u{6E}\u{66}\u{65}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{52}\u{6F}\u{6F}\u{6D}\u{73}") }
+
+    /// Connection error
+    public static var Connection_error｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}", value: "\u{43}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// Contact Organizer
+    public static var Contact_Organizer｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{4F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{65}\u{72}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{4F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{65}\u{72}") }
+
+    /// Contacts
+    public static var Contacts｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Continue
+    public static var Continue｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{6F}\u{6E}\u{74}\u{69}\u{6E}\u{75}\u{65}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{69}\u{6E}\u{75}\u{65}") }
+
+    /// Create event
+    public static var Create_event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Created by
+    public static var Created_by｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}") }
+
+    /// Current Location
+    public static var Current_Location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{43}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Custom
+    public static var Custom｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}", value: "\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}") }
+
+    /// Custom Locations
+    public static var Custom_Locations｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}") }
+
+    /// %@ %@
+    public static var Custom_by﹣day_item_format｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{62}\u{79}\u{2D}\u{64}\u{61}\u{79}\u{20}\u{69}\u{74}\u{65}\u{6D}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}", value: "\u{25}\u{40}\u{20}\u{25}\u{40}") }
+
+    /// Day
+    public static var Custom_recurrence_frequency_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{66}\u{72}\u{65}\u{71}\u{75}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{64}\u{61}\u{79}", value: "\u{44}\u{61}\u{79}") }
+
+    /// Month
+    public static var Custom_recurrence_frequency_month｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{66}\u{72}\u{65}\u{71}\u{75}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}", value: "\u{4D}\u{6F}\u{6E}\u{74}\u{68}") }
+
+    /// Year
+    public static var Custom_recurrence_frequency_year｜EventKitUI: String { Util｜EventKitUI.systemString("\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{20}\u{66}\u{72}\u{65}\u{71}\u{75}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{79}\u{65}\u{61}\u{72}", value: "\u{59}\u{65}\u{61}\u{72}") }
+
+    /// DECLINED
+    public static var DECLINED｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{45}\u{43}\u{4C}\u{49}\u{4E}\u{45}\u{44}", value: "\u{44}\u{45}\u{43}\u{4C}\u{49}\u{4E}\u{45}\u{44}") }
+
+    /// Daily
+    public static var Daily｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{61}\u{69}\u{6C}\u{79}", value: "\u{44}\u{61}\u{69}\u{6C}\u{79}") }
+
+    /// %@, %@
+    public static var Date_Time_format｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{61}\u{74}\u{65}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}", value: "\u{25}\u{40}\u{2C}\u{20}\u{25}\u{40}") }
+
+    /// Date changed
+    public static var Date_changed｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{61}\u{74}\u{65}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}", value: "\u{44}\u{61}\u{74}\u{65}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}") }
+
+    /// %@ (%@)
+    public static var Date／time_string_with_time_zone_format｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{61}\u{74}\u{65}\u{2F}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{73}\u{74}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{7A}\u{6F}\u{6E}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// Days
+    public static var Days｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{61}\u{79}\u{73}", value: "\u{44}\u{61}\u{79}\u{73}") }
+
+    /// Days of Week
+    public static var Days_of_Week｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{61}\u{79}\u{73}\u{20}\u{6F}\u{66}\u{20}\u{57}\u{65}\u{65}\u{6B}", value: "\u{44}\u{61}\u{79}\u{73}\u{20}\u{6F}\u{66}\u{20}\u{57}\u{65}\u{65}\u{6B}") }
+
+    /// Decline
+    public static var Decline｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}", value: "\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}") }
+
+    /// Decline Event
+    public static var Decline_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Declined
+    public static var Declined｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}", value: "\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}") }
+
+    /// Delegate Calendars…
+    public static var Delegate_Calendars．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}\u{2026}", value: "\u{44}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}\u{2026}") }
+
+    /// Delete All Events
+    public static var Delete_All_Events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Delete All Future Events
+    public static var Delete_All_Future_Events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{46}\u{75}\u{74}\u{75}\u{72}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{46}\u{75}\u{74}\u{75}\u{72}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Delete Calendar
+    public static var Delete_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Delete Event
+    public static var Delete_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Delete This Event Only
+    public static var Delete_This_Event_Only｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{4F}\u{6E}\u{6C}\u{79}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{4F}\u{6E}\u{6C}\u{79}") }
+
+    /// Delete and Report Junk
+    public static var Delete_and_Report_Junk｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{52}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{52}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}") }
+
+    /// %@ to %@
+    public static var Detail_duration_format_no_＇from＇｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{65}\u{74}\u{61}\u{69}\u{6C}\u{20}\u{64}\u{75}\u{72}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{20}\u{6E}\u{6F}\u{20}\u{27}\u{66}\u{72}\u{6F}\u{6D}\u{27}", value: "\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Discard Changes
+    public static var Discard_Changes｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}", value: "\u{44}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}") }
+
+    /// Display messages when shared events on this calendar are added, modified, or deleted by other people.
+    public static var Display_messages_when_shared_events_on_this_calendar_are_added，_modified，_or_deleted_by_other_people．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{69}\u{73}\u{70}\u{6C}\u{61}\u{79}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}\u{20}\u{77}\u{68}\u{65}\u{6E}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{61}\u{72}\u{65}\u{20}\u{61}\u{64}\u{64}\u{65}\u{64}\u{2C}\u{20}\u{6D}\u{6F}\u{64}\u{69}\u{66}\u{69}\u{65}\u{64}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{70}\u{65}\u{6F}\u{70}\u{6C}\u{65}\u{2E}", value: "\u{44}\u{69}\u{73}\u{70}\u{6C}\u{61}\u{79}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}\u{20}\u{77}\u{68}\u{65}\u{6E}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{61}\u{72}\u{65}\u{20}\u{61}\u{64}\u{64}\u{65}\u{64}\u{2C}\u{20}\u{6D}\u{6F}\u{64}\u{69}\u{66}\u{69}\u{65}\u{64}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{70}\u{65}\u{6F}\u{70}\u{6C}\u{65}\u{2E}") }
+
+    /// Done
+    public static var Done｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{6F}\u{6E}\u{65}", value: "\u{44}\u{6F}\u{6E}\u{65}") }
+
+    /// Download
+    public static var Download｜EventKitUI: String { Util｜EventKitUI.systemString("\u{44}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}", value: "\u{44}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}") }
+
+    /// E
+    public static var E｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}", value: "\u{45}") }
+
+    /// Each
+    public static var Each｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{61}\u{63}\u{68}", value: "\u{45}\u{61}\u{63}\u{68}") }
+
+    /// Edit
+    public static var Edit｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{64}\u{69}\u{74}", value: "\u{45}\u{64}\u{69}\u{74}") }
+
+    /// Edit Calendar
+    public static var Edit_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{64}\u{69}\u{74}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Edit Event
+    public static var Edit_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{64}\u{69}\u{74}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Edited by
+    public static var Edited_by｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{64}\u{69}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}", value: "\u{45}\u{64}\u{69}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}") }
+
+    /// End Repeat
+    public static var End_Repeat｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{6E}\u{64}\u{20}\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}", value: "\u{45}\u{6E}\u{64}\u{20}\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}") }
+
+    /// Ends
+    public static var Ends｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{6E}\u{64}\u{73}", value: "\u{45}\u{6E}\u{64}\u{73}") }
+
+    /// Ends %@
+    public static var Ends_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{6E}\u{64}\u{73}\u{20}\u{25}\u{40}", value: "\u{45}\u{6E}\u{64}\u{73}\u{20}\u{25}\u{40}") }
+
+    /// Enter Location
+    public static var Enter_Location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{45}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Enter an optional comment to %@.
+    public static var Enter_an_optional_comment_to_％＠．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{61}\u{6E}\u{20}\u{6F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{2E}", value: "\u{45}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{61}\u{6E}\u{20}\u{6F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{2E}") }
+
+    /// Error Importing Event
+    public static var Error_Importing_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{49}\u{6D}\u{70}\u{6F}\u{72}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{45}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{49}\u{6D}\u{70}\u{6F}\u{72}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Estimating travel time…
+    public static var Estimating_travel_time．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{73}\u{74}\u{69}\u{6D}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2026}", value: "\u{45}\u{73}\u{74}\u{69}\u{6D}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2026}") }
+
+    /// Event Alert
+    public static var Event_Alert｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{41}\u{6C}\u{65}\u{72}\u{74}", value: "\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{41}\u{6C}\u{65}\u{72}\u{74}") }
+
+    /// Event Alerts
+    public static var Event_Alerts｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{41}\u{6C}\u{65}\u{72}\u{74}\u{73}", value: "\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{41}\u{6C}\u{65}\u{72}\u{74}\u{73}") }
+
+    /// Event Details
+    public static var Event_Details｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{44}\u{65}\u{74}\u{61}\u{69}\u{6C}\u{73}", value: "\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{44}\u{65}\u{74}\u{61}\u{69}\u{6C}\u{73}") }
+
+    /// Event has been canceled
+    public static var Event_has_been_canceled｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{68}\u{61}\u{73}\u{20}\u{62}\u{65}\u{65}\u{6E}\u{20}\u{63}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{65}\u{64}", value: "\u{45}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{68}\u{61}\u{73}\u{20}\u{62}\u{65}\u{65}\u{6E}\u{20}\u{63}\u{61}\u{6E}\u{63}\u{65}\u{6C}\u{65}\u{64}") }
+
+    /// Events Affect Availability
+    public static var Events_Affect_Availability｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{41}\u{66}\u{66}\u{65}\u{63}\u{74}\u{20}\u{41}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{69}\u{6C}\u{69}\u{74}\u{79}", value: "\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{41}\u{66}\u{66}\u{65}\u{63}\u{74}\u{20}\u{41}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{69}\u{6C}\u{69}\u{74}\u{79}") }
+
+    /// Events on this calendar will affect your availability for scheduling.
+    public static var Events_on_this_calendar_will_affect_your_availability_for_scheduling．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{66}\u{66}\u{65}\u{63}\u{74}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{69}\u{6C}\u{69}\u{74}\u{79}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{73}\u{63}\u{68}\u{65}\u{64}\u{75}\u{6C}\u{69}\u{6E}\u{67}\u{2E}", value: "\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{66}\u{66}\u{65}\u{63}\u{74}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{69}\u{6C}\u{69}\u{74}\u{79}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{73}\u{63}\u{68}\u{65}\u{64}\u{75}\u{6C}\u{69}\u{6E}\u{67}\u{2E}") }
+
+    /// Every
+    public static var Every｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{72}\u{79}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}") }
+
+    /// Every 2 Weeks
+    public static var Every_2_Weeks｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{32}\u{20}\u{57}\u{65}\u{65}\u{6B}\u{73}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{32}\u{20}\u{57}\u{65}\u{65}\u{6B}\u{73}") }
+
+    /// Every Day
+    public static var Every_Day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{44}\u{61}\u{79}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{44}\u{61}\u{79}") }
+
+    /// Every Month
+    public static var Every_Month｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{4D}\u{6F}\u{6E}\u{74}\u{68}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{4D}\u{6F}\u{6E}\u{74}\u{68}") }
+
+    /// Every Week
+    public static var Every_Week｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{57}\u{65}\u{65}\u{6B}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{57}\u{65}\u{65}\u{6B}") }
+
+    /// Every Year
+    public static var Every_Year｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{59}\u{65}\u{61}\u{72}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}\u{20}\u{59}\u{65}\u{61}\u{72}") }
+
+    /// Everyone can attend
+    public static var Everyone_can_attend｜EventKitUI: String { Util｜EventKitUI.systemString("\u{45}\u{76}\u{65}\u{72}\u{79}\u{6F}\u{6E}\u{65}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{61}\u{74}\u{74}\u{65}\u{6E}\u{64}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}\u{6F}\u{6E}\u{65}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{61}\u{74}\u{74}\u{65}\u{6E}\u{64}") }
+
+    /// Facebook Events
+    public static var Facebook_Events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Floating
+    public static var Floating｜EventKitUI: String { Util｜EventKitUI.systemString("\u{46}\u{6C}\u{6F}\u{61}\u{74}\u{69}\u{6E}\u{67}", value: "\u{46}\u{6C}\u{6F}\u{61}\u{74}\u{69}\u{6E}\u{67}") }
+
+    /// Free
+    public static var Free｜EventKitUI: String { Util｜EventKitUI.systemString("\u{46}\u{72}\u{65}\u{65}", value: "\u{46}\u{72}\u{65}\u{65}") }
+
+    /// Frequency
+    public static var Frequency｜EventKitUI: String { Util｜EventKitUI.systemString("\u{46}\u{72}\u{65}\u{71}\u{75}\u{65}\u{6E}\u{63}\u{79}", value: "\u{46}\u{72}\u{65}\u{71}\u{75}\u{65}\u{6E}\u{63}\u{79}") }
+
+    /// From
+    public static var From｜EventKitUI: String { Util｜EventKitUI.systemString("\u{46}\u{72}\u{6F}\u{6D}", value: "\u{46}\u{72}\u{6F}\u{6D}") }
+
+    /// Green
+    public static var Green｜EventKitUI: String { Util｜EventKitUI.systemString("\u{47}\u{72}\u{65}\u{65}\u{6E}", value: "\u{47}\u{72}\u{65}\u{65}\u{6E}") }
+
+    /// Hide All
+    public static var Hide_All｜EventKitUI: String { Util｜EventKitUI.systemString("\u{48}\u{69}\u{64}\u{65}\u{20}\u{41}\u{6C}\u{6C}", value: "\u{48}\u{69}\u{64}\u{65}\u{20}\u{41}\u{6C}\u{6C}") }
+
+    /// Home
+    public static var Home｜EventKitUI: String { Util｜EventKitUI.systemString("\u{48}\u{6F}\u{6D}\u{65}", value: "\u{48}\u{6F}\u{6D}\u{65}") }
+
+    /// Ignore
+    public static var Ignore｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}", value: "\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}") }
+
+    /// Ignore
+    public static var Ignore_Proposed_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}") }
+
+    /// Ignore Proposed Time
+    public static var Ignore_Proposed_Time_（preview_option）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{28}\u{70}\u{72}\u{65}\u{76}\u{69}\u{65}\u{77}\u{20}\u{6F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{29}", value: "\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// In %@ minutes
+    public static var In_％＠_minutes｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}", value: "\u{49}\u{6E}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}") }
+
+    /// In one minute
+    public static var In_one_minute｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{20}\u{6F}\u{6E}\u{65}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}", value: "\u{49}\u{6E}\u{20}\u{6F}\u{6E}\u{65}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}") }
+
+    /// Incorrect password
+    public static var Incorrect_password｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{63}\u{6F}\u{72}\u{72}\u{65}\u{63}\u{74}\u{20}\u{70}\u{61}\u{73}\u{73}\u{77}\u{6F}\u{72}\u{64}", value: "\u{49}\u{6E}\u{63}\u{6F}\u{72}\u{72}\u{65}\u{63}\u{74}\u{20}\u{70}\u{61}\u{73}\u{73}\u{77}\u{6F}\u{72}\u{64}") }
+
+    /// Info
+    public static var Info｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{66}\u{6F}", value: "\u{49}\u{6E}\u{66}\u{6F}") }
+
+    /// Invalid Location
+    public static var Invalid_Location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{49}\u{6E}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Invitation
+    public static var Invitation｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Invitation from
+    public static var Invitation_from｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{66}\u{72}\u{6F}\u{6D}", value: "\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{66}\u{72}\u{6F}\u{6D}") }
+
+    /// %@ to %@
+    public static var Invitation_from_start_time_to_end_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{65}\u{6E}\u{64}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Invited by %@
+    public static var Invited_by_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}", value: "\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}") }
+
+    /// Invitees
+    public static var Invitees｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}", value: "\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}") }
+
+    /// Invitees: %@
+    public static var Invitees：_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{3A}\u{20}\u{25}\u{40}", value: "\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Join Calendar
+    public static var Join_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4A}\u{6F}\u{69}\u{6E}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{4A}\u{6F}\u{69}\u{6E}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Join Meeting
+    public static var Join_Meeting｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4A}\u{6F}\u{69}\u{6E}\u{20}\u{4D}\u{65}\u{65}\u{74}\u{69}\u{6E}\u{67}", value: "\u{4A}\u{6F}\u{69}\u{6E}\u{20}\u{4D}\u{65}\u{65}\u{74}\u{69}\u{6E}\u{67}") }
+
+    /// Keep Editing
+    public static var Keep_Editing｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4B}\u{65}\u{65}\u{70}\u{20}\u{45}\u{64}\u{69}\u{74}\u{69}\u{6E}\u{67}", value: "\u{4B}\u{65}\u{65}\u{70}\u{20}\u{45}\u{64}\u{69}\u{74}\u{69}\u{6E}\u{67}") }
+
+    /// On My Computer
+    public static var Local_calendar_group_title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4C}\u{6F}\u{63}\u{61}\u{6C}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}", value: "\u{4F}\u{6E}\u{20}\u{4D}\u{79}\u{20}\u{43}\u{6F}\u{6D}\u{70}\u{75}\u{74}\u{65}\u{72}") }
+
+    /// Location
+    public static var Location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Location changed
+    public static var Location_changed｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}", value: "\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}") }
+
+    /// Location: %@
+    public static var Location：_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{3A}\u{20}\u{25}\u{40}", value: "\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Make Optional
+    public static var Make_Optional｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{4F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}", value: "\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{4F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}") }
+
+    /// Make Required
+    public static var Make_Required｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{52}\u{65}\u{71}\u{75}\u{69}\u{72}\u{65}\u{64}", value: "\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{52}\u{65}\u{71}\u{75}\u{69}\u{72}\u{65}\u{64}") }
+
+    /// Map Locations
+    public static var Map_Locations｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{61}\u{70}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{4D}\u{61}\u{70}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}") }
+
+    /// Maybe
+    public static var Maybe｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{61}\u{79}\u{62}\u{65}", value: "\u{4D}\u{61}\u{79}\u{62}\u{65}") }
+
+    /// Maybe: %@
+    public static var Maybe：_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{61}\u{79}\u{62}\u{65}\u{3A}\u{20}\u{25}\u{40}", value: "\u{4D}\u{61}\u{79}\u{62}\u{65}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Message
+    public static var Message｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}", value: "\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// Message Organizer
+    public static var Message_Organizer｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{20}\u{4F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{65}\u{72}", value: "\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{20}\u{4F}\u{72}\u{67}\u{61}\u{6E}\u{69}\u{7A}\u{65}\u{72}") }
+
+    /// Monthly
+    public static var Monthly｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{6F}\u{6E}\u{74}\u{68}\u{6C}\u{79}", value: "\u{4D}\u{6F}\u{6E}\u{74}\u{68}\u{6C}\u{79}") }
+
+    /// Months
+    public static var Months｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{6F}\u{6E}\u{74}\u{68}\u{73}", value: "\u{4D}\u{6F}\u{6E}\u{74}\u{68}\u{73}") }
+
+    /// My Calendar
+    public static var My_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4D}\u{79}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{4D}\u{79}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// N
+    public static var N｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}", value: "\u{4E}") }
+
+    /// NEW TIME PROPOSAL:
+    public static var NEW_TIME_PROPOSAL：｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{45}\u{57}\u{20}\u{54}\u{49}\u{4D}\u{45}\u{20}\u{50}\u{52}\u{4F}\u{50}\u{4F}\u{53}\u{41}\u{4C}\u{3A}", value: "\u{4E}\u{45}\u{57}\u{20}\u{54}\u{49}\u{4D}\u{45}\u{20}\u{50}\u{52}\u{4F}\u{50}\u{4F}\u{53}\u{41}\u{4C}\u{3A}") }
+
+    /// Subscribed
+    public static var Name_of_subscribed_group｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{73}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}", value: "\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}") }
+
+    /// Never
+    public static var Never｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{65}\u{76}\u{65}\u{72}", value: "\u{4E}\u{65}\u{76}\u{65}\u{72}") }
+
+    /// New Event
+    public static var New_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{65}\u{77}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{4E}\u{65}\u{77}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// New Time Proposed
+    public static var New_Time_Proposed｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{65}\u{77}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}", value: "\u{4E}\u{65}\u{77}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}") }
+
+    /// New events created outside of a specific calendar for this delegate will default to this calendar.
+    public static var New_events_created_outside_of_a_specific_calendar_for_this_delegate_will_default_to_this_calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{65}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{63}\u{72}\u{65}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6F}\u{75}\u{74}\u{73}\u{69}\u{64}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{61}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{64}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{4E}\u{65}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{63}\u{72}\u{65}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6F}\u{75}\u{74}\u{73}\u{69}\u{64}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{61}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{64}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// New events created outside of a specific calendar will default to this calendar.
+    public static var New_events_created_outside_of_a_specific_calendar_will_default_to_this_calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{65}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{63}\u{72}\u{65}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6F}\u{75}\u{74}\u{73}\u{69}\u{64}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{61}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{64}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{4E}\u{65}\u{77}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{63}\u{72}\u{65}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6F}\u{75}\u{74}\u{73}\u{69}\u{64}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{61}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{64}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// No Internet connection
+    public static var No_Internet_connection｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{20}\u{49}\u{6E}\u{74}\u{65}\u{72}\u{6E}\u{65}\u{74}\u{20}\u{63}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{4E}\u{6F}\u{20}\u{49}\u{6E}\u{74}\u{65}\u{72}\u{6E}\u{65}\u{74}\u{20}\u{63}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// No Reply
+    public static var No_Reply｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{20}\u{52}\u{65}\u{70}\u{6C}\u{79}", value: "\u{4E}\u{6F}\u{20}\u{52}\u{65}\u{70}\u{6C}\u{79}") }
+
+    /// No Response
+    public static var No_Response｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{20}\u{52}\u{65}\u{73}\u{70}\u{6F}\u{6E}\u{73}\u{65}", value: "\u{4E}\u{6F}\u{20}\u{52}\u{65}\u{73}\u{70}\u{6F}\u{6E}\u{73}\u{65}") }
+
+    /// No available times
+    public static var No_available_times｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{73}", value: "\u{4E}\u{6F}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{73}") }
+
+    /// No more available times
+    public static var No_more_available_times｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{20}\u{6D}\u{6F}\u{72}\u{65}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{73}", value: "\u{4E}\u{6F}\u{20}\u{6D}\u{6F}\u{72}\u{65}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{73}") }
+
+    /// None
+    public static var None｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{6E}\u{65}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// None
+    public static var None_alert_﹣_calendar_event_alarm_table｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{6E}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{2D}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{20}\u{74}\u{61}\u{62}\u{6C}\u{65}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// None
+    public static var None_alert_﹣_calendar_item_alarm_edit_item｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{6E}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{2D}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{69}\u{74}\u{65}\u{6D}\u{20}\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{20}\u{65}\u{64}\u{69}\u{74}\u{20}\u{69}\u{74}\u{65}\u{6D}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// None
+    public static var None_alert_﹣_event_alarm_detail_item｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{6E}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{2D}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{20}\u{64}\u{65}\u{74}\u{61}\u{69}\u{6C}\u{20}\u{69}\u{74}\u{65}\u{6D}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// None
+    public static var None_alert_﹣_event_detail_alarm_cell｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{6E}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{20}\u{2D}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{64}\u{65}\u{74}\u{61}\u{69}\u{6C}\u{20}\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{20}\u{63}\u{65}\u{6C}\u{6C}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// None
+    public static var None_invitees｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{6E}\u{65}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// Noon
+    public static var Noon｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{6F}\u{6E}", value: "\u{4E}\u{6F}\u{6F}\u{6E}") }
+
+    /// Not Junk
+    public static var Not_Junk｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}", value: "\u{4E}\u{6F}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}") }
+
+    /// Notes
+    public static var Notes｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{74}\u{65}\u{73}", value: "\u{4E}\u{6F}\u{74}\u{65}\u{73}") }
+
+    /// Notes
+    public static var Notes_placeholder｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{74}\u{65}\u{73}\u{20}\u{70}\u{6C}\u{61}\u{63}\u{65}\u{68}\u{6F}\u{6C}\u{64}\u{65}\u{72}", value: "\u{4E}\u{6F}\u{74}\u{65}\u{73}") }
+
+    /// Notifications
+    public static var Notifications｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{74}\u{69}\u{66}\u{69}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{4E}\u{6F}\u{74}\u{69}\u{66}\u{69}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}") }
+
+    /// Notify all invitees?
+    public static var Notify_all_invitees？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{74}\u{69}\u{66}\u{79}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{3F}", value: "\u{4E}\u{6F}\u{74}\u{69}\u{66}\u{79}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{3F}") }
+
+    /// Now
+    public static var Now｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4E}\u{6F}\u{77}", value: "\u{4E}\u{6F}\u{77}") }
+
+    /// OK
+    public static var OK｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{4B}", value: "\u{4F}\u{4B}") }
+
+    /// Ok
+    public static var Ok｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{6B}", value: "\u{4F}\u{6B}") }
+
+    /// On Date
+    public static var On_Date｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{6E}\u{20}\u{44}\u{61}\u{74}\u{65}", value: "\u{4F}\u{6E}\u{20}\u{44}\u{61}\u{74}\u{65}") }
+
+    /// On day of event (%@)
+    public static var On_day_of_event_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{6E}\u{20}\u{64}\u{61}\u{79}\u{20}\u{6F}\u{66}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{4F}\u{6E}\u{20}\u{64}\u{61}\u{79}\u{20}\u{6F}\u{66}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// On the...
+    public static var On_the．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{2E}\u{2E}\u{2E}", value: "\u{4F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{2E}\u{2E}\u{2E}") }
+
+    /// Open attachment in web browser?
+    public static var Open_attachment_in_web_browser？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{70}\u{65}\u{6E}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{6E}\u{20}\u{77}\u{65}\u{62}\u{20}\u{62}\u{72}\u{6F}\u{77}\u{73}\u{65}\u{72}\u{3F}", value: "\u{4F}\u{70}\u{65}\u{6E}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{6E}\u{20}\u{77}\u{65}\u{62}\u{20}\u{62}\u{72}\u{6F}\u{77}\u{73}\u{65}\u{72}\u{3F}") }
+
+    /// Open in Maps
+    public static var Open_in_Maps｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{70}\u{65}\u{6E}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{70}\u{73}", value: "\u{4F}\u{70}\u{65}\u{6E}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{70}\u{73}") }
+
+    /// Optional
+    public static var Optional｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}", value: "\u{4F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}") }
+
+    /// Orange
+    public static var Orange｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{72}\u{61}\u{6E}\u{67}\u{65}", value: "\u{4F}\u{72}\u{61}\u{6E}\u{67}\u{65}") }
+
+    /// Original Time
+    public static var Original_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{72}\u{69}\u{67}\u{69}\u{6E}\u{61}\u{6C}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{4F}\u{72}\u{69}\u{67}\u{69}\u{6E}\u{61}\u{6C}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Out of office
+    public static var Out_of_office｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{75}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{6F}\u{66}\u{66}\u{69}\u{63}\u{65}", value: "\u{4F}\u{75}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{6F}\u{66}\u{66}\u{69}\u{63}\u{65}") }
+
+    /// Owner
+    public static var Owner｜EventKitUI: String { Util｜EventKitUI.systemString("\u{4F}\u{77}\u{6E}\u{65}\u{72}", value: "\u{4F}\u{77}\u{6E}\u{65}\u{72}") }
+
+    /// PROPOSED: %@
+    public static var PROPOSED：_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{52}\u{4F}\u{50}\u{4F}\u{53}\u{45}\u{44}\u{3A}\u{20}\u{25}\u{40}", value: "\u{50}\u{52}\u{4F}\u{50}\u{4F}\u{53}\u{45}\u{44}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Pending
+    public static var Pending｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}", value: "\u{50}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}") }
+
+    /// Please enter a valid address or select a point of interest from the list.
+    public static var Please_enter_a_valid_address_or_select_a_point_of_interest_from_the_list．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{6C}\u{65}\u{61}\u{73}\u{65}\u{20}\u{65}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{61}\u{20}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{70}\u{6F}\u{69}\u{6E}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{69}\u{6E}\u{74}\u{65}\u{72}\u{65}\u{73}\u{74}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{69}\u{73}\u{74}\u{2E}", value: "\u{50}\u{6C}\u{65}\u{61}\u{73}\u{65}\u{20}\u{65}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{61}\u{20}\u{76}\u{61}\u{6C}\u{69}\u{64}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{70}\u{6F}\u{69}\u{6E}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{69}\u{6E}\u{74}\u{65}\u{72}\u{65}\u{73}\u{74}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{69}\u{73}\u{74}\u{2E}") }
+
+    /// Previous Location
+    public static var Previous_Location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{65}\u{76}\u{69}\u{6F}\u{75}\u{73}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{50}\u{72}\u{65}\u{76}\u{69}\u{6F}\u{75}\u{73}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Private
+    public static var Private｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{69}\u{76}\u{61}\u{74}\u{65}", value: "\u{50}\u{72}\u{69}\u{76}\u{61}\u{74}\u{65}") }
+
+    /// Propose New Time
+    public static var Propose_New_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Propose a new time?
+    public static var Propose_a_new_time？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{3F}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{3F}") }
+
+    /// Propose new time?
+    public static var Propose_new_time？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{3F}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{3F}") }
+
+    /// Proposed Start Time
+    public static var Proposed_Start_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{53}\u{74}\u{61}\u{72}\u{74}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{53}\u{74}\u{61}\u{72}\u{74}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Proposed Time
+    public static var Proposed_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Proposed Time Declined
+    public static var Proposed_Time_Declined｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}") }
+
+    /// Proposed Time: %@
+    public static var Proposed_Time：_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{3A}\u{20}\u{25}\u{40}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Proposed Times
+    public static var Proposed_Times｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{73}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{54}\u{69}\u{6D}\u{65}\u{73}") }
+
+    /// Proposed a new time
+    public static var Proposed_a_new_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{61}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{74}\u{69}\u{6D}\u{65}") }
+
+    /// Proposed by
+    public static var Proposed_by｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}") }
+
+    /// Proposed by 
+    public static var Proposed_by_｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}") }
+
+    /// Proposed by %@
+    public static var Proposed_by_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}") }
+
+    /// Proposed by %@ and %@
+    public static var Proposed_by_％＠_and_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}", value: "\u{50}\u{72}\u{6F}\u{70}\u{6F}\u{73}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}") }
+
+    /// Public Calendar
+    public static var Public_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{75}\u{62}\u{6C}\u{69}\u{63}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{50}\u{75}\u{62}\u{6C}\u{69}\u{63}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Public and Shared with %@…
+    public static var Public_and_Shared_with_％＠．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{75}\u{62}\u{6C}\u{69}\u{63}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{2026}", value: "\u{50}\u{75}\u{62}\u{6C}\u{69}\u{63}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{2026}") }
+
+    /// Purple
+    public static var Purple｜EventKitUI: String { Util｜EventKitUI.systemString("\u{50}\u{75}\u{72}\u{70}\u{6C}\u{65}", value: "\u{50}\u{75}\u{72}\u{70}\u{6C}\u{65}") }
+
+    /// RE:
+    public static var RE：｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{45}\u{3A}", value: "\u{52}\u{45}\u{3A}") }
+
+    /// Recents
+    public static var Recents｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{63}\u{65}\u{6E}\u{74}\u{73}", value: "\u{52}\u{65}\u{63}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Red
+    public static var Red｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{64}", value: "\u{52}\u{65}\u{64}") }
+
+    /// Remove
+    public static var Remove｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}") }
+
+    /// Remove
+    public static var Remove_attachment｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}") }
+
+    /// Remove
+    public static var Remove_invitee_﹣_add_invitees_section｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{2D}\u{20}\u{61}\u{64}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{73}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}") }
+
+    /// Remove
+    public static var Remove_invitee_﹣_invisible_invitee_status_section｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{2D}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{73}\u{69}\u{62}\u{6C}\u{65}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{20}\u{73}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}") }
+
+    /// Remove
+    public static var Remove_invitee_﹣_not_responded_invitees_section｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{2D}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{72}\u{65}\u{73}\u{70}\u{6F}\u{6E}\u{64}\u{65}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{73}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}") }
+
+    /// Remove
+    public static var Remove_invitee_﹣_responded_invitees_section｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{20}\u{2D}\u{20}\u{72}\u{65}\u{73}\u{70}\u{6F}\u{6E}\u{64}\u{65}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{73}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}") }
+
+    /// Repeat
+    public static var Repeat｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}", value: "\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}") }
+
+    /// Repeat Forever
+    public static var Repeat_Forever｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}\u{20}\u{46}\u{6F}\u{72}\u{65}\u{76}\u{65}\u{72}", value: "\u{52}\u{65}\u{70}\u{65}\u{61}\u{74}\u{20}\u{46}\u{6F}\u{72}\u{65}\u{76}\u{65}\u{72}") }
+
+    /// Reply
+    public static var Reply｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{70}\u{6C}\u{79}", value: "\u{52}\u{65}\u{70}\u{6C}\u{79}") }
+
+    /// Report Junk
+    public static var Report_Junk｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}", value: "\u{52}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}") }
+
+    /// Report Junk…
+    public static var Report_Junk．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}\u{2026}", value: "\u{52}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{4A}\u{75}\u{6E}\u{6B}\u{2026}") }
+
+    /// Resend Sharing Invitation
+    public static var Resend_Sharing_Invitation｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{73}\u{65}\u{6E}\u{64}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{52}\u{65}\u{73}\u{65}\u{6E}\u{64}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Responded
+    public static var Responded｜EventKitUI: String { Util｜EventKitUI.systemString("\u{52}\u{65}\u{73}\u{70}\u{6F}\u{6E}\u{64}\u{65}\u{64}", value: "\u{52}\u{65}\u{73}\u{70}\u{6F}\u{6E}\u{64}\u{65}\u{64}") }
+
+    /// S
+    public static var S｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}", value: "\u{53}") }
+
+    /// Save for all events
+    public static var Save_for_all_events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Save for all recurrences
+    public static var Save_for_all_recurrences｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}", value: "\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{72}\u{65}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{63}\u{65}\u{73}") }
+
+    /// Save for future events
+    public static var Save_for_future_events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{66}\u{75}\u{74}\u{75}\u{72}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{66}\u{75}\u{74}\u{75}\u{72}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Save for this event only
+    public static var Save_for_this_event_only｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{6F}\u{6E}\u{6C}\u{79}", value: "\u{53}\u{61}\u{76}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{6F}\u{6E}\u{6C}\u{79}") }
+
+    /// Scheduled: %@
+    public static var Scheduled：_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{63}\u{68}\u{65}\u{64}\u{75}\u{6C}\u{65}\u{64}\u{3A}\u{20}\u{25}\u{40}", value: "\u{53}\u{63}\u{68}\u{65}\u{64}\u{75}\u{6C}\u{65}\u{64}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Scheduling Conflict
+    public static var Scheduling_Conflict｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{63}\u{68}\u{65}\u{64}\u{75}\u{6C}\u{69}\u{6E}\u{67}\u{20}\u{43}\u{6F}\u{6E}\u{66}\u{6C}\u{69}\u{63}\u{74}", value: "\u{53}\u{63}\u{68}\u{65}\u{64}\u{75}\u{6C}\u{69}\u{6E}\u{67}\u{20}\u{43}\u{6F}\u{6E}\u{66}\u{6C}\u{69}\u{63}\u{74}") }
+
+    /// Searching available times…
+    public static var Searching_available_times．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}\u{69}\u{6E}\u{67}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{73}\u{2026}", value: "\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}\u{69}\u{6E}\u{67}\u{20}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{73}\u{2026}") }
+
+    /// Second Alert
+    public static var Second_Alert｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{65}\u{63}\u{6F}\u{6E}\u{64}\u{20}\u{41}\u{6C}\u{65}\u{72}\u{74}", value: "\u{53}\u{65}\u{63}\u{6F}\u{6E}\u{64}\u{20}\u{41}\u{6C}\u{65}\u{72}\u{74}") }
+
+    /// Select a starting location to automatically determine travel time, or select a time below.
+    public static var Select_a_starting_location_to_automatically_determine_travel_time，_or_select_a_time_below．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{75}\u{74}\u{6F}\u{6D}\u{61}\u{74}\u{69}\u{63}\u{61}\u{6C}\u{6C}\u{79}\u{20}\u{64}\u{65}\u{74}\u{65}\u{72}\u{6D}\u{69}\u{6E}\u{65}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{62}\u{65}\u{6C}\u{6F}\u{77}\u{2E}", value: "\u{53}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{75}\u{74}\u{6F}\u{6D}\u{61}\u{74}\u{69}\u{63}\u{61}\u{6C}\u{6C}\u{79}\u{20}\u{64}\u{65}\u{74}\u{65}\u{72}\u{6D}\u{69}\u{6E}\u{65}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{73}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{62}\u{65}\u{6C}\u{6F}\u{77}\u{2E}") }
+
+    /// Send
+    public static var Send｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{65}\u{6E}\u{64}", value: "\u{53}\u{65}\u{6E}\u{64}") }
+
+    /// %@ to %@
+    public static var Send_mail_body_text_multi﹣day_interval_format．_The_first_％＠_is_the_start_date_and_time，_the_second_％＠_is_the_end_date_and_time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{65}\u{6E}\u{64}\u{20}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{62}\u{6F}\u{64}\u{79}\u{20}\u{74}\u{65}\u{78}\u{74}\u{20}\u{6D}\u{75}\u{6C}\u{74}\u{69}\u{2D}\u{64}\u{61}\u{79}\u{20}\u{69}\u{6E}\u{74}\u{65}\u{72}\u{76}\u{61}\u{6C}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{2E}\u{20}\u{20}\u{54}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{25}\u{40}\u{20}\u{69}\u{73}\u{20}\u{74}\u{68}\u{65}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{20}\u{64}\u{61}\u{74}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{74}\u{68}\u{65}\u{20}\u{73}\u{65}\u{63}\u{6F}\u{6E}\u{64}\u{20}\u{25}\u{40}\u{20}\u{69}\u{73}\u{20}\u{74}\u{68}\u{65}\u{20}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{74}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{74}\u{69}\u{6D}\u{65}", value: "\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Share Link…
+    public static var Share_Link．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{4C}\u{69}\u{6E}\u{6B}\u{2026}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{4C}\u{69}\u{6E}\u{6B}\u{2026}") }
+
+    /// Shared Calendar
+    public static var Shared_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Shared Event
+    public static var Shared_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Shared Events
+    public static var Shared_Events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Shared by %@
+    public static var Shared_by_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{25}\u{40}") }
+
+    /// Shared with %@
+    public static var Shared_with_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}") }
+
+    /// Shared with %@ and…
+    public static var Shared_with_％＠_and．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{2026}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{2026}") }
+
+    /// Shared with:
+    public static var Shared_with：｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{3A}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{3A}") }
+
+    /// Show All
+    public static var Show_All｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{6C}\u{6C}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{6C}\u{6C}") }
+
+    /// Show All Notes
+    public static var Show_All_Notes｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{4E}\u{6F}\u{74}\u{65}\u{73}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{4E}\u{6F}\u{74}\u{65}\u{73}") }
+
+    /// Show All…
+    public static var Show_All．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{6C}\u{6C}\u{2026}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{6C}\u{6C}\u{2026}") }
+
+    /// Show As
+    public static var Show_As｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{73}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{73}") }
+
+    /// Show Calendars
+    public static var Show_Calendars｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}") }
+
+    /// Show Changes
+    public static var Show_Changes｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}") }
+
+    /// Show Declined Events
+    public static var Show_Declined_Events｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{44}\u{65}\u{63}\u{6C}\u{69}\u{6E}\u{65}\u{64}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Show More…
+    public static var Show_More．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{4D}\u{6F}\u{72}\u{65}\u{2026}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{4D}\u{6F}\u{72}\u{65}\u{2026}") }
+
+    /// Show in Calendar
+    public static var Show_in_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{69}\u{6E}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{69}\u{6E}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Show in Mail
+    public static var Show_in_Mail｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{69}\u{6C}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{69}\u{6C}") }
+
+    /// Show in Messages
+    public static var Show_in_Messages｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{68}\u{6F}\u{77}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}") }
+
+    /// Day
+    public static var Singular_day_label｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{69}\u{6E}\u{67}\u{75}\u{6C}\u{61}\u{72}\u{20}\u{64}\u{61}\u{79}\u{20}\u{6C}\u{61}\u{62}\u{65}\u{6C}", value: "\u{44}\u{61}\u{79}") }
+
+    /// Month
+    public static var Singular_month_label｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{69}\u{6E}\u{67}\u{75}\u{6C}\u{61}\u{72}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6C}\u{61}\u{62}\u{65}\u{6C}", value: "\u{4D}\u{6F}\u{6E}\u{74}\u{68}") }
+
+    /// Year
+    public static var Singular_year_label｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{69}\u{6E}\u{67}\u{75}\u{6C}\u{61}\u{72}\u{20}\u{79}\u{65}\u{61}\u{72}\u{20}\u{6C}\u{61}\u{62}\u{65}\u{6C}", value: "\u{59}\u{65}\u{61}\u{72}") }
+
+    /// Siri Suggestions
+    public static var Siri_Suggestions｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{69}\u{72}\u{69}\u{20}\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{53}\u{69}\u{72}\u{69}\u{20}\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}\u{73}") }
+
+    /// Skype
+    public static var Skype｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{6B}\u{79}\u{70}\u{65}", value: "\u{53}\u{6B}\u{79}\u{70}\u{65}") }
+
+    /// Some Invitees Can Attend
+    public static var Some_Invitees_Can_Attend｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{6F}\u{6D}\u{65}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{43}\u{61}\u{6E}\u{20}\u{41}\u{74}\u{74}\u{65}\u{6E}\u{64}", value: "\u{53}\u{6F}\u{6D}\u{65}\u{20}\u{49}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}\u{20}\u{43}\u{61}\u{6E}\u{20}\u{41}\u{74}\u{74}\u{65}\u{6E}\u{64}") }
+
+    /// Somebody
+    public static var Somebody｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{6F}\u{6D}\u{65}\u{62}\u{6F}\u{64}\u{79}", value: "\u{53}\u{6F}\u{6D}\u{65}\u{62}\u{6F}\u{64}\u{79}") }
+
+    /// %@ %@
+    public static var Start_time_zone_format｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{61}\u{72}\u{74}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{7A}\u{6F}\u{6E}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}", value: "\u{25}\u{40}\u{20}\u{25}\u{40}") }
+
+    /// Starting Location
+    public static var Starting_Location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{61}\u{72}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{53}\u{74}\u{61}\u{72}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Starts
+    public static var Starts｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{61}\u{72}\u{74}\u{73}", value: "\u{53}\u{74}\u{61}\u{72}\u{74}\u{73}") }
+
+    /// at %@
+    public static var Starts_with_a_lowercase_letter．_The_placeholder_is_for_a_time_expression，_e．g．_9_AM，_appropriate_to_the_current_locale．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{61}\u{72}\u{74}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{61}\u{20}\u{6C}\u{6F}\u{77}\u{65}\u{72}\u{63}\u{61}\u{73}\u{65}\u{20}\u{6C}\u{65}\u{74}\u{74}\u{65}\u{72}\u{2E}\u{20}\u{20}\u{54}\u{68}\u{65}\u{20}\u{70}\u{6C}\u{61}\u{63}\u{65}\u{68}\u{6F}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{69}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{65}\u{78}\u{70}\u{72}\u{65}\u{73}\u{73}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{65}\u{2E}\u{67}\u{2E}\u{20}\u{39}\u{20}\u{41}\u{4D}\u{2C}\u{20}\u{61}\u{70}\u{70}\u{72}\u{6F}\u{70}\u{72}\u{69}\u{61}\u{74}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{6C}\u{65}\u{2E}", value: "\u{61}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// at %@
+    public static var Starts_with_a_lowercase_letter．_Used_only_when_the_time_is_1_o＇clock_（i．e．_1：00_AM，_1：00_PM，_or_0100_in_24﹣hour_time）．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{61}\u{72}\u{74}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{61}\u{20}\u{6C}\u{6F}\u{77}\u{65}\u{72}\u{63}\u{61}\u{73}\u{65}\u{20}\u{6C}\u{65}\u{74}\u{74}\u{65}\u{72}\u{2E}\u{20}\u{20}\u{55}\u{73}\u{65}\u{64}\u{20}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{77}\u{68}\u{65}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{69}\u{73}\u{20}\u{31}\u{20}\u{6F}\u{27}\u{63}\u{6C}\u{6F}\u{63}\u{6B}\u{20}\u{28}\u{69}\u{2E}\u{65}\u{2E}\u{20}\u{31}\u{3A}\u{30}\u{30}\u{20}\u{41}\u{4D}\u{2C}\u{20}\u{31}\u{3A}\u{30}\u{30}\u{20}\u{50}\u{4D}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{30}\u{31}\u{30}\u{30}\u{20}\u{69}\u{6E}\u{20}\u{32}\u{34}\u{2D}\u{68}\u{6F}\u{75}\u{72}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{29}\u{2E}", value: "\u{61}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// At %@
+    public static var Starts_with_an_uppercase_letter．_The_placeholder_is_for_a_time_expression，_e．g．_9_AM，_appropriate_to_the_current_locale．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{61}\u{72}\u{74}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{61}\u{6E}\u{20}\u{75}\u{70}\u{70}\u{65}\u{72}\u{63}\u{61}\u{73}\u{65}\u{20}\u{6C}\u{65}\u{74}\u{74}\u{65}\u{72}\u{2E}\u{20}\u{20}\u{54}\u{68}\u{65}\u{20}\u{70}\u{6C}\u{61}\u{63}\u{65}\u{68}\u{6F}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{69}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{65}\u{78}\u{70}\u{72}\u{65}\u{73}\u{73}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{65}\u{2E}\u{67}\u{2E}\u{20}\u{39}\u{20}\u{41}\u{4D}\u{2C}\u{20}\u{61}\u{70}\u{70}\u{72}\u{6F}\u{70}\u{72}\u{69}\u{61}\u{74}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{6C}\u{65}\u{2E}", value: "\u{41}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// At %@
+    public static var Starts_with_an_uppercase_letter．_Used_only_when_the_time_is_1_o＇clock_（i．e．_1：00_AM，_1：00_PM，_or_0100_in_24﹣hour_time）．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{61}\u{72}\u{74}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{61}\u{6E}\u{20}\u{75}\u{70}\u{70}\u{65}\u{72}\u{63}\u{61}\u{73}\u{65}\u{20}\u{6C}\u{65}\u{74}\u{74}\u{65}\u{72}\u{2E}\u{20}\u{20}\u{55}\u{73}\u{65}\u{64}\u{20}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{77}\u{68}\u{65}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{69}\u{73}\u{20}\u{31}\u{20}\u{6F}\u{27}\u{63}\u{6C}\u{6F}\u{63}\u{6B}\u{20}\u{28}\u{69}\u{2E}\u{65}\u{2E}\u{20}\u{31}\u{3A}\u{30}\u{30}\u{20}\u{41}\u{4D}\u{2C}\u{20}\u{31}\u{3A}\u{30}\u{30}\u{20}\u{50}\u{4D}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{30}\u{31}\u{30}\u{30}\u{20}\u{69}\u{6E}\u{20}\u{32}\u{34}\u{2D}\u{68}\u{6F}\u{75}\u{72}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{29}\u{2E}", value: "\u{41}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// Stop Sharing
+    public static var Stop_Sharing｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{74}\u{6F}\u{70}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}", value: "\u{53}\u{74}\u{6F}\u{70}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}") }
+
+    /// Subscribe to my %@ Calendar
+    public static var Subscribe_to_my_％＠_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{79}\u{20}\u{25}\u{40}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{79}\u{20}\u{25}\u{40}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Subscribe to my %@ Calendar at: %@
+    public static var Subscribe_to_my_％＠_Calendar_at：_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{79}\u{20}\u{25}\u{40}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{61}\u{74}\u{3A}\u{20}\u{25}\u{40}", value: "\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{79}\u{20}\u{25}\u{40}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{61}\u{74}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Subscribed
+    public static var Subscribed_calendar_group_title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}", value: "\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}") }
+
+    /// Subscribed
+    public static var Subscribed_calendar_group_title．_Usually_preceded_by_＇All＇_to_denote_selecting_all_the_calendars_in_the_group．_In_English_these_are_the_same．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{2E}\u{20}\u{20}\u{55}\u{73}\u{75}\u{61}\u{6C}\u{6C}\u{79}\u{20}\u{70}\u{72}\u{65}\u{63}\u{65}\u{64}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{27}\u{41}\u{6C}\u{6C}\u{27}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{65}\u{6E}\u{6F}\u{74}\u{65}\u{20}\u{73}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{67}\u{72}\u{6F}\u{75}\u{70}\u{2E}\u{20}\u{49}\u{6E}\u{20}\u{45}\u{6E}\u{67}\u{6C}\u{69}\u{73}\u{68}\u{20}\u{74}\u{68}\u{65}\u{73}\u{65}\u{20}\u{61}\u{72}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{73}\u{61}\u{6D}\u{65}\u{2E}", value: "\u{53}\u{75}\u{62}\u{73}\u{63}\u{72}\u{69}\u{62}\u{65}\u{64}") }
+
+    /// Suggested Location:
+    public static var Suggested_Location：｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{65}\u{64}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{3A}", value: "\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{65}\u{64}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{3A}") }
+
+    /// %@ from %@
+    public static var Suggested_event_date_and_time_format｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{65}\u{64}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{64}\u{61}\u{74}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}", value: "\u{25}\u{40}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}") }
+
+    /// Suggestion
+    public static var Suggestion｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Suggestions
+    public static var Suggestions｜EventKitUI: String { Util｜EventKitUI.systemString("\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}\u{73}") }
+
+    /// Tentative
+    public static var Tentative｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{65}\u{6E}\u{74}\u{61}\u{74}\u{69}\u{76}\u{65}", value: "\u{54}\u{65}\u{6E}\u{74}\u{61}\u{74}\u{69}\u{76}\u{65}") }
+
+    /// Other
+    public static var The_＇other＇_account，_where_the_birthday_calendar_lives｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{20}\u{27}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{27}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{2C}\u{20}\u{77}\u{68}\u{65}\u{72}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{6C}\u{69}\u{76}\u{65}\u{73}", value: "\u{4F}\u{74}\u{68}\u{65}\u{72}") }
+
+    /// The address could not be located. If you use this address you won’t be able to get maps, travel time, or time to leave alerts.
+    public static var The_address_could_not_be_located．_If_you_use_this_address_you_wonߴt_be_able_to_get_maps，_travel_time，_or_time_to_leave_alerts．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{63}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{65}\u{64}\u{2E}\u{20}\u{49}\u{66}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{75}\u{73}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{6F}\u{6E}\u{2019}\u{74}\u{20}\u{62}\u{65}\u{20}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{67}\u{65}\u{74}\u{20}\u{6D}\u{61}\u{70}\u{73}\u{2C}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6C}\u{65}\u{61}\u{76}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{2E}", value: "\u{54}\u{68}\u{65}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{63}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{65}\u{64}\u{2E}\u{20}\u{49}\u{66}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{75}\u{73}\u{65}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{6F}\u{6E}\u{2019}\u{74}\u{20}\u{62}\u{65}\u{20}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{67}\u{65}\u{74}\u{20}\u{6D}\u{61}\u{70}\u{73}\u{2C}\u{20}\u{74}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6C}\u{65}\u{61}\u{76}\u{65}\u{20}\u{61}\u{6C}\u{65}\u{72}\u{74}\u{73}\u{2E}") }
+
+    /// The attachment is on a different server than the event.
+    public static var The_attachment_is_on_a_different_server_than_the_event．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{61}\u{20}\u{64}\u{69}\u{66}\u{66}\u{65}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{73}\u{65}\u{72}\u{76}\u{65}\u{72}\u{20}\u{74}\u{68}\u{61}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2E}", value: "\u{54}\u{68}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{61}\u{20}\u{64}\u{69}\u{66}\u{66}\u{65}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{73}\u{65}\u{72}\u{76}\u{65}\u{72}\u{20}\u{74}\u{68}\u{61}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2E}") }
+
+    /// at %@
+    public static var The_placeholder_is_for_a_time_expression，_e．g．_9_AM，_appropriate_to_the_current_locale．_This_is_only_used_for_events_in_the_past｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{20}\u{70}\u{6C}\u{61}\u{63}\u{65}\u{68}\u{6F}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{69}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{65}\u{78}\u{70}\u{72}\u{65}\u{73}\u{73}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{65}\u{2E}\u{67}\u{2E}\u{20}\u{39}\u{20}\u{41}\u{4D}\u{2C}\u{20}\u{61}\u{70}\u{70}\u{72}\u{6F}\u{70}\u{72}\u{69}\u{61}\u{74}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{6C}\u{65}\u{2E}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{73}\u{20}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{75}\u{73}\u{65}\u{64}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{70}\u{61}\u{73}\u{74}", value: "\u{61}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// At %@
+    public static var The_placeholder_is_for_a_time，_e．g．_12：00．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{20}\u{70}\u{6C}\u{61}\u{63}\u{65}\u{68}\u{6F}\u{6C}\u{64}\u{65}\u{72}\u{20}\u{69}\u{73}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{2C}\u{20}\u{65}\u{2E}\u{67}\u{2E}\u{20}\u{31}\u{32}\u{3A}\u{30}\u{30}\u{2E}", value: "\u{41}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// The title, location, and details of private events are not visible to others sharing this calendar.
+    public static var The_title，_location，_and_details_of_private_events_are_not_visible_to_others_sharing_this_calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{2C}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{64}\u{65}\u{74}\u{61}\u{69}\u{6C}\u{73}\u{20}\u{6F}\u{66}\u{20}\u{70}\u{72}\u{69}\u{76}\u{61}\u{74}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{61}\u{72}\u{65}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{76}\u{69}\u{73}\u{69}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{20}\u{73}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{54}\u{68}\u{65}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{2C}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2C}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{64}\u{65}\u{74}\u{61}\u{69}\u{6C}\u{73}\u{20}\u{6F}\u{66}\u{20}\u{70}\u{72}\u{69}\u{76}\u{61}\u{74}\u{65}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{61}\u{72}\u{65}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{76}\u{69}\u{73}\u{69}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}\u{20}\u{73}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// There was a problem adding this event to the calendar.
+    public static var There_was_a_problem_adding_this_event_to_the_calendar．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{72}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{61}\u{20}\u{70}\u{72}\u{6F}\u{62}\u{6C}\u{65}\u{6D}\u{20}\u{61}\u{64}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}", value: "\u{54}\u{68}\u{65}\u{72}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{61}\u{20}\u{70}\u{72}\u{6F}\u{62}\u{6C}\u{65}\u{6D}\u{20}\u{61}\u{64}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{2E}") }
+
+    /// There was an unknown error while updating this account.
+    public static var There_was_an_unknown_error_while_updating_this_account．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{65}\u{72}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{61}\u{6E}\u{20}\u{75}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{77}\u{68}\u{69}\u{6C}\u{65}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{2E}", value: "\u{54}\u{68}\u{65}\u{72}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{61}\u{6E}\u{20}\u{75}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{77}\u{68}\u{69}\u{6C}\u{65}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{2E}") }
+
+    /// This app does not have access to your calendars.
+    public static var This_app_does_not_have_access_to_your_calendars．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{70}\u{70}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{70}\u{70}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}\u{2E}") }
+
+    /// This app does not have access to your reminders.
+    public static var This_app_does_not_have_access_to_your_reminders．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{70}\u{70}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{72}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}\u{73}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{70}\u{70}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{72}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}\u{73}\u{2E}") }
+
+    /// This attachment is a download link to an external website, would you like to continue opening the attachment in web browser?
+    public static var This_attachment_is_a_download_link_to_an_external_website，_would_you_like_to_continue_opening_the_attachment_in_web_browser？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{73}\u{20}\u{61}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{20}\u{6C}\u{69}\u{6E}\u{6B}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6E}\u{20}\u{65}\u{78}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{6C}\u{20}\u{77}\u{65}\u{62}\u{73}\u{69}\u{74}\u{65}\u{2C}\u{20}\u{77}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{6C}\u{69}\u{6B}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{69}\u{6E}\u{75}\u{65}\u{20}\u{6F}\u{70}\u{65}\u{6E}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{6E}\u{20}\u{77}\u{65}\u{62}\u{20}\u{62}\u{72}\u{6F}\u{77}\u{73}\u{65}\u{72}\u{3F}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{73}\u{20}\u{61}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{20}\u{6C}\u{69}\u{6E}\u{6B}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{6E}\u{20}\u{65}\u{78}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{6C}\u{20}\u{77}\u{65}\u{62}\u{73}\u{69}\u{74}\u{65}\u{2C}\u{20}\u{77}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{6C}\u{69}\u{6B}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{69}\u{6E}\u{75}\u{65}\u{20}\u{6F}\u{70}\u{65}\u{6E}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{65}\u{20}\u{61}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}\u{20}\u{69}\u{6E}\u{20}\u{77}\u{65}\u{62}\u{20}\u{62}\u{72}\u{6F}\u{77}\u{73}\u{65}\u{72}\u{3F}") }
+
+    /// This calendar is shared with your family. Manage family members in iCloud Settings.
+    public static var This_calendar_is_shared_with_your_family．_Manage_family_members_in_iCloud_Settings．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{69}\u{73}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{66}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{2E}\u{20}\u{4D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{20}\u{66}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{20}\u{6D}\u{65}\u{6D}\u{62}\u{65}\u{72}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}\u{20}\u{53}\u{65}\u{74}\u{74}\u{69}\u{6E}\u{67}\u{73}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{20}\u{69}\u{73}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{66}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{2E}\u{20}\u{4D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{20}\u{66}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{20}\u{6D}\u{65}\u{6D}\u{62}\u{65}\u{72}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}\u{20}\u{53}\u{65}\u{74}\u{74}\u{69}\u{6E}\u{67}\u{73}\u{2E}") }
+
+    /// This invitation data is out of date.
+    public static var This_invitation_data_is_out_of_date．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{64}\u{61}\u{74}\u{61}\u{20}\u{69}\u{73}\u{20}\u{6F}\u{75}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{64}\u{61}\u{74}\u{65}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{64}\u{61}\u{74}\u{61}\u{20}\u{69}\u{73}\u{20}\u{6F}\u{75}\u{74}\u{20}\u{6F}\u{66}\u{20}\u{64}\u{61}\u{74}\u{65}\u{2E}") }
+
+    /// This invitation is from an unknown contact.
+    public static var This_invitation_is_from_an_unknown_contact．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{69}\u{73}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{61}\u{6E}\u{20}\u{75}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{69}\u{73}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{61}\u{6E}\u{20}\u{75}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{2E}") }
+
+    /// This invitation is managed by your delegate.
+    public static var This_invitation_is_managed_by_your_delegate．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{69}\u{73}\u{20}\u{6D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{69}\u{73}\u{20}\u{6D}\u{61}\u{6E}\u{61}\u{67}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{2E}") }
+
+    /// This is a repeating event.
+    public static var This_is_a_repeating_event．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{73}\u{20}\u{61}\u{20}\u{72}\u{65}\u{70}\u{65}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{69}\u{73}\u{20}\u{61}\u{20}\u{72}\u{65}\u{70}\u{65}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{2E}") }
+
+    /// This type of file is not supported.
+    public static var This_type_of_file_is_not_supported．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{68}\u{69}\u{73}\u{20}\u{74}\u{79}\u{70}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{66}\u{69}\u{6C}\u{65}\u{20}\u{69}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{73}\u{75}\u{70}\u{70}\u{6F}\u{72}\u{74}\u{65}\u{64}\u{2E}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{74}\u{79}\u{70}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{66}\u{69}\u{6C}\u{65}\u{20}\u{69}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{73}\u{75}\u{70}\u{70}\u{6F}\u{72}\u{74}\u{65}\u{64}\u{2E}") }
+
+    /// Time Zone
+    public static var Time_Zone｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{6D}\u{65}\u{20}\u{5A}\u{6F}\u{6E}\u{65}", value: "\u{54}\u{69}\u{6D}\u{65}\u{20}\u{5A}\u{6F}\u{6E}\u{65}") }
+
+    /// Time changed
+    public static var Time_changed｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{6D}\u{65}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}", value: "\u{54}\u{69}\u{6D}\u{65}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}") }
+
+    /// %@ (%@)
+    public static var Time_string_annotated_with_short_timezone，_for_instance_＇4：00PM_（PST）＇｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{6D}\u{65}\u{20}\u{73}\u{74}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{61}\u{6E}\u{6E}\u{6F}\u{74}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{73}\u{68}\u{6F}\u{72}\u{74}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{7A}\u{6F}\u{6E}\u{65}\u{2C}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{69}\u{6E}\u{73}\u{74}\u{61}\u{6E}\u{63}\u{65}\u{20}\u{27}\u{34}\u{3A}\u{30}\u{30}\u{50}\u{4D}\u{20}\u{28}\u{50}\u{53}\u{54}\u{29}\u{27}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// Time to Leave
+    public static var Time_to_Leave｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{6D}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{4C}\u{65}\u{61}\u{76}\u{65}", value: "\u{54}\u{69}\u{6D}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{4C}\u{65}\u{61}\u{76}\u{65}") }
+
+    /// Time to Leave
+    public static var Time_to_Leave_Watch_notification_header｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{6D}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{4C}\u{65}\u{61}\u{76}\u{65}\u{20}\u{57}\u{61}\u{74}\u{63}\u{68}\u{20}\u{6E}\u{6F}\u{74}\u{69}\u{66}\u{69}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{68}\u{65}\u{61}\u{64}\u{65}\u{72}", value: "\u{54}\u{69}\u{6D}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{4C}\u{65}\u{61}\u{76}\u{65}") }
+
+    /// Time was changed
+    public static var Time_was_changed｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{6D}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}", value: "\u{54}\u{69}\u{6D}\u{65}\u{20}\u{77}\u{61}\u{73}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{64}") }
+
+    /// Title
+    public static var Title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{74}\u{6C}\u{65}", value: "\u{54}\u{69}\u{74}\u{6C}\u{65}") }
+
+    /// Title
+    public static var Title_placeholder｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{69}\u{74}\u{6C}\u{65}\u{20}\u{70}\u{6C}\u{61}\u{63}\u{65}\u{68}\u{6F}\u{6C}\u{64}\u{65}\u{72}", value: "\u{54}\u{69}\u{74}\u{6C}\u{65}") }
+
+    /// To:
+    public static var To：｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{6F}\u{3A}", value: "\u{54}\u{6F}\u{3A}") }
+
+    /// Travel Time
+    public static var Travel_Time｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{54}\u{69}\u{6D}\u{65}", value: "\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// None
+    public static var Travel_editor_no_start_location｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{65}\u{64}\u{69}\u{74}\u{6F}\u{72}\u{20}\u{6E}\u{6F}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{20}\u{6C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// Directions could not be found.
+    public static var Travel_lookup_error_﹣_directions_not_found｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{6C}\u{6F}\u{6F}\u{6B}\u{75}\u{70}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{2D}\u{20}\u{64}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}", value: "\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{63}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}\u{2E}") }
+
+    /// Network lost.
+    public static var Travel_lookup_error_﹣_network_throttled｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{6C}\u{6F}\u{6F}\u{6B}\u{75}\u{70}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{2D}\u{20}\u{6E}\u{65}\u{74}\u{77}\u{6F}\u{72}\u{6B}\u{20}\u{74}\u{68}\u{72}\u{6F}\u{74}\u{74}\u{6C}\u{65}\u{64}", value: "\u{4E}\u{65}\u{74}\u{77}\u{6F}\u{72}\u{6B}\u{20}\u{6C}\u{6F}\u{73}\u{74}\u{2E}") }
+
+    /// Directions could not be found.
+    public static var Travel_lookup_error_﹣_place_not_found｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{6C}\u{6F}\u{6F}\u{6B}\u{75}\u{70}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{2D}\u{20}\u{70}\u{6C}\u{61}\u{63}\u{65}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}", value: "\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{63}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}\u{2E}") }
+
+    /// Network lost.
+    public static var Travel_lookup_error_﹣_server_failure｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{6C}\u{6F}\u{6F}\u{6B}\u{75}\u{70}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{2D}\u{20}\u{73}\u{65}\u{72}\u{76}\u{65}\u{72}\u{20}\u{66}\u{61}\u{69}\u{6C}\u{75}\u{72}\u{65}", value: "\u{4E}\u{65}\u{74}\u{77}\u{6F}\u{72}\u{6B}\u{20}\u{6C}\u{6F}\u{73}\u{74}\u{2E}") }
+
+    /// Network lost.
+    public static var Travel_lookup_error_﹣_server_timeout｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{6C}\u{6F}\u{6F}\u{6B}\u{75}\u{70}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{2D}\u{20}\u{73}\u{65}\u{72}\u{76}\u{65}\u{72}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{6F}\u{75}\u{74}", value: "\u{4E}\u{65}\u{74}\u{77}\u{6F}\u{72}\u{6B}\u{20}\u{6C}\u{6F}\u{73}\u{74}\u{2E}") }
+
+    /// Travel to %@ (%@)
+    public static var Travel_to_％＠_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{54}\u{72}\u{61}\u{76}\u{65}\u{6C}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// URL
+    public static var URL｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{52}\u{4C}", value: "\u{55}\u{52}\u{4C}") }
+
+    /// Unable to connect to account.
+    public static var Unable_to_connect_to_account．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{2E}", value: "\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{2E}") }
+
+    /// Unable to connect to the Internet.
+    public static var Unable_to_connect_to_the_Internet．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{49}\u{6E}\u{74}\u{65}\u{72}\u{6E}\u{65}\u{74}\u{2E}", value: "\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{49}\u{6E}\u{74}\u{65}\u{72}\u{6E}\u{65}\u{74}\u{2E}") }
+
+    /// Unable to update account due to missing information.
+    public static var Unable_to_update_account_due_to_missing_information．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{20}\u{64}\u{75}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{69}\u{73}\u{73}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{6E}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2E}", value: "\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{20}\u{61}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{20}\u{64}\u{75}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{69}\u{73}\u{73}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{6E}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2E}") }
+
+    /// Unable to update calendars.
+    public static var Unable_to_update_calendars．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}\u{2E}", value: "\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{73}\u{2E}") }
+
+    /// Unknown
+    public static var Unknown｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}", value: "\u{55}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}") }
+
+    /// Unknown Error
+    public static var Unknown_Error｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}", value: "\u{55}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{45}\u{72}\u{72}\u{6F}\u{72}") }
+
+    /// Title
+    public static var Unknown_title｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}\u{20}\u{74}\u{69}\u{74}\u{6C}\u{65}", value: "\u{54}\u{69}\u{74}\u{6C}\u{65}") }
+
+    /// Untitled Account
+    public static var Untitled_Account｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{64}\u{20}\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}", value: "\u{55}\u{6E}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{64}\u{20}\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}") }
+
+    /// Untitled Attachment
+    public static var Untitled_Attachment｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{64}\u{20}\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}", value: "\u{55}\u{6E}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{64}\u{20}\u{41}\u{74}\u{74}\u{61}\u{63}\u{68}\u{6D}\u{65}\u{6E}\u{74}") }
+
+    /// Untitled Calendar
+    public static var Untitled_Calendar｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{64}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}", value: "\u{55}\u{6E}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{64}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// New Event
+    public static var Untitled_event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{6E}\u{74}\u{69}\u{74}\u{6C}\u{65}\u{64}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}", value: "\u{4E}\u{65}\u{77}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Update Event
+    public static var Update_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// Updates
+    public static var Updates｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{73}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{73}") }
+
+    /// Use Anyway
+    public static var Use_Anyway｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{73}\u{65}\u{20}\u{41}\u{6E}\u{79}\u{77}\u{61}\u{79}", value: "\u{55}\u{73}\u{65}\u{20}\u{41}\u{6E}\u{79}\u{77}\u{61}\u{79}") }
+
+    /// at %@
+    public static var Used_only_when_the_time_is_1_o＇clock_（i．e．_1：00_AM，_1：00_PM，_or_0100_in_24﹣hour_time）．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{55}\u{73}\u{65}\u{64}\u{20}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{77}\u{68}\u{65}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{69}\u{73}\u{20}\u{31}\u{20}\u{6F}\u{27}\u{63}\u{6C}\u{6F}\u{63}\u{6B}\u{20}\u{28}\u{69}\u{2E}\u{65}\u{2E}\u{20}\u{31}\u{3A}\u{30}\u{30}\u{20}\u{41}\u{4D}\u{2C}\u{20}\u{31}\u{3A}\u{30}\u{30}\u{20}\u{50}\u{4D}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{30}\u{31}\u{30}\u{30}\u{20}\u{69}\u{6E}\u{20}\u{32}\u{34}\u{2D}\u{68}\u{6F}\u{75}\u{72}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{29}\u{2E}", value: "\u{61}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// Verify Account Information
+    public static var Verify_Account_Information｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{65}\u{72}\u{69}\u{66}\u{79}\u{20}\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{20}\u{49}\u{6E}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{69}\u{6F}\u{6E}", value: "\u{56}\u{65}\u{72}\u{69}\u{66}\u{79}\u{20}\u{41}\u{63}\u{63}\u{6F}\u{75}\u{6E}\u{74}\u{20}\u{49}\u{6E}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// View & Edit
+    public static var View_＆_Edit｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{69}\u{65}\u{77}\u{20}\u{26}\u{20}\u{45}\u{64}\u{69}\u{74}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{26}\u{20}\u{45}\u{64}\u{69}\u{74}") }
+
+    /// View Calendar:
+    public static var View_Calendar：｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{69}\u{65}\u{77}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3A}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}\u{3A}") }
+
+    /// View Comment
+    public static var View_Comment｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{69}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}") }
+
+    /// View Comments
+    public static var View_Comments｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{69}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{73}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6D}\u{6D}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// View Event
+    public static var View_Event｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{69}\u{65}\u{77}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{45}\u{76}\u{65}\u{6E}\u{74}") }
+
+    /// View Only
+    public static var View_Only｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{69}\u{65}\u{77}\u{20}\u{4F}\u{6E}\u{6C}\u{79}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{4F}\u{6E}\u{6C}\u{79}") }
+
+    /// View on Facebook
+    public static var View_on_Facebook｜EventKitUI: String { Util｜EventKitUI.systemString("\u{56}\u{69}\u{65}\u{77}\u{20}\u{6F}\u{6E}\u{20}\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{6F}\u{6E}\u{20}\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}") }
+
+    /// W
+    public static var W｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}", value: "\u{57}") }
+
+    /// Week
+    public static var Week｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}\u{65}\u{65}\u{6B}", value: "\u{57}\u{65}\u{65}\u{6B}") }
+
+    /// Weekly
+    public static var Weekly｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}\u{65}\u{65}\u{6B}\u{6C}\u{79}", value: "\u{57}\u{65}\u{65}\u{6B}\u{6C}\u{79}") }
+
+    /// Weeks
+    public static var Weeks｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}\u{65}\u{65}\u{6B}\u{73}", value: "\u{57}\u{65}\u{65}\u{6B}\u{73}") }
+
+    /// When
+    public static var When｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}\u{68}\u{65}\u{6E}", value: "\u{57}\u{68}\u{65}\u{6E}") }
+
+    /// Where
+    public static var Where｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}\u{68}\u{65}\u{72}\u{65}", value: "\u{57}\u{68}\u{65}\u{72}\u{65}") }
+
+    /// Work
+    public static var Work｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}\u{6F}\u{72}\u{6B}", value: "\u{57}\u{6F}\u{72}\u{6B}") }
+
+    /// Would you like to download it from “%@”?
+    public static var Would_you_like_to_download_it_from_＇＇％＠＇＇？｜EventKitUI: String { Util｜EventKitUI.systemString("\u{57}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{6C}\u{69}\u{6B}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{20}\u{69}\u{74}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{201C}\u{25}\u{40}\u{201D}\u{3F}", value: "\u{57}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{6C}\u{69}\u{6B}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{6F}\u{77}\u{6E}\u{6C}\u{6F}\u{61}\u{64}\u{20}\u{69}\u{74}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{201C}\u{25}\u{40}\u{201D}\u{3F}") }
+
+    /// Yearly
+    public static var Yearly｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{65}\u{61}\u{72}\u{6C}\u{79}", value: "\u{59}\u{65}\u{61}\u{72}\u{6C}\u{79}") }
+
+    /// Years
+    public static var Years｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{65}\u{61}\u{72}\u{73}", value: "\u{59}\u{65}\u{61}\u{72}\u{73}") }
+
+    /// Yellow
+    public static var Yellow｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{65}\u{6C}\u{6C}\u{6F}\u{77}", value: "\u{59}\u{65}\u{6C}\u{6C}\u{6F}\u{77}") }
+
+    /// You
+    public static var You｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}", value: "\u{59}\u{6F}\u{75}") }
+
+    /// You are being notified of this event because you are a delegate of an invitee.
+    public static var You_are_being_notified_of_this_event_because_you_are_a_delegate_of_an_invitee．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}\u{20}\u{61}\u{72}\u{65}\u{20}\u{62}\u{65}\u{69}\u{6E}\u{67}\u{20}\u{6E}\u{6F}\u{74}\u{69}\u{66}\u{69}\u{65}\u{64}\u{20}\u{6F}\u{66}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{61}\u{72}\u{65}\u{20}\u{61}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{61}\u{6E}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{2E}", value: "\u{59}\u{6F}\u{75}\u{20}\u{61}\u{72}\u{65}\u{20}\u{62}\u{65}\u{69}\u{6E}\u{67}\u{20}\u{6E}\u{6F}\u{74}\u{69}\u{66}\u{69}\u{65}\u{64}\u{20}\u{6F}\u{66}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{76}\u{65}\u{6E}\u{74}\u{20}\u{62}\u{65}\u{63}\u{61}\u{75}\u{73}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{61}\u{72}\u{65}\u{20}\u{61}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{67}\u{61}\u{74}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{61}\u{6E}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{2E}") }
+
+    /// You can report this invitation as junk by sending it to Apple.
+    public static var You_can_report_this_invitation_as_junk_by_sending_it_to_Apple．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{72}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{61}\u{73}\u{20}\u{6A}\u{75}\u{6E}\u{6B}\u{20}\u{62}\u{79}\u{20}\u{73}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{41}\u{70}\u{70}\u{6C}\u{65}\u{2E}", value: "\u{59}\u{6F}\u{75}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{72}\u{65}\u{70}\u{6F}\u{72}\u{74}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{61}\u{73}\u{20}\u{6A}\u{75}\u{6E}\u{6B}\u{20}\u{62}\u{79}\u{20}\u{73}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{41}\u{70}\u{70}\u{6C}\u{65}\u{2E}") }
+
+    /// You have a pending invite
+    public static var You_have_a_pending_invite｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{20}\u{70}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}", value: "\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{20}\u{70}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}") }
+
+    /// You have pending invitees
+    public static var You_have_pending_invitees｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{70}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}", value: "\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{70}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}") }
+
+    /// You have removed an invitee
+    public static var You_have_removed_an_invitee｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}", value: "\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{64}\u{20}\u{61}\u{6E}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}") }
+
+    /// You have removed invitees
+    public static var You_have_removed_invitees｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}", value: "\u{59}\u{6F}\u{75}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{72}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{64}\u{20}\u{69}\u{6E}\u{76}\u{69}\u{74}\u{65}\u{65}\u{73}") }
+
+    /// Your username or password is incorrect.
+    public static var Your_username_or_password_is_incorrect．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{59}\u{6F}\u{75}\u{72}\u{20}\u{75}\u{73}\u{65}\u{72}\u{6E}\u{61}\u{6D}\u{65}\u{20}\u{6F}\u{72}\u{20}\u{70}\u{61}\u{73}\u{73}\u{77}\u{6F}\u{72}\u{64}\u{20}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{63}\u{6F}\u{72}\u{72}\u{65}\u{63}\u{74}\u{2E}", value: "\u{59}\u{6F}\u{75}\u{72}\u{20}\u{75}\u{73}\u{65}\u{72}\u{6E}\u{61}\u{6D}\u{65}\u{20}\u{6F}\u{72}\u{20}\u{70}\u{61}\u{73}\u{73}\u{77}\u{6F}\u{72}\u{64}\u{20}\u{69}\u{73}\u{20}\u{69}\u{6E}\u{63}\u{6F}\u{72}\u{72}\u{65}\u{63}\u{74}\u{2E}") }
+
+    /// add…
+    public static var add．．．｜EventKitUI: String { Util｜EventKitUI.systemString("\u{61}\u{64}\u{64}\u{2026}", value: "\u{61}\u{64}\u{64}\u{2026}") }
+
+    /// all-day
+    public static var all﹣day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{61}\u{6C}\u{6C}\u{2D}\u{64}\u{61}\u{79}", value: "\u{61}\u{6C}\u{6C}\u{2D}\u{64}\u{61}\u{79}") }
+
+    /// beginning now
+    public static var beginning_now｜EventKitUI: String { Util｜EventKitUI.systemString("\u{62}\u{65}\u{67}\u{69}\u{6E}\u{6E}\u{69}\u{6E}\u{67}\u{20}\u{6E}\u{6F}\u{77}", value: "\u{62}\u{65}\u{67}\u{69}\u{6E}\u{6E}\u{69}\u{6E}\u{67}\u{20}\u{6E}\u{6F}\u{77}") }
+
+    /// bike
+    public static var bike｜EventKitUI: String { Util｜EventKitUI.systemString("\u{62}\u{69}\u{6B}\u{65}", value: "\u{62}\u{69}\u{6B}\u{65}") }
+
+    /// daily
+    public static var daily｜EventKitUI: String { Util｜EventKitUI.systemString("\u{64}\u{61}\u{69}\u{6C}\u{79}", value: "\u{64}\u{61}\u{69}\u{6C}\u{79}") }
+
+    /// day
+    public static var day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{64}\u{61}\u{79}", value: "\u{64}\u{61}\u{79}") }
+
+    /// drive
+    public static var drive｜EventKitUI: String { Util｜EventKitUI.systemString("\u{64}\u{72}\u{69}\u{76}\u{65}", value: "\u{64}\u{72}\u{69}\u{76}\u{65}") }
+
+    /// every %u days
+    public static var every_％u_days｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{64}\u{61}\u{79}\u{73}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// every %u months
+    public static var every_％u_months｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}") }
+
+    /// every %u months on the %@
+    public static var every_％u_months_on_the_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}") }
+
+    /// every %u months on the first weekday
+    public static var every_％u_months_on_the_first_weekday｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}") }
+
+    /// every %u months on the first weekend day
+    public static var every_％u_months_on_the_first_weekend_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// every %u months on the last day
+    public static var every_％u_months_on_the_last_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// every %u months on the last weekday
+    public static var every_％u_months_on_the_last_weekday｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}") }
+
+    /// every %u months on the last weekend day
+    public static var every_％u_months_on_the_last_weekend_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// every %u months that have %u days
+    public static var every_％u_months_that_have_％u_days｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{25}\u{75}\u{20}\u{64}\u{61}\u{79}\u{73}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{25}\u{75}\u{20}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// every %u months, each %@
+    public static var every_％u_months，_each_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{2C}\u{20}\u{65}\u{61}\u{63}\u{68}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{73}\u{2C}\u{20}\u{65}\u{61}\u{63}\u{68}\u{20}\u{25}\u{40}") }
+
+    /// every %u weeks
+    public static var every_％u_weeks｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{73}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{73}") }
+
+    /// every %u weeks on %@
+    public static var every_％u_weeks_on_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{25}\u{40}") }
+
+    /// every %u years
+    public static var every_％u_years｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}") }
+
+    /// every %u years in %@
+    public static var every_％u_years_in_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{25}\u{40}") }
+
+    /// every %u years on the %@ %@
+    public static var every_％u_years_on_the_％＠_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{25}\u{75}\u{20}\u{79}\u{65}\u{61}\u{72}\u{73}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}") }
+
+    /// every month on the %@
+    public static var every_month_on_the_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}") }
+
+    /// every month on the first weekday
+    public static var every_month_on_the_first_weekday｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}") }
+
+    /// every month on the first weekend day
+    public static var every_month_on_the_first_weekend_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// every month on the last day
+    public static var every_month_on_the_last_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// every month on the last weekday
+    public static var every_month_on_the_last_weekday｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}") }
+
+    /// every month on the last weekend day
+    public static var every_month_on_the_last_weekend_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// every month that has %u days
+    public static var every_month_that_has_％u_days｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{68}\u{61}\u{73}\u{20}\u{25}\u{75}\u{20}\u{64}\u{61}\u{79}\u{73}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{20}\u{74}\u{68}\u{61}\u{74}\u{20}\u{68}\u{61}\u{73}\u{20}\u{25}\u{75}\u{20}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// every month, each %@
+    public static var every_month，_each_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{2C}\u{20}\u{65}\u{61}\u{63}\u{68}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{2C}\u{20}\u{65}\u{61}\u{63}\u{68}\u{20}\u{25}\u{40}") }
+
+    /// every week on %@
+    public static var every_week_on_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{20}\u{6F}\u{6E}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{77}\u{65}\u{65}\u{6B}\u{20}\u{6F}\u{6E}\u{20}\u{25}\u{40}") }
+
+    /// every year in %@
+    public static var every_year_in_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{79}\u{65}\u{61}\u{72}\u{20}\u{69}\u{6E}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{79}\u{65}\u{61}\u{72}\u{20}\u{69}\u{6E}\u{20}\u{25}\u{40}") }
+
+    /// every year on the %@ %@
+    public static var every_year_on_the_％＠_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{79}\u{65}\u{61}\u{72}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}", value: "\u{65}\u{76}\u{65}\u{72}\u{79}\u{20}\u{79}\u{65}\u{61}\u{72}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}") }
+
+    /// fifth
+    public static var fifth｜EventKitUI: String { Util｜EventKitUI.systemString("\u{66}\u{69}\u{66}\u{74}\u{68}", value: "\u{66}\u{69}\u{66}\u{74}\u{68}") }
+
+    /// first
+    public static var first｜EventKitUI: String { Util｜EventKitUI.systemString("\u{66}\u{69}\u{72}\u{73}\u{74}", value: "\u{66}\u{69}\u{72}\u{73}\u{74}") }
+
+    /// fourth
+    public static var fourth｜EventKitUI: String { Util｜EventKitUI.systemString("\u{66}\u{6F}\u{75}\u{72}\u{74}\u{68}", value: "\u{66}\u{6F}\u{75}\u{72}\u{74}\u{68}") }
+
+    /// from %@ %@
+    public static var from_％＠_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}", value: "\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}") }
+
+    /// from %@ (%@) to %@ (%@)
+    public static var from_％＠_（％＠）_to_％＠_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// from %@ to %@
+    public static var from_％＠_to_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}", value: "\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// from %@ to %@ (%@)
+    public static var from_％＠_to_％＠_（％＠）｜EventKitUI: String { Util｜EventKitUI.systemString("\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}", value: "\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// in %@
+    public static var in_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{69}\u{6E}\u{20}\u{25}\u{40}", value: "\u{69}\u{6E}\u{20}\u{25}\u{40}") }
+
+    /// in %@ minutes
+    public static var in_％＠_minutes｜EventKitUI: String { Util｜EventKitUI.systemString("\u{69}\u{6E}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}", value: "\u{69}\u{6E}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}") }
+
+    /// in one minute
+    public static var in_one_minute｜EventKitUI: String { Util｜EventKitUI.systemString("\u{69}\u{6E}\u{20}\u{6F}\u{6E}\u{65}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}", value: "\u{69}\u{6E}\u{20}\u{6F}\u{6E}\u{65}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}") }
+
+    /// it started %@ minutes ago
+    public static var it_started_％＠_minutes_ago｜EventKitUI: String { Util｜EventKitUI.systemString("\u{69}\u{74}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{65}\u{64}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}\u{20}\u{61}\u{67}\u{6F}", value: "\u{69}\u{74}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{65}\u{64}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}\u{20}\u{61}\u{67}\u{6F}") }
+
+    /// last
+    public static var last｜EventKitUI: String { Util｜EventKitUI.systemString("\u{6C}\u{61}\u{73}\u{74}", value: "\u{6C}\u{61}\u{73}\u{74}") }
+
+    /// monthly
+    public static var monthly｜EventKitUI: String { Util｜EventKitUI.systemString("\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{6C}\u{79}", value: "\u{6D}\u{6F}\u{6E}\u{74}\u{68}\u{6C}\u{79}") }
+
+    /// optional
+    public static var optional｜EventKitUI: String { Util｜EventKitUI.systemString("\u{6F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}", value: "\u{6F}\u{70}\u{74}\u{69}\u{6F}\u{6E}\u{61}\u{6C}") }
+
+    /// repeats %@
+    public static var repeats_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{72}\u{65}\u{70}\u{65}\u{61}\u{74}\u{73}\u{20}\u{25}\u{40}", value: "\u{72}\u{65}\u{70}\u{65}\u{61}\u{74}\u{73}\u{20}\u{25}\u{40}") }
+
+    /// second
+    public static var second｜EventKitUI: String { Util｜EventKitUI.systemString("\u{73}\u{65}\u{63}\u{6F}\u{6E}\u{64}", value: "\u{73}\u{65}\u{63}\u{6F}\u{6E}\u{64}") }
+
+    /// somebody
+    public static var somebody｜EventKitUI: String { Util｜EventKitUI.systemString("\u{73}\u{6F}\u{6D}\u{65}\u{62}\u{6F}\u{64}\u{79}", value: "\u{73}\u{6F}\u{6D}\u{65}\u{62}\u{6F}\u{64}\u{79}") }
+
+    /// take transit
+    public static var take_transit｜EventKitUI: String { Util｜EventKitUI.systemString("\u{74}\u{61}\u{6B}\u{65}\u{20}\u{74}\u{72}\u{61}\u{6E}\u{73}\u{69}\u{74}", value: "\u{74}\u{61}\u{6B}\u{65}\u{20}\u{74}\u{72}\u{61}\u{6E}\u{73}\u{69}\u{74}") }
+
+    /// that started %@ minutes ago
+    public static var that_started_％＠_minutes_ago｜EventKitUI: String { Util｜EventKitUI.systemString("\u{74}\u{68}\u{61}\u{74}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{65}\u{64}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}\u{20}\u{61}\u{67}\u{6F}", value: "\u{74}\u{68}\u{61}\u{74}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{65}\u{64}\u{20}\u{25}\u{40}\u{20}\u{6D}\u{69}\u{6E}\u{75}\u{74}\u{65}\u{73}\u{20}\u{61}\u{67}\u{6F}") }
+
+    /// third
+    public static var third｜EventKitUI: String { Util｜EventKitUI.systemString("\u{74}\u{68}\u{69}\u{72}\u{64}", value: "\u{74}\u{68}\u{69}\u{72}\u{64}") }
+
+    /// to %@
+    public static var to_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{74}\u{6F}\u{20}\u{25}\u{40}", value: "\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// to %@ %@
+    public static var to_％＠_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}", value: "\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{25}\u{40}") }
+
+    /// walk
+    public static var walk｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{61}\u{6C}\u{6B}", value: "\u{77}\u{61}\u{6C}\u{6B}") }
+
+    /// weekday
+    public static var weekday｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}", value: "\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}") }
+
+    /// weekdays
+    public static var weekdays｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}\u{73}", value: "\u{77}\u{65}\u{65}\u{6B}\u{64}\u{61}\u{79}\u{73}") }
+
+    /// weekend day
+    public static var weekend_day｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}", value: "\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{20}\u{64}\u{61}\u{79}") }
+
+    /// weekends
+    public static var weekends｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{73}", value: "\u{77}\u{65}\u{65}\u{6B}\u{65}\u{6E}\u{64}\u{73}") }
+
+    /// weekly
+    public static var weekly｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{65}\u{65}\u{6B}\u{6C}\u{79}", value: "\u{77}\u{65}\u{65}\u{6B}\u{6C}\u{79}") }
+
+    /// with %@
+    public static var with_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}", value: "\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}") }
+
+    /// with %@ and %@
+    public static var with_％＠_and_％＠｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}", value: "\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}") }
+
+    /// with %@ and %@ others
+    public static var with_％＠_and_％＠_others｜EventKitUI: String { Util｜EventKitUI.systemString("\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}\u{20}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}", value: "\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{25}\u{40}\u{20}\u{6F}\u{74}\u{68}\u{65}\u{72}\u{73}") }
+
+    /// yearly
+    public static var yearly｜EventKitUI: String { Util｜EventKitUI.systemString("\u{79}\u{65}\u{61}\u{72}\u{6C}\u{79}", value: "\u{79}\u{65}\u{61}\u{72}\u{6C}\u{79}") }
+
+    /// “%@”
+    public static var ＇＇％＠＇＇｜EventKitUI: String { Util｜EventKitUI.systemString("\u{201C}\u{25}\u{40}\u{201D}", value: "\u{201C}\u{25}\u{40}\u{201D}") }
+
+}
+
+// MARK: - EventKitUI Utilities
+
+@available(iOS 4.0, *)
+enum Util｜EventKitUI {
+
+    /// For testing: The preferred localization for EventKitUI strings (`nil` means use the current system locale)
+    static var preferredLocalization: String? = nil
+
+    /// Preferred available localization, depending on current value of `localization`
+    private static var preferredAvailableLocalization: String? {
+        Bundle.preferredLocalizations(from: availableLocalizations, forPreferences: preferredLocalization.flatMap { [$0] }).first
+    }
+
+    /// Localizations available in EventKitUI framework
+    private static let availableLocalizations = ["ar", "ca", "cs", "da", "de", "el", "en", "en_AU", "en_GB", "es", "es_419", "fi", "fr", "fr_CA", "he", "hi", "hr", "hu", "id", "it", "ja", "ko", "ms", "nl", "no", "pl", "pt", "pt_PT", "ro", "ru", "sk", "sv", "th", "tr", "uk", "vi", "zh_CN", "zh_HK", "zh_TW"]
+
+    /// Loads the EventKitUI string for the specified key
+    fileprivate static func systemString(_ key: String, value: String) -> String {
+        preferredAvailableLocalization.flatMap { bundle(for: $0)?.localizedString(forKey: key, value: value, table: nil) } ?? value
+    }
+
+    /// Utility method for accessing static (= lazy) properties
+    static func bundle(for localization: String) -> Bundle? {
+        switch localization {
+        case "ar": return ar｜EventKitUI
+        case "ca": return ca｜EventKitUI
+        case "cs": return cs｜EventKitUI
+        case "da": return da｜EventKitUI
+        case "de": return de｜EventKitUI
+        case "el": return el｜EventKitUI
+        case "en": return en｜EventKitUI
+        case "en_AU": return en_AU｜EventKitUI
+        case "en_GB": return en_GB｜EventKitUI
+        case "es": return es｜EventKitUI
+        case "es_419": return es_419｜EventKitUI
+        case "fi": return fi｜EventKitUI
+        case "fr": return fr｜EventKitUI
+        case "fr_CA": return fr_CA｜EventKitUI
+        case "he": return he｜EventKitUI
+        case "hi": return hi｜EventKitUI
+        case "hr": return hr｜EventKitUI
+        case "hu": return hu｜EventKitUI
+        case "id": return id｜EventKitUI
+        case "it": return it｜EventKitUI
+        case "ja": return ja｜EventKitUI
+        case "ko": return ko｜EventKitUI
+        case "ms": return ms｜EventKitUI
+        case "nl": return nl｜EventKitUI
+        case "no": return no｜EventKitUI
+        case "pl": return pl｜EventKitUI
+        case "pt": return pt｜EventKitUI
+        case "pt_PT": return pt_PT｜EventKitUI
+        case "ro": return ro｜EventKitUI
+        case "ru": return ru｜EventKitUI
+        case "sk": return sk｜EventKitUI
+        case "sv": return sv｜EventKitUI
+        case "th": return th｜EventKitUI
+        case "tr": return tr｜EventKitUI
+        case "uk": return uk｜EventKitUI
+        case "vi": return vi｜EventKitUI
+        case "zh_CN": return zh_CN｜EventKitUI
+        case "zh_HK": return zh_HK｜EventKitUI
+        case "zh_TW": return zh_TW｜EventKitUI
+        default: return nil
+        }
+    }
+
+    /// Localized bundle for ar strings. Kept static so that it's loaded lazily.
+    private static let ar｜EventKitUI = loadBundle(for: "ar")
+
+    /// Localized bundle for ca strings. Kept static so that it's loaded lazily.
+    private static let ca｜EventKitUI = loadBundle(for: "ca")
+
+    /// Localized bundle for cs strings. Kept static so that it's loaded lazily.
+    private static let cs｜EventKitUI = loadBundle(for: "cs")
+
+    /// Localized bundle for da strings. Kept static so that it's loaded lazily.
+    private static let da｜EventKitUI = loadBundle(for: "da")
+
+    /// Localized bundle for de strings. Kept static so that it's loaded lazily.
+    private static let de｜EventKitUI = loadBundle(for: "de")
+
+    /// Localized bundle for el strings. Kept static so that it's loaded lazily.
+    private static let el｜EventKitUI = loadBundle(for: "el")
+
+    /// Localized bundle for en strings. Kept static so that it's loaded lazily.
+    private static let en｜EventKitUI = loadBundle(for: "en")
+
+    /// Localized bundle for en_AU strings. Kept static so that it's loaded lazily.
+    private static let en_AU｜EventKitUI = loadBundle(for: "en_AU")
+
+    /// Localized bundle for en_GB strings. Kept static so that it's loaded lazily.
+    private static let en_GB｜EventKitUI = loadBundle(for: "en_GB")
+
+    /// Localized bundle for es strings. Kept static so that it's loaded lazily.
+    private static let es｜EventKitUI = loadBundle(for: "es")
+
+    /// Localized bundle for es_419 strings. Kept static so that it's loaded lazily.
+    private static let es_419｜EventKitUI = loadBundle(for: "es_419")
+
+    /// Localized bundle for fi strings. Kept static so that it's loaded lazily.
+    private static let fi｜EventKitUI = loadBundle(for: "fi")
+
+    /// Localized bundle for fr strings. Kept static so that it's loaded lazily.
+    private static let fr｜EventKitUI = loadBundle(for: "fr")
+
+    /// Localized bundle for fr_CA strings. Kept static so that it's loaded lazily.
+    private static let fr_CA｜EventKitUI = loadBundle(for: "fr_CA")
+
+    /// Localized bundle for he strings. Kept static so that it's loaded lazily.
+    private static let he｜EventKitUI = loadBundle(for: "he")
+
+    /// Localized bundle for hi strings. Kept static so that it's loaded lazily.
+    private static let hi｜EventKitUI = loadBundle(for: "hi")
+
+    /// Localized bundle for hr strings. Kept static so that it's loaded lazily.
+    private static let hr｜EventKitUI = loadBundle(for: "hr")
+
+    /// Localized bundle for hu strings. Kept static so that it's loaded lazily.
+    private static let hu｜EventKitUI = loadBundle(for: "hu")
+
+    /// Localized bundle for id strings. Kept static so that it's loaded lazily.
+    private static let id｜EventKitUI = loadBundle(for: "id")
+
+    /// Localized bundle for it strings. Kept static so that it's loaded lazily.
+    private static let it｜EventKitUI = loadBundle(for: "it")
+
+    /// Localized bundle for ja strings. Kept static so that it's loaded lazily.
+    private static let ja｜EventKitUI = loadBundle(for: "ja")
+
+    /// Localized bundle for ko strings. Kept static so that it's loaded lazily.
+    private static let ko｜EventKitUI = loadBundle(for: "ko")
+
+    /// Localized bundle for ms strings. Kept static so that it's loaded lazily.
+    private static let ms｜EventKitUI = loadBundle(for: "ms")
+
+    /// Localized bundle for nl strings. Kept static so that it's loaded lazily.
+    private static let nl｜EventKitUI = loadBundle(for: "nl")
+
+    /// Localized bundle for no strings. Kept static so that it's loaded lazily.
+    private static let no｜EventKitUI = loadBundle(for: "no")
+
+    /// Localized bundle for pl strings. Kept static so that it's loaded lazily.
+    private static let pl｜EventKitUI = loadBundle(for: "pl")
+
+    /// Localized bundle for pt strings. Kept static so that it's loaded lazily.
+    private static let pt｜EventKitUI = loadBundle(for: "pt")
+
+    /// Localized bundle for pt_PT strings. Kept static so that it's loaded lazily.
+    private static let pt_PT｜EventKitUI = loadBundle(for: "pt_PT")
+
+    /// Localized bundle for ro strings. Kept static so that it's loaded lazily.
+    private static let ro｜EventKitUI = loadBundle(for: "ro")
+
+    /// Localized bundle for ru strings. Kept static so that it's loaded lazily.
+    private static let ru｜EventKitUI = loadBundle(for: "ru")
+
+    /// Localized bundle for sk strings. Kept static so that it's loaded lazily.
+    private static let sk｜EventKitUI = loadBundle(for: "sk")
+
+    /// Localized bundle for sv strings. Kept static so that it's loaded lazily.
+    private static let sv｜EventKitUI = loadBundle(for: "sv")
+
+    /// Localized bundle for th strings. Kept static so that it's loaded lazily.
+    private static let th｜EventKitUI = loadBundle(for: "th")
+
+    /// Localized bundle for tr strings. Kept static so that it's loaded lazily.
+    private static let tr｜EventKitUI = loadBundle(for: "tr")
+
+    /// Localized bundle for uk strings. Kept static so that it's loaded lazily.
+    private static let uk｜EventKitUI = loadBundle(for: "uk")
+
+    /// Localized bundle for vi strings. Kept static so that it's loaded lazily.
+    private static let vi｜EventKitUI = loadBundle(for: "vi")
+
+    /// Localized bundle for zh_CN strings. Kept static so that it's loaded lazily.
+    private static let zh_CN｜EventKitUI = loadBundle(for: "zh_CN")
+
+    /// Localized bundle for zh_HK strings. Kept static so that it's loaded lazily.
+    private static let zh_HK｜EventKitUI = loadBundle(for: "zh_HK")
+
+    /// Localized bundle for zh_TW strings. Kept static so that it's loaded lazily.
+    private static let zh_TW｜EventKitUI = loadBundle(for: "zh_TW")
+
+    /// Convenience method for loading localized bundles
+    private static func loadBundle(for localization: String) -> Bundle? {
+        _ = EventKitUI.EKEventViewController.self // Force bundle load
+        return Bundle(identifier: "com.apple.eventkitui")?
+            .path(forResource: localization, ofType: "lproj")
+            .flatMap { Bundle(path: $0) }
+    }
+
+}

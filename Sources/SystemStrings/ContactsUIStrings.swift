@@ -1,0 +1,1855 @@
+/// Copyright 2020 Johannes Marbach
+///
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+///
+///     http://www.apache.org/licenses/LICENSE-2.0
+///
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+
+import ContactsUI
+import Foundation
+
+// MARK: - ContactsUI Strings
+
+@available(iOS 9.0, *)
+extension String {
+
+    /// 1 Linked Contact
+    public static var _1_LINKED_CARD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{31}\u{5F}\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}", value: "\u{31}\u{20}\u{4C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// You can enable access in Privacy Settings.
+    public static var ACCESS_DENIED_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{43}\u{45}\u{53}\u{53}\u{5F}\u{44}\u{45}\u{4E}\u{49}\u{45}\u{44}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{59}\u{6F}\u{75}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{65}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{50}\u{72}\u{69}\u{76}\u{61}\u{63}\u{79}\u{20}\u{53}\u{65}\u{74}\u{74}\u{69}\u{6E}\u{67}\u{73}\u{2E}") }
+
+    /// This app does not have access to your contacts.
+    public static var ACCESS_DENIED_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{43}\u{45}\u{53}\u{53}\u{5F}\u{44}\u{45}\u{4E}\u{49}\u{45}\u{44}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{61}\u{70}\u{70}\u{20}\u{64}\u{6F}\u{65}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{68}\u{61}\u{76}\u{65}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{2E}") }
+
+    /// Call
+    public static var ACTION_AUDIO_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{4F}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{43}\u{61}\u{6C}\u{6C}") }
+
+    /// call
+    public static var ACTION_BUTTON_AUDIO_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{4F}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{63}\u{61}\u{6C}\u{6C}") }
+
+    /// info
+    public static var ACTION_BUTTON_INFO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{49}\u{4E}\u{46}\u{4F}", value: "\u{69}\u{6E}\u{66}\u{6F}") }
+
+    /// mail
+    public static var ACTION_BUTTON_MAIL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{4D}\u{41}\u{49}\u{4C}", value: "\u{6D}\u{61}\u{69}\u{6C}") }
+
+    /// message
+    public static var ACTION_BUTTON_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// video
+    public static var ACTION_BUTTON_VIDEO_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{56}\u{49}\u{44}\u{45}\u{4F}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{76}\u{69}\u{64}\u{65}\u{6F}") }
+
+    /// Info
+    public static var ACTION_INFO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{49}\u{4E}\u{46}\u{4F}", value: "\u{49}\u{6E}\u{66}\u{6F}") }
+
+    /// Mail
+    public static var ACTION_MAIL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4D}\u{41}\u{49}\u{4C}", value: "\u{4D}\u{61}\u{69}\u{6C}") }
+
+    /// Message
+    public static var ACTION_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// Video Call
+    public static var ACTION_VIDEO_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{49}\u{44}\u{45}\u{4F}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{56}\u{69}\u{64}\u{65}\u{6F}\u{20}\u{43}\u{61}\u{6C}\u{6C}") }
+
+    /// Add
+    public static var ADD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}", value: "\u{41}\u{64}\u{64}") }
+
+    /// Open in Google Maps
+    public static var ADDRESS_ACTION_GOOGLE_MAPS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{52}\u{45}\u{53}\u{53}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{47}\u{4F}\u{4F}\u{47}\u{4C}\u{45}\u{5F}\u{4D}\u{41}\u{50}\u{53}", value: "\u{4F}\u{70}\u{65}\u{6E}\u{20}\u{69}\u{6E}\u{20}\u{47}\u{6F}\u{6F}\u{67}\u{6C}\u{65}\u{20}\u{4D}\u{61}\u{70}\u{73}") }
+
+    /// Create a New Contact
+    public static var ADD_CONTACT_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{61}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Add Custom Label
+    public static var ADD_CUSTOM_LABEL_BUTTON｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}", value: "\u{41}\u{64}\u{64}\u{20}\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{4C}\u{61}\u{62}\u{65}\u{6C}") }
+
+    /// Add Custom Service
+    public static var ADD_CUSTOM_SERVICE_BUTTON｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}", value: "\u{41}\u{64}\u{64}\u{20}\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{53}\u{65}\u{72}\u{76}\u{69}\u{63}\u{65}") }
+
+    /// custom service
+    public static var ADD_CUSTOM_SERVICE_PLACEHOLDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}\u{5F}\u{50}\u{4C}\u{41}\u{43}\u{45}\u{48}\u{4F}\u{4C}\u{44}\u{45}\u{52}", value: "\u{63}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{73}\u{65}\u{72}\u{76}\u{69}\u{63}\u{65}") }
+
+    /// Custom Service
+    public static var ADD_CUSTOM_SERVICE_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{53}\u{65}\u{72}\u{76}\u{69}\u{63}\u{65}") }
+
+    /// Add this email to:
+    public static var ADD_EMAIL_TO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{45}\u{4D}\u{41}\u{49}\u{4C}\u{5F}\u{54}\u{4F}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{74}\u{6F}\u{3A}") }
+
+    /// add field
+    public static var ADD_MORE_PROPERTIES｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4D}\u{4F}\u{52}\u{45}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{49}\u{45}\u{53}", value: "\u{61}\u{64}\u{64}\u{20}\u{66}\u{69}\u{65}\u{6C}\u{64}") }
+
+    /// Add Field
+    public static var ADD_MORE_PROPERTIES_NAV_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4D}\u{4F}\u{52}\u{45}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{49}\u{45}\u{53}\u{5F}\u{4E}\u{41}\u{56}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{41}\u{64}\u{64}\u{20}\u{46}\u{69}\u{65}\u{6C}\u{64}") }
+
+    /// Add Name
+    public static var ADD_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{41}\u{64}\u{64}\u{20}\u{4E}\u{61}\u{6D}\u{65}") }
+
+    /// Add New Contact For %@
+    public static var ADD_NEW_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{41}\u{64}\u{64}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{46}\u{6F}\u{72}\u{20}\u{25}\u{40}") }
+
+    /// add %@
+    public static var ADD_NEW_ITEM｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}", value: "\u{61}\u{64}\u{64}\u{20}\u{25}\u{40}") }
+
+    /// add birthday
+    public static var ADD_NEW_ITEM_birthday｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}", value: "\u{61}\u{64}\u{64}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// add related name
+    public static var ADD_NEW_ITEM_contactRelations｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{52}\u{65}\u{6C}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{72}\u{65}\u{6C}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// add date
+    public static var ADD_NEW_ITEM_dates｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{64}\u{61}\u{74}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{64}\u{61}\u{74}\u{65}") }
+
+    /// add email
+    public static var ADD_NEW_ITEM_emailAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{65}\u{6D}\u{61}\u{69}\u{6C}") }
+
+    /// add instant message
+    public static var ADD_NEW_ITEM_instantMessageAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{69}\u{6E}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{69}\u{6E}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// add alternate birthday
+    public static var ADD_NEW_ITEM_nonGregorianBirthday｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{6E}\u{6F}\u{6E}\u{47}\u{72}\u{65}\u{67}\u{6F}\u{72}\u{69}\u{61}\u{6E}\u{42}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}", value: "\u{61}\u{64}\u{64}\u{20}\u{61}\u{6C}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{74}\u{65}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// add note
+    public static var ADD_NEW_ITEM_note｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{6E}\u{6F}\u{74}\u{65}", value: "\u{61}\u{64}\u{64}\u{20}\u{6E}\u{6F}\u{74}\u{65}") }
+
+    /// add phone
+    public static var ADD_NEW_ITEM_phoneNumbers｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{4E}\u{75}\u{6D}\u{62}\u{65}\u{72}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// add address
+    public static var ADD_NEW_ITEM_postalAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{70}\u{6F}\u{73}\u{74}\u{61}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}") }
+
+    /// add social profile
+    public static var ADD_NEW_ITEM_socialProfiles｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{6C}\u{50}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{6C}\u{20}\u{70}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}") }
+
+    /// add url
+    public static var ADD_NEW_ITEM_urlAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{20}\u{75}\u{72}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{20}\u{75}\u{72}\u{6C}") }
+
+    /// Add New Contact
+    public static var ADD_NEW_LOCAL_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{4C}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{41}\u{64}\u{64}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Add this phone number to:
+    public static var ADD_PHONE_NUMBER_TO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{44}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{4E}\u{55}\u{4D}\u{42}\u{45}\u{52}\u{5F}\u{54}\u{4F}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{6E}\u{75}\u{6D}\u{62}\u{65}\u{72}\u{20}\u{74}\u{6F}\u{3A}") }
+
+    /// Emergency Bypass On
+    public static var ALERT_IGNORE_MUTE_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{49}\u{47}\u{4E}\u{4F}\u{52}\u{45}\u{5F}\u{4D}\u{55}\u{54}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{45}\u{6D}\u{65}\u{72}\u{67}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{42}\u{79}\u{70}\u{61}\u{73}\u{73}\u{20}\u{4F}\u{6E}") }
+
+    /// Sound: %@
+    public static var ALERT_SOUND_LABEL_AND_VALUE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{53}\u{4F}\u{55}\u{4E}\u{44}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}", value: "\u{53}\u{6F}\u{75}\u{6E}\u{64}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Vibration: %@
+    public static var ALERT_VIBRATION_LABEL_AND_VALUE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{56}\u{49}\u{42}\u{52}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}", value: "\u{56}\u{69}\u{62}\u{72}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{3A}\u{20}\u{25}\u{40}") }
+
+    /// Allow Contact Editing
+    public static var ALLOW_CONTACT_EDITING｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{4C}\u{4C}\u{4F}\u{57}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{49}\u{4E}\u{47}", value: "\u{41}\u{6C}\u{6C}\u{6F}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{45}\u{64}\u{69}\u{74}\u{69}\u{6E}\u{67}") }
+
+    /// Contacts
+    public static var ALL_CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{4C}\u{4C}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// All %@
+    public static var ALL_CONTACTS_FOR_ACCOUNT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{4C}\u{4C}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}\u{5F}\u{46}\u{4F}\u{52}\u{5F}\u{41}\u{43}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{2D}\u{25}\u{40}", value: "\u{41}\u{6C}\u{6C}\u{20}\u{25}\u{40}") }
+
+    /// All Labels
+    public static var ALL_LABELS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{4C}\u{4C}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{53}", value: "\u{41}\u{6C}\u{6C}\u{20}\u{4C}\u{61}\u{62}\u{65}\u{6C}\u{73}") }
+
+    /// District (E.g., Chao Yang)
+    public static var APPLEPAY_DISTRICT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{50}\u{50}\u{4C}\u{45}\u{50}\u{41}\u{59}\u{5F}\u{44}\u{49}\u{53}\u{54}\u{52}\u{49}\u{43}\u{54}", value: "\u{44}\u{69}\u{73}\u{74}\u{72}\u{69}\u{63}\u{74}\u{20}\u{28}\u{45}\u{2E}\u{67}\u{2E}\u{2C}\u{20}\u{43}\u{68}\u{61}\u{6F}\u{20}\u{59}\u{61}\u{6E}\u{67}\u{29}") }
+
+    /// Ask Siri to Make a Call
+    public static var ASK_SIRI_TO_MAKE_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{53}\u{4B}\u{5F}\u{53}\u{49}\u{52}\u{49}\u{5F}\u{54}\u{4F}\u{5F}\u{4D}\u{41}\u{4B}\u{45}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{41}\u{73}\u{6B}\u{20}\u{53}\u{69}\u{72}\u{69}\u{20}\u{74}\u{6F}\u{20}\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{61}\u{20}\u{43}\u{61}\u{6C}\u{6C}") }
+
+    /// Authorize
+    public static var AUTHORIZE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{55}\u{54}\u{48}\u{4F}\u{52}\u{49}\u{5A}\u{45}", value: "\u{41}\u{75}\u{74}\u{68}\u{6F}\u{72}\u{69}\u{7A}\u{65}") }
+
+    /// Strike your favorite pose.
+    public static var AVATAR_POSE_PROMPT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{56}\u{41}\u{54}\u{41}\u{52}\u{5F}\u{50}\u{4F}\u{53}\u{45}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}", value: "\u{53}\u{74}\u{72}\u{69}\u{6B}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{66}\u{61}\u{76}\u{6F}\u{72}\u{69}\u{74}\u{65}\u{20}\u{70}\u{6F}\u{73}\u{65}\u{2E}") }
+
+    /// Africa
+    public static var Africa｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}", value: "\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}") }
+
+    /// Africa (Eastern)
+    public static var Africa_（Eastern）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{45}\u{61}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{45}\u{61}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// Africa (Middle)
+    public static var Africa_（Middle）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{4D}\u{69}\u{64}\u{64}\u{6C}\u{65}\u{29}", value: "\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{4D}\u{69}\u{64}\u{64}\u{6C}\u{65}\u{29}") }
+
+    /// Africa (Northern)
+    public static var Africa_（Northern）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{4E}\u{6F}\u{72}\u{74}\u{68}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{4E}\u{6F}\u{72}\u{74}\u{68}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// Africa (Southern)
+    public static var Africa_（Southern）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// Africa (Western)
+    public static var Africa_（Western）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{57}\u{65}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{66}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{57}\u{65}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// America (Central)
+    public static var America_（Central）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{43}\u{65}\u{6E}\u{74}\u{72}\u{61}\u{6C}\u{29}", value: "\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{43}\u{65}\u{6E}\u{74}\u{72}\u{61}\u{6C}\u{29}") }
+
+    /// America (North)
+    public static var America_（North）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{4E}\u{6F}\u{72}\u{74}\u{68}\u{29}", value: "\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{4E}\u{6F}\u{72}\u{74}\u{68}\u{29}") }
+
+    /// America (South)
+    public static var America_（South）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{29}", value: "\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{29}") }
+
+    /// Asia
+    public static var Asia｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{73}\u{69}\u{61}", value: "\u{41}\u{73}\u{69}\u{61}") }
+
+    /// Asia (Central)
+    public static var Asia_（Central）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{43}\u{65}\u{6E}\u{74}\u{72}\u{61}\u{6C}\u{29}", value: "\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{43}\u{65}\u{6E}\u{74}\u{72}\u{61}\u{6C}\u{29}") }
+
+    /// Asia (Eastern)
+    public static var Asia_（Eastern）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{45}\u{61}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{45}\u{61}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// Asia (South-Eastern)
+    public static var Asia_（South﹣Eastern）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{2D}\u{45}\u{61}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{2D}\u{45}\u{61}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// Asia (Southern)
+    public static var Asia_（Southern）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{53}\u{6F}\u{75}\u{74}\u{68}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// Asia (Western)
+    public static var Asia_（Western）｜ContactsUI: String { Util｜ContactsUI.systemString("\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{57}\u{65}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}", value: "\u{41}\u{73}\u{69}\u{61}\u{20}\u{28}\u{57}\u{65}\u{73}\u{74}\u{65}\u{72}\u{6E}\u{29}") }
+
+    /// Search for a Contact
+    public static var BEGIN_SEARCH_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{45}\u{47}\u{49}\u{4E}\u{5F}\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{61}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// default calendar
+    public static var BIRTHDAY_CALENDAR_LABEL_DEFAULT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}", value: "\u{64}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// chinese calendar
+    public static var BIRTHDAY_CALENDAR_LABEL_FORMAT﹣chinese｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{63}\u{68}\u{69}\u{6E}\u{65}\u{73}\u{65}", value: "\u{63}\u{68}\u{69}\u{6E}\u{65}\u{73}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// hebrew calendar
+    public static var BIRTHDAY_CALENDAR_LABEL_FORMAT﹣hebrew｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{68}\u{65}\u{62}\u{72}\u{65}\u{77}", value: "\u{68}\u{65}\u{62}\u{72}\u{65}\u{77}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// islamic calendar
+    public static var BIRTHDAY_CALENDAR_LABEL_FORMAT﹣islamic｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// islamic calendar
+    public static var BIRTHDAY_CALENDAR_LABEL_FORMAT﹣islamic﹣civil｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{2D}\u{63}\u{69}\u{76}\u{69}\u{6C}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// islamic calendar
+    public static var BIRTHDAY_CALENDAR_LABEL_FORMAT﹣islamic﹣tbla｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{2D}\u{74}\u{62}\u{6C}\u{61}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// islamic calendar
+    public static var BIRTHDAY_CALENDAR_LABEL_FORMAT﹣islamic﹣umalqura｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{2D}\u{75}\u{6D}\u{61}\u{6C}\u{71}\u{75}\u{72}\u{61}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{63}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// chinese birthday
+    public static var BIRTHDAY_LABEL_FORMAT﹣chinese｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{63}\u{68}\u{69}\u{6E}\u{65}\u{73}\u{65}", value: "\u{63}\u{68}\u{69}\u{6E}\u{65}\u{73}\u{65}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// hebrew birthday
+    public static var BIRTHDAY_LABEL_FORMAT﹣hebrew｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{68}\u{65}\u{62}\u{72}\u{65}\u{77}", value: "\u{68}\u{65}\u{62}\u{72}\u{65}\u{77}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// islamic birthday
+    public static var BIRTHDAY_LABEL_FORMAT﹣islamic｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// islamic birthday
+    public static var BIRTHDAY_LABEL_FORMAT﹣islamic﹣civil｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{2D}\u{63}\u{69}\u{76}\u{69}\u{6C}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// islamic birthday
+    public static var BIRTHDAY_LABEL_FORMAT﹣islamic﹣tbla｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{2D}\u{74}\u{62}\u{6C}\u{61}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// islamic birthday
+    public static var BIRTHDAY_LABEL_FORMAT﹣islamic﹣umalqura｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{2D}\u{75}\u{6D}\u{61}\u{6C}\u{71}\u{75}\u{72}\u{61}", value: "\u{69}\u{73}\u{6C}\u{61}\u{6D}\u{69}\u{63}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// Block this Caller
+    public static var BLOCK_THIS_CALLER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{42}\u{4C}\u{4F}\u{43}\u{4B}\u{5F}\u{54}\u{48}\u{49}\u{53}\u{5F}\u{43}\u{41}\u{4C}\u{4C}\u{45}\u{52}", value: "\u{42}\u{6C}\u{6F}\u{63}\u{6B}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{43}\u{61}\u{6C}\u{6C}\u{65}\u{72}") }
+
+    /// Cancel
+    public static var CANCEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Discard Changes to a Contact
+    public static var CANCEL_EDITING_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{49}\u{4E}\u{47}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{44}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Stop Searching
+    public static var CANCEL_SEARCH_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}\u{5F}\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{53}\u{74}\u{6F}\u{70}\u{20}\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}\u{69}\u{6E}\u{67}") }
+
+    /// CardDAV
+    public static var CARDDAV｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{44}\u{41}\u{56}", value: "\u{43}\u{61}\u{72}\u{64}\u{44}\u{41}\u{56}") }
+
+    /// Assign Ringtone
+    public static var CARD_ACTION_ASSIGN_RINGTONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{41}\u{53}\u{53}\u{49}\u{47}\u{4E}\u{5F}\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}", value: "\u{41}\u{73}\u{73}\u{69}\u{67}\u{6E}\u{20}\u{52}\u{69}\u{6E}\u{67}\u{74}\u{6F}\u{6E}\u{65}") }
+
+    /// Block Contact
+    public static var CARD_ACTION_BLOCK_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{4C}\u{4F}\u{43}\u{4B}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{42}\u{6C}\u{6F}\u{63}\u{6B}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// You will not receive phone calls, messages, or FaceTime from people on the block list.
+    public static var CARD_ACTION_BLOCK_CONTACT_INFO_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{4C}\u{4F}\u{43}\u{4B}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{49}\u{4E}\u{46}\u{4F}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{59}\u{6F}\u{75}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{72}\u{65}\u{63}\u{65}\u{69}\u{76}\u{65}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{6C}\u{73}\u{2C}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}\u{2C}\u{20}\u{6F}\u{72}\u{20}\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{70}\u{65}\u{6F}\u{70}\u{6C}\u{65}\u{20}\u{6F}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{62}\u{6C}\u{6F}\u{63}\u{6B}\u{20}\u{6C}\u{69}\u{73}\u{74}\u{2E}") }
+
+    /// Create Medical ID
+    public static var CARD_ACTION_CREATE_MEDICAL_ID｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}\u{5F}\u{4D}\u{45}\u{44}\u{49}\u{43}\u{41}\u{4C}\u{5F}\u{49}\u{44}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{4D}\u{65}\u{64}\u{69}\u{63}\u{61}\u{6C}\u{20}\u{49}\u{44}") }
+
+    /// Delete Contact
+    public static var CARD_ACTION_DELETE_CARD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Delete %@ Contacts
+    public static var CARD_ACTION_DELETE_CARD_MULTIPLE_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{4D}\u{55}\u{4C}\u{54}\u{49}\u{50}\u{4C}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{25}\u{40}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Edit Medical ID
+    public static var CARD_ACTION_EDIT_MEDICAL_ID｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{4D}\u{45}\u{44}\u{49}\u{43}\u{41}\u{4C}\u{5F}\u{49}\u{44}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{4D}\u{65}\u{64}\u{69}\u{63}\u{61}\u{6C}\u{20}\u{49}\u{44}") }
+
+    /// Add to Emergency Contacts
+    public static var CARD_ACTION_EMERGENCY_ADD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{4D}\u{45}\u{52}\u{47}\u{45}\u{4E}\u{43}\u{59}\u{5F}\u{41}\u{44}\u{44}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{45}\u{6D}\u{65}\u{72}\u{67}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Which phone number do you want added to your Emergency Contacts?
+    public static var CARD_ACTION_EMERGENCY_ADD_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{4D}\u{45}\u{52}\u{47}\u{45}\u{4E}\u{43}\u{59}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{57}\u{68}\u{69}\u{63}\u{68}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{6E}\u{75}\u{6D}\u{62}\u{65}\u{72}\u{20}\u{64}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{61}\u{64}\u{64}\u{65}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{45}\u{6D}\u{65}\u{72}\u{67}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{3F}") }
+
+    /// Relationship
+    public static var CARD_ACTION_EMERGENCY_RELATIONSHIP_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{4D}\u{45}\u{52}\u{47}\u{45}\u{4E}\u{43}\u{59}\u{5F}\u{52}\u{45}\u{4C}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{53}\u{48}\u{49}\u{50}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{52}\u{65}\u{6C}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{68}\u{69}\u{70}") }
+
+    /// Remove from Emergency Contacts
+    public static var CARD_ACTION_EMERGENCY_REMOVE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{4D}\u{45}\u{52}\u{47}\u{45}\u{4E}\u{43}\u{59}\u{5F}\u{52}\u{45}\u{4D}\u{4F}\u{56}\u{45}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{45}\u{6D}\u{65}\u{72}\u{67}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Are you sure you want to remove %@ from your Emergency Contacts?
+    public static var CARD_ACTION_EMERGENCY_REMOVE_SHEET_TITLE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{4D}\u{45}\u{52}\u{47}\u{45}\u{4E}\u{43}\u{59}\u{5F}\u{52}\u{45}\u{4D}\u{4F}\u{56}\u{45}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{2D}\u{25}\u{40}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{72}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{25}\u{40}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{45}\u{6D}\u{65}\u{72}\u{67}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{3F}") }
+
+    /// Ignore All
+    public static var CARD_ACTION_IGNORE_CARD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{49}\u{47}\u{4E}\u{4F}\u{52}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}", value: "\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}\u{20}\u{41}\u{6C}\u{6C}") }
+
+    /// Show Medical ID
+    public static var CARD_ACTION_SHOW_MEDICAL_ID｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{53}\u{48}\u{4F}\u{57}\u{5F}\u{4D}\u{45}\u{44}\u{49}\u{43}\u{41}\u{4C}\u{5F}\u{49}\u{44}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{4D}\u{65}\u{64}\u{69}\u{63}\u{61}\u{6C}\u{20}\u{49}\u{44}") }
+
+    /// Done|Edit
+    public static var CARD_DONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{4F}\u{4E}\u{45}", value: "\u{44}\u{6F}\u{6E}\u{65}\u{7C}\u{45}\u{64}\u{69}\u{74}") }
+
+    /// Edit|Done
+    public static var CARD_EDIT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{45}\u{44}\u{49}\u{54}", value: "\u{45}\u{64}\u{69}\u{74}\u{7C}\u{44}\u{6F}\u{6E}\u{65}") }
+
+    /// Downtime Contact
+    public static var CARD_NAME_DOWNTIME_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{44}\u{6F}\u{77}\u{6E}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Emergency Contact
+    public static var CARD_NAME_EMERGENCY_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{45}\u{4D}\u{45}\u{52}\u{47}\u{45}\u{4E}\u{43}\u{59}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{45}\u{6D}\u{65}\u{72}\u{67}\u{65}\u{6E}\u{63}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// %@ Members
+    public static var CARD_NAME_GROUP_MEMBERS_COUNT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{4D}\u{45}\u{4D}\u{42}\u{45}\u{52}\u{53}\u{5F}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{4D}\u{65}\u{6D}\u{62}\u{65}\u{72}\u{73}") }
+
+    ///  - 
+    public static var CARD_NAME_JOB_TITLE_DEPARMENT_SEPARATOR｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{4A}\u{4F}\u{42}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{44}\u{45}\u{50}\u{41}\u{52}\u{4D}\u{45}\u{4E}\u{54}\u{5F}\u{53}\u{45}\u{50}\u{41}\u{52}\u{41}\u{54}\u{4F}\u{52}", value: "\u{20}\u{2D}\u{20}") }
+
+    /// “%@”
+    public static var CARD_NAME_NICKNAME_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{41}\u{52}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{4E}\u{49}\u{43}\u{4B}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{201C}\u{25}\u{40}\u{201D}") }
+
+    /// Choose Different Photo
+    public static var CHOOSE_DIFFERENT_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{44}\u{49}\u{46}\u{46}\u{45}\u{52}\u{45}\u{4E}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{44}\u{69}\u{66}\u{66}\u{65}\u{72}\u{65}\u{6E}\u{74}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Choose Existing Photo
+    public static var CHOOSE_EXISTITNG_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{45}\u{58}\u{49}\u{53}\u{54}\u{49}\u{54}\u{4E}\u{47}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{45}\u{78}\u{69}\u{73}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Choose From My Contacts
+    public static var CHOOSE_FROM_MY_CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{46}\u{52}\u{4F}\u{4D}\u{5F}\u{4D}\u{59}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{46}\u{72}\u{6F}\u{6D}\u{20}\u{4D}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Choose From %@ʼs Contacts
+    public static var CHOOSE_FROM_YOUR_CHILD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{46}\u{52}\u{4F}\u{4D}\u{5F}\u{59}\u{4F}\u{55}\u{52}\u{5F}\u{43}\u{48}\u{49}\u{4C}\u{44}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{46}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}\u{2BC}\u{73}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Choose Photo from Library
+    public static var CHOOSE_LIBRARY_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{4C}\u{49}\u{42}\u{52}\u{41}\u{52}\u{59}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{4C}\u{69}\u{62}\u{72}\u{61}\u{72}\u{79}") }
+
+    /// Choose Photo
+    public static var CHOOSE_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Remove from Recents
+    public static var CLEAR_RECENTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{4C}\u{45}\u{41}\u{52}\u{5F}\u{52}\u{45}\u{43}\u{45}\u{4E}\u{54}\u{53}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{52}\u{65}\u{63}\u{65}\u{6E}\u{74}\u{73}") }
+
+    /// Close
+    public static var CLOSE_DISAMBIGUATION_CATEGORY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{4C}\u{4F}\u{53}\u{45}\u{5F}\u{44}\u{49}\u{53}\u{41}\u{4D}\u{42}\u{49}\u{47}\u{55}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{41}\u{54}\u{45}\u{47}\u{4F}\u{52}\u{59}", value: "\u{43}\u{6C}\u{6F}\u{73}\u{65}") }
+
+    /// Confirm Delete
+    public static var CONFIRM_DELETE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}\u{5F}\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}", value: "\u{43}\u{6F}\u{6E}\u{66}\u{69}\u{72}\u{6D}\u{20}\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}") }
+
+    /// Contacts
+    public static var CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Contacts access is limited while driving
+    public static var CONTACTS_ACCESS_LIMITED｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}\u{5F}\u{41}\u{43}\u{43}\u{45}\u{53}\u{53}\u{5F}\u{4C}\u{49}\u{4D}\u{49}\u{54}\u{45}\u{44}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{20}\u{69}\u{73}\u{20}\u{6C}\u{69}\u{6D}\u{69}\u{74}\u{65}\u{64}\u{20}\u{77}\u{68}\u{69}\u{6C}\u{65}\u{20}\u{64}\u{72}\u{69}\u{76}\u{69}\u{6E}\u{67}") }
+
+    /// Enter a name for this contact.
+    public static var CREATE_NEW_CONTACT_PROMPT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}", value: "\u{45}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{61}\u{20}\u{6E}\u{61}\u{6D}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{2E}") }
+
+    /// New Contact
+    public static var CREATE_NEW_CONTACT_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Create a Reminder
+    public static var CREATE_REMINDER_ACTION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}\u{5F}\u{52}\u{45}\u{4D}\u{49}\u{4E}\u{44}\u{45}\u{52}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{61}\u{20}\u{52}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}") }
+
+    /// Done|Edit
+    public static var CUSTOM_LABEL_DONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{44}\u{4F}\u{4E}\u{45}", value: "\u{44}\u{6F}\u{6E}\u{65}\u{7C}\u{45}\u{64}\u{69}\u{74}") }
+
+    /// Edit|Done
+    public static var CUSTOM_LABEL_EDIT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{45}\u{44}\u{49}\u{54}", value: "\u{45}\u{64}\u{69}\u{74}\u{7C}\u{44}\u{6F}\u{6E}\u{65}") }
+
+    /// Custom…
+    public static var CUSTOM_LABEL_ITEM｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{49}\u{54}\u{45}\u{4D}", value: "\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{2026}") }
+
+    /// Custom Label
+    public static var CUSTOM_LABEL_PLACEHOLDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{50}\u{4C}\u{41}\u{43}\u{45}\u{48}\u{4F}\u{4C}\u{44}\u{45}\u{52}", value: "\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{4C}\u{61}\u{62}\u{65}\u{6C}") }
+
+    /// Custom Label
+    public static var CUSTOM_NAVIGATION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}\u{5F}\u{4E}\u{41}\u{56}\u{49}\u{47}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}\u{20}\u{4C}\u{61}\u{62}\u{65}\u{6C}") }
+
+    /// Caribbean
+    public static var Caribbean｜ContactsUI: String { Util｜ContactsUI.systemString("\u{43}\u{61}\u{72}\u{69}\u{62}\u{62}\u{65}\u{61}\u{6E}", value: "\u{43}\u{61}\u{72}\u{69}\u{62}\u{62}\u{65}\u{61}\u{6E}") }
+
+    /// Delete
+    public static var DELETE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}") }
+
+    /// The linked %@ contact will not be deleted.
+    public static var DELETE_CARD_READONLY_CONTACT_MESSAGE_FORMAT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{52}\u{45}\u{41}\u{44}\u{4F}\u{4E}\u{4C}\u{59}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}", value: "\u{54}\u{68}\u{65}\u{20}\u{6C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{20}\u{25}\u{40}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{62}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}\u{2E}") }
+
+    /// Delete Contact
+    public static var DELETE_CARD_SHEET_CONFIRMATION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}\u{41}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// One or more of the contacts may be read-only.
+    public static var DELETE_CARD_SHEET_FAILURE_ALERT_EXPLANATION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{46}\u{41}\u{49}\u{4C}\u{55}\u{52}\u{45}\u{5F}\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{45}\u{58}\u{50}\u{4C}\u{41}\u{4E}\u{41}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{4F}\u{6E}\u{65}\u{20}\u{6F}\u{72}\u{20}\u{6D}\u{6F}\u{72}\u{65}\u{20}\u{6F}\u{66}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{6D}\u{61}\u{79}\u{20}\u{62}\u{65}\u{20}\u{72}\u{65}\u{61}\u{64}\u{2D}\u{6F}\u{6E}\u{6C}\u{79}\u{2E}") }
+
+    /// Not all contacts were deleted
+    public static var DELETE_CARD_SHEET_FAILURE_ALERT_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{46}\u{41}\u{49}\u{4C}\u{55}\u{52}\u{45}\u{5F}\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4E}\u{6F}\u{74}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{77}\u{65}\u{72}\u{65}\u{20}\u{64}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{64}") }
+
+    /// Delete Photo
+    public static var DELETE_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Delete %@ Photos
+    public static var DELETE_PHOTO_MULTIPLE_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{4D}\u{55}\u{4C}\u{54}\u{49}\u{50}\u{4C}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}\u{20}\u{25}\u{40}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{73}") }
+
+    /// Directories
+    public static var DIRECTORIES｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{49}\u{52}\u{45}\u{43}\u{54}\u{4F}\u{52}\u{49}\u{45}\u{53}", value: "\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{6F}\u{72}\u{69}\u{65}\u{73}") }
+
+    /// Keep Editing
+    public static var DISCARD_CHANGES_CANCEL_ACTION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{53}\u{5F}\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4B}\u{65}\u{65}\u{70}\u{20}\u{45}\u{64}\u{69}\u{74}\u{69}\u{6E}\u{67}") }
+
+    /// Discard Changes
+    public static var DISCARD_CHANGES_DISCARD_ACTION_TITE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{53}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{45}", value: "\u{44}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}") }
+
+    /// Are you sure you want to discard your changes?
+    public static var DISCARD_CHANGES_TITLE_EDIT_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{53}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{3F}") }
+
+    /// Are you sure you want to discard this new contact?
+    public static var DISCARD_CHANGES_TITLE_NEW_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{53}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{3F}") }
+
+    /// DISPLAY NAME
+    public static var DISPLAY_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{49}\u{53}\u{50}\u{4C}\u{41}\u{59}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{44}\u{49}\u{53}\u{50}\u{4C}\u{41}\u{59}\u{20}\u{4E}\u{41}\u{4D}\u{45}") }
+
+    /// Done
+    public static var DONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{4E}\u{45}", value: "\u{44}\u{6F}\u{6E}\u{65}") }
+
+    /// Downtime Contact
+    public static var DOWNTIME_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{44}\u{6F}\u{77}\u{6E}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Contacts
+    public static var DOWNTIME_PICKER_CONTACTS_SECTION_TITLE_MEMBER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}\u{5F}\u{53}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{4D}\u{45}\u{4D}\u{42}\u{45}\u{52}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// My Contacts
+    public static var DOWNTIME_PICKER_CONTACTS_SECTION_TITLE_THIS_DEVICE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}\u{5F}\u{53}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{54}\u{48}\u{49}\u{53}\u{5F}\u{44}\u{45}\u{56}\u{49}\u{43}\u{45}", value: "\u{4D}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Modify contact information.
+    public static var DOWNTIME_PICKER_CONTACT_CARD_PROMPT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}", value: "\u{4D}\u{6F}\u{64}\u{69}\u{66}\u{79}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{69}\u{6E}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{2E}") }
+
+    /// Confirm this contact card contains the best way for %@ to contact %@. Changes will only apply to the card for %@. 
+    /// 
+    /// Parents or Guardians in Family Sharing can view this contact card.
+    /// 
+    public static var DOWNTIME_PICKER_CONTACT_CARD_WARNING｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}", value: "\u{43}\u{6F}\u{6E}\u{66}\u{69}\u{72}\u{6D}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{63}\u{61}\u{72}\u{64}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{73}\u{20}\u{74}\u{68}\u{65}\u{20}\u{62}\u{65}\u{73}\u{74}\u{20}\u{77}\u{61}\u{79}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{25}\u{40}\u{2E}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{79}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{72}\u{64}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{25}\u{40}\u{2E}\u{20}\u{A}\u{A}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{72}\u{20}\u{47}\u{75}\u{61}\u{72}\u{64}\u{69}\u{61}\u{6E}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{46}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{76}\u{69}\u{65}\u{77}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{63}\u{61}\u{72}\u{64}\u{2E}\u{A}") }
+
+    /// Confirm this contact card contains the best way for %@ to contact this person. Changes will only apply to the card for %@. 
+    /// 
+    /// Parents or Guardians in Family Sharing can view this contact card.
+    /// 
+    public static var DOWNTIME_PICKER_CONTACT_CARD_WARNING_NO_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}\u{5F}\u{4E}\u{4F}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{43}\u{6F}\u{6E}\u{66}\u{69}\u{72}\u{6D}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{63}\u{61}\u{72}\u{64}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{69}\u{6E}\u{73}\u{20}\u{74}\u{68}\u{65}\u{20}\u{62}\u{65}\u{73}\u{74}\u{20}\u{77}\u{61}\u{79}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{70}\u{65}\u{72}\u{73}\u{6F}\u{6E}\u{2E}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{6F}\u{6E}\u{6C}\u{79}\u{20}\u{61}\u{70}\u{70}\u{6C}\u{79}\u{20}\u{74}\u{6F}\u{20}\u{74}\u{68}\u{65}\u{20}\u{63}\u{61}\u{72}\u{64}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{25}\u{40}\u{2E}\u{20}\u{A}\u{A}\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{72}\u{20}\u{47}\u{75}\u{61}\u{72}\u{64}\u{69}\u{61}\u{6E}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{46}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{76}\u{69}\u{65}\u{77}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{63}\u{61}\u{72}\u{64}\u{2E}\u{A}") }
+
+    /// My Card
+    public static var DOWNTIME_PICKER_CONTACT_LABEL_ME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{4D}\u{45}", value: "\u{4D}\u{79}\u{20}\u{43}\u{61}\u{72}\u{64}") }
+
+    /// Parent/Guardian
+    public static var DOWNTIME_PICKER_CONTACT_LABEL_PARENT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{50}\u{41}\u{52}\u{45}\u{4E}\u{54}", value: "\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2F}\u{47}\u{75}\u{61}\u{72}\u{64}\u{69}\u{61}\u{6E}") }
+
+    /// Family Members
+    public static var DOWNTIME_PICKER_FAMILY_SECTION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{46}\u{41}\u{4D}\u{49}\u{4C}\u{59}\u{5F}\u{53}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{46}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{20}\u{4D}\u{65}\u{6D}\u{62}\u{65}\u{72}\u{73}") }
+
+    /// Choose contacts and what information to give to %@.
+    public static var DOWNTIME_PICKER_PROMPT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{77}\u{68}\u{61}\u{74}\u{20}\u{69}\u{6E}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{67}\u{69}\u{76}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{2E}") }
+
+    /// Choose contacts and what information to give to member.
+    public static var DOWNTIME_PICKER_PROMPT_DEFAULT_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{77}\u{68}\u{61}\u{74}\u{20}\u{69}\u{6E}\u{66}\u{6F}\u{72}\u{6D}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{67}\u{69}\u{76}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6D}\u{65}\u{6D}\u{62}\u{65}\u{72}\u{2E}") }
+
+    /// Contacts
+    public static var DOWNTIME_PICKER_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// %@'s Contacts
+    public static var DOWNTIME_PICKER_TITLE_MEMBER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{4D}\u{45}\u{4D}\u{42}\u{45}\u{52}", value: "\u{25}\u{40}\u{27}\u{73}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// My Contacts
+    public static var DOWNTIME_PICKER_TITLE_THIS_DEVICE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{54}\u{48}\u{49}\u{53}\u{5F}\u{44}\u{45}\u{56}\u{49}\u{43}\u{45}", value: "\u{4D}\u{79}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Parents or Guardians in Family Sharing can view this contact card.
+    public static var DOWNTIME_WARNING｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}", value: "\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{73}\u{20}\u{6F}\u{72}\u{20}\u{47}\u{75}\u{61}\u{72}\u{64}\u{69}\u{61}\u{6E}\u{73}\u{20}\u{69}\u{6E}\u{20}\u{46}\u{61}\u{6D}\u{69}\u{6C}\u{79}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{63}\u{61}\u{6E}\u{20}\u{76}\u{69}\u{65}\u{77}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{63}\u{61}\u{72}\u{64}\u{2E}") }
+
+    /// Do you want to set your Contact Card?
+    public static var DO_YOU_WANT_TO_SET_ME_CARD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{44}\u{4F}\u{5F}\u{59}\u{4F}\u{55}\u{5F}\u{57}\u{41}\u{4E}\u{54}\u{5F}\u{54}\u{4F}\u{5F}\u{53}\u{45}\u{54}\u{5F}\u{4D}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}", value: "\u{44}\u{6F}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{73}\u{65}\u{74}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{43}\u{61}\u{72}\u{64}\u{3F}") }
+
+    /// Edit
+    public static var EDIT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}", value: "\u{45}\u{64}\u{69}\u{74}") }
+
+    /// Edit a Contact
+    public static var EDIT_CONTACT_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{61}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Country or Region
+    public static var EDIT_COUNTRY_FORMAT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{52}\u{59}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}", value: "\u{43}\u{6F}\u{75}\u{6E}\u{74}\u{72}\u{79}\u{20}\u{6F}\u{72}\u{20}\u{52}\u{65}\u{67}\u{69}\u{6F}\u{6E}") }
+
+    /// Edit in Contacts
+    public static var EDIT_IN_APP_ACTION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{49}\u{4E}\u{5F}\u{41}\u{50}\u{50}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{69}\u{6E}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Label
+    public static var EDIT_ITEM_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{4C}\u{61}\u{62}\u{65}\u{6C}") }
+
+    /// Edit Name
+    public static var EDIT_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{4E}\u{61}\u{6D}\u{65}") }
+
+    /// Edit Photo
+    public static var EDIT_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Ringtone
+    public static var EDIT_RINGTONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}", value: "\u{52}\u{69}\u{6E}\u{67}\u{74}\u{6F}\u{6E}\u{65}") }
+
+    /// Text Tone
+    public static var EDIT_TEXTTONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{54}\u{45}\u{58}\u{54}\u{54}\u{4F}\u{4E}\u{45}", value: "\u{54}\u{65}\u{78}\u{74}\u{20}\u{54}\u{6F}\u{6E}\u{65}") }
+
+    /// Vibration
+    public static var EDIT_VIBRATION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{44}\u{49}\u{54}\u{5F}\u{56}\u{49}\u{42}\u{52}\u{41}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{56}\u{69}\u{62}\u{72}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Email
+    public static var EMAIL_ACTION_EMAIL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{4D}\u{41}\u{49}\u{4C}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{4D}\u{41}\u{49}\u{4C}", value: "\u{45}\u{6D}\u{61}\u{69}\u{6C}") }
+
+    /// Enter screen time passcode
+    public static var ENTER_SCREEN_TIME_PASSCODE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{4E}\u{54}\u{45}\u{52}\u{5F}\u{53}\u{43}\u{52}\u{45}\u{45}\u{4E}\u{5F}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{50}\u{41}\u{53}\u{53}\u{43}\u{4F}\u{44}\u{45}", value: "\u{45}\u{6E}\u{74}\u{65}\u{72}\u{20}\u{73}\u{63}\u{72}\u{65}\u{65}\u{6E}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{70}\u{61}\u{73}\u{73}\u{63}\u{6F}\u{64}\u{65}") }
+
+    /// Exchange
+    public static var EXCHANGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{58}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}", value: "\u{45}\u{78}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}") }
+
+    /// Expand
+    public static var EXPAND_DISAMBIGUATION_CATEGORY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{58}\u{50}\u{41}\u{4E}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{41}\u{4D}\u{42}\u{49}\u{47}\u{55}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{41}\u{54}\u{45}\u{47}\u{4F}\u{52}\u{59}", value: "\u{45}\u{78}\u{70}\u{61}\u{6E}\u{64}") }
+
+    /// Europe
+    public static var Europe｜ContactsUI: String { Util｜ContactsUI.systemString("\u{45}\u{75}\u{72}\u{6F}\u{70}\u{65}", value: "\u{45}\u{75}\u{72}\u{6F}\u{70}\u{65}") }
+
+    /// FaceTime
+    public static var FACETIME_ACTION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{46}\u{41}\u{43}\u{45}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// FaceTime Audio
+    public static var FACETIME_AUDIO_ACTION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{46}\u{41}\u{43}\u{45}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{41}\u{75}\u{64}\u{69}\u{6F}") }
+
+    /// Make a FaceTime Audio Reminder
+    public static var FACETIME_AUDIO_REMINDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{46}\u{41}\u{43}\u{45}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{4F}\u{5F}\u{52}\u{45}\u{4D}\u{49}\u{4E}\u{44}\u{45}\u{52}", value: "\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{61}\u{20}\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{41}\u{75}\u{64}\u{69}\u{6F}\u{20}\u{52}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}") }
+
+    /// Make a FaceTime Reminder
+    public static var FACETIME_REMINDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{46}\u{41}\u{43}\u{45}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{52}\u{45}\u{4D}\u{49}\u{4E}\u{44}\u{45}\u{52}", value: "\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{61}\u{20}\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{52}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}") }
+
+    /// First Name
+    public static var FIRST_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{46}\u{49}\u{52}\u{53}\u{54}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{46}\u{69}\u{72}\u{73}\u{74}\u{20}\u{4E}\u{61}\u{6D}\u{65}") }
+
+    /// Grid
+    public static var GRID｜ContactsUI: String { Util｜ContactsUI.systemString("\u{47}\u{52}\u{49}\u{44}", value: "\u{47}\u{72}\u{69}\u{64}") }
+
+    /// Groups
+    public static var GROUPS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{47}\u{52}\u{4F}\u{55}\u{50}\u{53}", value: "\u{47}\u{72}\u{6F}\u{75}\u{70}\u{73}") }
+
+    /// %@ (%ld)
+    public static var GROUP_NAME_WITH_AMOUNT_FORMAT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{41}\u{4D}\u{4F}\u{55}\u{4E}\u{54}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{6C}\u{64}\u{29}") }
+
+    /// Google
+    public static var GoogleTalk_SHORT_INSTANT_MESSAGE_SERVICE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{47}\u{6F}\u{6F}\u{67}\u{6C}\u{65}\u{54}\u{61}\u{6C}\u{6B}\u{20}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{49}\u{4E}\u{53}\u{54}\u{41}\u{4E}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}", value: "\u{47}\u{6F}\u{6F}\u{67}\u{6C}\u{65}") }
+
+    /// Hide All Contacts
+    public static var HIDE_ALL_CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{48}\u{49}\u{44}\u{45}\u{5F}\u{41}\u{4C}\u{4C}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{48}\u{69}\u{64}\u{65}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Could not ignore all values
+    public static var IGNORE_CARD_SHEET_FAILURE_ALERT_EXPLANATION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{49}\u{47}\u{4E}\u{4F}\u{52}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{46}\u{41}\u{49}\u{4C}\u{55}\u{52}\u{45}\u{5F}\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{45}\u{58}\u{50}\u{4C}\u{41}\u{4E}\u{41}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{43}\u{6F}\u{75}\u{6C}\u{64}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{69}\u{67}\u{6E}\u{6F}\u{72}\u{65}\u{20}\u{61}\u{6C}\u{6C}\u{20}\u{76}\u{61}\u{6C}\u{75}\u{65}\u{73}") }
+
+    /// Error ignoring values
+    public static var IGNORE_CARD_SHEET_FAILURE_ALERT_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{49}\u{47}\u{4E}\u{4F}\u{52}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{46}\u{41}\u{49}\u{4C}\u{55}\u{52}\u{45}\u{5F}\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{45}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{69}\u{67}\u{6E}\u{6F}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{76}\u{61}\u{6C}\u{75}\u{65}\u{73}") }
+
+    /// Info
+    public static var INFO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{49}\u{4E}\u{46}\u{4F}", value: "\u{49}\u{6E}\u{66}\u{6F}") }
+
+    /// %@ (%@)
+    public static var INSTANT_MESSAGE_USERNAME_AND_SERVICE_FORMAT﹣％＠﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{49}\u{4E}\u{53}\u{54}\u{41}\u{4E}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}\u{5F}\u{55}\u{53}\u{45}\u{52}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// Keep
+    public static var KEEP｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4B}\u{45}\u{45}\u{50}", value: "\u{4B}\u{65}\u{65}\u{70}") }
+
+    /// Contacts Are No Longer Updated by Facebook
+    public static var KEEP_FACEBOOK_CONTACTS_ALERT_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4B}\u{45}\u{45}\u{50}\u{5F}\u{46}\u{41}\u{43}\u{45}\u{42}\u{4F}\u{4F}\u{4B}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}\u{5F}\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{41}\u{72}\u{65}\u{20}\u{4E}\u{6F}\u{20}\u{4C}\u{6F}\u{6E}\u{67}\u{65}\u{72}\u{20}\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{64}\u{20}\u{62}\u{79}\u{20}\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}") }
+
+    /// Last Name
+    public static var LAST_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{41}\u{53}\u{54}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{4C}\u{61}\u{73}\u{74}\u{20}\u{4E}\u{61}\u{6D}\u{65}") }
+
+    /// LDAP
+    public static var LDAP｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{44}\u{41}\u{50}", value: "\u{4C}\u{44}\u{41}\u{50}") }
+
+    /// Linked Contacts
+    public static var LINKED_CARDS_BACK_BUTTON_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{53}\u{5F}\u{42}\u{41}\u{43}\u{4B}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// LINKED CONTACTS
+    public static var LINKED_CARDS_TABLE_SECTION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{53}\u{5F}\u{54}\u{41}\u{42}\u{4C}\u{45}\u{5F}\u{53}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{20}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}") }
+
+    /// This will add a value to %@ linked contacts.
+    public static var LINKED_CARD_ADD_WARNING_EXPLANATION_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{58}\u{50}\u{4C}\u{41}\u{4E}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{61}\u{64}\u{64}\u{20}\u{61}\u{20}\u{76}\u{61}\u{6C}\u{75}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{25}\u{40}\u{20}\u{6C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{2E}") }
+
+    /// Warning
+    public static var LINKED_CARD_ADD_WARNING_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{57}\u{61}\u{72}\u{6E}\u{69}\u{6E}\u{67}") }
+
+    /// This will edit the matching value on %@ linked contacts.
+    public static var LINKED_CARD_EDIT_WARNING_EXPLANATION_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{58}\u{50}\u{4C}\u{41}\u{4E}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{65}\u{64}\u{69}\u{74}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6D}\u{61}\u{74}\u{63}\u{68}\u{69}\u{6E}\u{67}\u{20}\u{76}\u{61}\u{6C}\u{75}\u{65}\u{20}\u{6F}\u{6E}\u{20}\u{25}\u{40}\u{20}\u{6C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{2E}") }
+
+    /// Warning
+    public static var LINKED_CARD_EDIT_WARNING_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{57}\u{61}\u{72}\u{6E}\u{69}\u{6E}\u{67}") }
+
+    /// This will change the photo for %@ linked contacts.
+    public static var LINKED_CARD_IMAGE_WARNING_EXPLANATION_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{4D}\u{41}\u{47}\u{45}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{58}\u{50}\u{4C}\u{41}\u{4E}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{54}\u{68}\u{69}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{70}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{25}\u{40}\u{20}\u{6C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{2E}") }
+
+    /// Warning
+    public static var LINKED_CARD_IMAGE_WARNING_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{4D}\u{41}\u{47}\u{45}\u{5F}\u{57}\u{41}\u{52}\u{4E}\u{49}\u{4E}\u{47}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{57}\u{61}\u{72}\u{6E}\u{69}\u{6E}\u{67}") }
+
+    /// %@ note
+    public static var LINKED_NOTES_LABEL_WITH_SOURCE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{4E}\u{4F}\u{54}\u{45}\u{53}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{4F}\u{55}\u{52}\u{43}\u{45}", value: "\u{25}\u{40}\u{20}\u{6E}\u{6F}\u{74}\u{65}") }
+
+    /// Link and Unlink Contacts with %@
+    public static var LINK_AND_UNLINK_CARDS_WITH｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{55}\u{4E}\u{4C}\u{49}\u{4E}\u{4B}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{53}\u{5F}\u{57}\u{49}\u{54}\u{48}", value: "\u{4C}\u{69}\u{6E}\u{6B}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{55}\u{6E}\u{6C}\u{69}\u{6E}\u{6B}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}") }
+
+    /// link contacts…
+    public static var LINK_ANOTHER_CONTACT_TABLE_CELL_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{5F}\u{41}\u{4E}\u{4F}\u{54}\u{48}\u{45}\u{52}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{54}\u{41}\u{42}\u{4C}\u{45}\u{5F}\u{43}\u{45}\u{4C}\u{4C}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{6C}\u{69}\u{6E}\u{6B}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{2026}") }
+
+    /// Link
+    public static var LINK_BAR_BUTTON_ITEM_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{5F}\u{42}\u{41}\u{52}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4C}\u{69}\u{6E}\u{6B}") }
+
+    /// Link Contacts with %@
+    public static var LINK_CARDS_WITH｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{53}\u{5F}\u{57}\u{49}\u{54}\u{48}", value: "\u{4C}\u{69}\u{6E}\u{6B}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}") }
+
+    /// Link Contact
+    public static var LINK_NEW_CONTACT_POPOVER_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{4E}\u{4B}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{4F}\u{50}\u{4F}\u{56}\u{45}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{4C}\u{69}\u{6E}\u{6B}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// List
+    public static var LIST｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{49}\u{53}\u{54}", value: "\u{4C}\u{69}\u{73}\u{74}") }
+
+    /// %@
+    public static var LOWERCASE_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{25}\u{40}") }
+
+    /// birthday
+    public static var LOWERCASE_LABEL_birthday｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}", value: "\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// related name
+    public static var LOWERCASE_LABEL_contactRelations｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{52}\u{65}\u{6C}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}", value: "\u{72}\u{65}\u{6C}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// date
+    public static var LOWERCASE_LABEL_dates｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{64}\u{61}\u{74}\u{65}\u{73}", value: "\u{64}\u{61}\u{74}\u{65}") }
+
+    /// email
+    public static var LOWERCASE_LABEL_emailAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{65}\u{6D}\u{61}\u{69}\u{6C}") }
+
+    /// instant message
+    public static var LOWERCASE_LABEL_instantMessageAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{69}\u{6E}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{69}\u{6E}\u{73}\u{74}\u{61}\u{6E}\u{74}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// alternate birthday
+    public static var LOWERCASE_LABEL_nonGregorianBirthday｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{6E}\u{6F}\u{6E}\u{47}\u{72}\u{65}\u{67}\u{6F}\u{72}\u{69}\u{61}\u{6E}\u{42}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}", value: "\u{61}\u{6C}\u{74}\u{65}\u{72}\u{6E}\u{61}\u{74}\u{65}\u{20}\u{62}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}") }
+
+    /// note
+    public static var LOWERCASE_LABEL_note｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{6E}\u{6F}\u{74}\u{65}", value: "\u{6E}\u{6F}\u{74}\u{65}") }
+
+    /// phone
+    public static var LOWERCASE_LABEL_phoneNumbers｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{4E}\u{75}\u{6D}\u{62}\u{65}\u{72}\u{73}", value: "\u{70}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// address
+    public static var LOWERCASE_LABEL_postalAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{70}\u{6F}\u{73}\u{74}\u{61}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}") }
+
+    /// social profile
+    public static var LOWERCASE_LABEL_socialProfiles｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{73}\u{6F}\u{63}\u{69}\u{61}\u{6C}\u{50}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}\u{73}", value: "\u{73}\u{6F}\u{63}\u{69}\u{61}\u{6C}\u{20}\u{70}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}") }
+
+    /// url
+    public static var LOWERCASE_LABEL_urlAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{4F}\u{57}\u{45}\u{52}\u{43}\u{41}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{20}\u{75}\u{72}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{75}\u{72}\u{6C}") }
+
+    /// Latin America
+    public static var Latin_America｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4C}\u{61}\u{74}\u{69}\u{6E}\u{20}\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}", value: "\u{4C}\u{61}\u{74}\u{69}\u{6E}\u{20}\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}") }
+
+    /// Add to Bookmarks
+    public static var MAPS_CARD_ADD_TO_BOOKMARKS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{41}\u{50}\u{53}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{54}\u{4F}\u{5F}\u{42}\u{4F}\u{4F}\u{4B}\u{4D}\u{41}\u{52}\u{4B}\u{53}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{42}\u{6F}\u{6F}\u{6B}\u{6D}\u{61}\u{72}\u{6B}\u{73}") }
+
+    /// Add to Contacts
+    public static var MAPS_CARD_ADD_TO_CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{41}\u{50}\u{53}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{54}\u{4F}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Directions From Here
+    public static var MAPS_CARD_DIRECTIONS_FROM｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{41}\u{50}\u{53}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{52}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{53}\u{5F}\u{46}\u{52}\u{4F}\u{4D}", value: "\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{46}\u{72}\u{6F}\u{6D}\u{20}\u{48}\u{65}\u{72}\u{65}") }
+
+    /// Directions To Here
+    public static var MAPS_CARD_DIRECTIONS_TO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{41}\u{50}\u{53}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{52}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{53}\u{5F}\u{54}\u{4F}", value: "\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{54}\u{6F}\u{20}\u{48}\u{65}\u{72}\u{65}") }
+
+    /// Remove Pin
+    public static var MAPS_CARD_REMOVE_PIN｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{41}\u{50}\u{53}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{52}\u{45}\u{4D}\u{4F}\u{56}\u{45}\u{5F}\u{50}\u{49}\u{4E}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{50}\u{69}\u{6E}") }
+
+    /// Share Location
+    public static var MAPS_CARD_SHARE_LOCATION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{41}\u{50}\u{53}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Me
+    public static var ME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{45}", value: "\u{4D}\u{65}") }
+
+    /// Make a Message Reminder
+    public static var MESSAGE_REMINDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}\u{5F}\u{52}\u{45}\u{4D}\u{49}\u{4E}\u{44}\u{45}\u{52}", value: "\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{61}\u{20}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{20}\u{52}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}") }
+
+    /// me
+    public static var ME_CELL_INDICATOR｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{45}\u{5F}\u{43}\u{45}\u{4C}\u{4C}\u{5F}\u{49}\u{4E}\u{44}\u{49}\u{43}\u{41}\u{54}\u{4F}\u{52}", value: "\u{6D}\u{65}") }
+
+    /// MobileMe
+    public static var MOBILEME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{4F}\u{42}\u{49}\u{4C}\u{45}\u{4D}\u{45}", value: "\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{4D}\u{65}") }
+
+    /// more…
+    public static var MORE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{4F}\u{52}\u{45}", value: "\u{6D}\u{6F}\u{72}\u{65}\u{2026}") }
+
+    /// MSN
+    public static var MSN_SHORT_INSTANT_MESSAGE_SERVICE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{53}\u{4E}\u{20}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{49}\u{4E}\u{53}\u{54}\u{41}\u{4E}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}", value: "\u{4D}\u{53}\u{4E}") }
+
+    /// My Card
+    public static var MY_CARD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4D}\u{59}\u{5F}\u{43}\u{41}\u{52}\u{44}", value: "\u{4D}\u{79}\u{20}\u{43}\u{61}\u{72}\u{64}") }
+
+    /// Done|Save
+    public static var NEW_CARD_DONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{45}\u{57}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{4F}\u{4E}\u{45}", value: "\u{44}\u{6F}\u{6E}\u{65}\u{7C}\u{53}\u{61}\u{76}\u{65}") }
+
+    /// Next
+    public static var NEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{45}\u{58}\u{54}", value: "\u{4E}\u{65}\u{78}\u{74}") }
+
+    /// No Contacts
+    public static var NO_CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{4F}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{4E}\u{6F}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// No Name
+    public static var NO_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{4F}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{4E}\u{6F}\u{20}\u{4E}\u{61}\u{6D}\u{65}") }
+
+    /// No Network Connection
+    public static var NO_NETWORK｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{4F}\u{5F}\u{4E}\u{45}\u{54}\u{57}\u{4F}\u{52}\u{4B}", value: "\u{4E}\u{6F}\u{20}\u{4E}\u{65}\u{74}\u{77}\u{6F}\u{72}\u{6B}\u{20}\u{43}\u{6F}\u{6E}\u{6E}\u{65}\u{63}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// No Results
+    public static var NO_RESULTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{4F}\u{5F}\u{52}\u{45}\u{53}\u{55}\u{4C}\u{54}\u{53}", value: "\u{4E}\u{6F}\u{20}\u{52}\u{65}\u{73}\u{75}\u{6C}\u{74}\u{73}") }
+
+    /// An error occurred reading the file
+    public static var NO_VCARDS_ERROR｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{4F}\u{5F}\u{56}\u{43}\u{41}\u{52}\u{44}\u{53}\u{5F}\u{45}\u{52}\u{52}\u{4F}\u{52}", value: "\u{41}\u{6E}\u{20}\u{65}\u{72}\u{72}\u{6F}\u{72}\u{20}\u{6F}\u{63}\u{63}\u{75}\u{72}\u{72}\u{65}\u{64}\u{20}\u{72}\u{65}\u{61}\u{64}\u{69}\u{6E}\u{67}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{6C}\u{65}") }
+
+    /// No cards
+    public static var NO_VCARDS_FOUND｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{4F}\u{5F}\u{56}\u{43}\u{41}\u{52}\u{44}\u{53}\u{5F}\u{46}\u{4F}\u{55}\u{4E}\u{44}", value: "\u{4E}\u{6F}\u{20}\u{63}\u{61}\u{72}\u{64}\u{73}") }
+
+    /// %@ Linked Contacts
+    public static var N_LINKED_CARDS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{5F}\u{4C}\u{49}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{53}", value: "\u{25}\u{40}\u{20}\u{4C}\u{69}\u{6E}\u{6B}\u{65}\u{64}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// North America
+    public static var North_America｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4E}\u{6F}\u{72}\u{74}\u{68}\u{20}\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}", value: "\u{4E}\u{6F}\u{72}\u{74}\u{68}\u{20}\u{41}\u{6D}\u{65}\u{72}\u{69}\u{63}\u{61}") }
+
+    /// OK
+    public static var OK｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4F}\u{4B}", value: "\u{4F}\u{4B}") }
+
+    /// Other Results
+    public static var OTHER_LOCAL_SEARCH_MATCHES_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4F}\u{54}\u{48}\u{45}\u{52}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{4C}\u{5F}\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{4D}\u{41}\u{54}\u{43}\u{48}\u{45}\u{53}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{52}\u{65}\u{73}\u{75}\u{6C}\u{74}\u{73}") }
+
+    /// Other Number
+    public static var OTHER_NUMBER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4F}\u{54}\u{48}\u{45}\u{52}\u{5F}\u{4E}\u{55}\u{4D}\u{42}\u{45}\u{52}", value: "\u{4F}\u{74}\u{68}\u{65}\u{72}\u{20}\u{4E}\u{75}\u{6D}\u{62}\u{65}\u{72}") }
+
+    /// Oceania
+    public static var Oceania｜ContactsUI: String { Util｜ContactsUI.systemString("\u{4F}\u{63}\u{65}\u{61}\u{6E}\u{69}\u{61}", value: "\u{4F}\u{63}\u{65}\u{61}\u{6E}\u{69}\u{61}") }
+
+    /// Parent/Guardian
+    public static var PARENT_OR_GUARDIAN｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{41}\u{52}\u{45}\u{4E}\u{54}\u{5F}\u{4F}\u{52}\u{5F}\u{47}\u{55}\u{41}\u{52}\u{44}\u{49}\u{41}\u{4E}", value: "\u{50}\u{61}\u{72}\u{65}\u{6E}\u{74}\u{2F}\u{47}\u{75}\u{61}\u{72}\u{64}\u{69}\u{61}\u{6E}") }
+
+    /// (No Name)
+    public static var PEOPLE_PICKER_FOR_LINKING_NO_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{45}\u{4F}\u{50}\u{4C}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{46}\u{4F}\u{52}\u{5F}\u{4C}\u{49}\u{4E}\u{4B}\u{49}\u{4E}\u{47}\u{5F}\u{4E}\u{4F}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{28}\u{4E}\u{6F}\u{20}\u{4E}\u{61}\u{6D}\u{65}\u{29}") }
+
+    /// Choose a contact to link with %@.
+    public static var PEOPLE_PICKER_FOR_LINKING_PROMPT_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{45}\u{4F}\u{50}\u{4C}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{46}\u{4F}\u{52}\u{5F}\u{4C}\u{49}\u{4E}\u{4B}\u{49}\u{4E}\u{47}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{61}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{6C}\u{69}\u{6E}\u{6B}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{40}\u{2E}") }
+
+    /// Add to Favorites
+    public static var PHONE_ACTION_ADD_TO_FAVORITES｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{54}\u{4F}\u{5F}\u{46}\u{41}\u{56}\u{4F}\u{52}\u{49}\u{54}\u{45}\u{53}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{46}\u{61}\u{76}\u{6F}\u{72}\u{69}\u{74}\u{65}\u{73}") }
+
+    /// Add to
+    /// Favorites
+    public static var PHONE_ACTION_ADD_TO_FAVORITES_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{54}\u{4F}\u{5F}\u{46}\u{41}\u{56}\u{4F}\u{52}\u{49}\u{54}\u{45}\u{53}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{A}\u{46}\u{61}\u{76}\u{6F}\u{72}\u{69}\u{74}\u{65}\u{73}") }
+
+    /// Call
+    public static var PHONE_ACTION_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{43}\u{61}\u{6C}\u{6C}") }
+
+    /// Voice Call.
+    public static var PHONE_ACTION_CALL_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{41}\u{4C}\u{4C}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{56}\u{6F}\u{69}\u{63}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{6C}\u{2E}") }
+
+    /// FaceTime Audio
+    public static var PHONE_ACTION_FACETIME_AUDIO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{41}\u{43}\u{45}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{4F}", value: "\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{41}\u{75}\u{64}\u{69}\u{6F}") }
+
+    /// Add %@ to Favorites as:
+    public static var PHONE_ACTION_FAVORITES_DIFFERENTIATE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{41}\u{56}\u{4F}\u{52}\u{49}\u{54}\u{45}\u{53}\u{5F}\u{44}\u{49}\u{46}\u{46}\u{45}\u{52}\u{45}\u{4E}\u{54}\u{49}\u{41}\u{54}\u{45}\u{2D}\u{25}\u{40}", value: "\u{41}\u{64}\u{64}\u{20}\u{25}\u{40}\u{20}\u{74}\u{6F}\u{20}\u{46}\u{61}\u{76}\u{6F}\u{72}\u{69}\u{74}\u{65}\u{73}\u{20}\u{61}\u{73}\u{3A}") }
+
+    /// Add to Favorites.
+    public static var PHONE_ACTION_FAVORITES_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{41}\u{56}\u{4F}\u{52}\u{49}\u{54}\u{45}\u{53}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{46}\u{61}\u{76}\u{6F}\u{72}\u{69}\u{74}\u{65}\u{73}\u{2E}") }
+
+    /// Send Message
+    public static var PHONE_ACTION_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{53}\u{65}\u{6E}\u{64}\u{20}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// Send a text message.
+    public static var PHONE_ACTION_TEXT_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{45}\u{58}\u{54}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{65}\u{6E}\u{64}\u{20}\u{61}\u{20}\u{74}\u{65}\u{78}\u{74}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{2E}") }
+
+    /// Send
+    /// Message
+    public static var PHONE_ACTION_TEXT_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{45}\u{58}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{53}\u{65}\u{6E}\u{64}\u{A}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// RTT/TTY
+    public static var PHONE_ACTION_TTY_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{54}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}") }
+
+    /// RTT/TTY Relay
+    public static var PHONE_ACTION_TTY_RELAY_CALL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{54}\u{59}\u{5F}\u{52}\u{45}\u{4C}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{4C}", value: "\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}\u{20}\u{52}\u{65}\u{6C}\u{61}\u{79}") }
+
+    /// FaceTime
+    public static var PHONE_ACTION_VIDEO_CONFERENCE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{49}\u{44}\u{45}\u{4F}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{45}\u{52}\u{45}\u{4E}\u{43}\u{45}", value: "\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// FaceTime
+    public static var PHONE_ACTION_VIDEO_CONFERENCE_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{49}\u{44}\u{45}\u{4F}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{45}\u{52}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// FaceTime
+    public static var PHONE_ACTION_VIDEO_CONFERENCE_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{49}\u{44}\u{45}\u{4F}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{45}\u{52}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}") }
+
+    /// Voice Call
+    public static var PHONE_ACTION_VOICE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{4F}\u{49}\u{43}\u{45}", value: "\u{56}\u{6F}\u{69}\u{63}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{6C}") }
+
+    /// FaceTime Audio
+    public static var PHONE_ACTION_VOICE_CONFERENCE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{4F}\u{49}\u{43}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{45}\u{52}\u{45}\u{4E}\u{43}\u{45}", value: "\u{46}\u{61}\u{63}\u{65}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{41}\u{75}\u{64}\u{69}\u{6F}") }
+
+    /// Delete
+    public static var PHOTO_ACTION_DELETE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{44}\u{45}\u{4C}\u{45}\u{54}\u{45}", value: "\u{44}\u{65}\u{6C}\u{65}\u{74}\u{65}") }
+
+    /// Duplicate
+    public static var PHOTO_ACTION_DUPLICATE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{44}\u{55}\u{50}\u{4C}\u{49}\u{43}\u{41}\u{54}\u{45}", value: "\u{44}\u{75}\u{70}\u{6C}\u{69}\u{63}\u{61}\u{74}\u{65}") }
+
+    /// Move and Scale
+    public static var PHOTO_ACTION_EDIT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{44}\u{49}\u{54}", value: "\u{4D}\u{6F}\u{76}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{53}\u{63}\u{61}\u{6C}\u{65}") }
+
+    /// Edit Color
+    public static var PHOTO_ACTION_EDIT_COLOR｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4C}\u{4F}\u{52}", value: "\u{45}\u{64}\u{69}\u{74}\u{20}\u{43}\u{6F}\u{6C}\u{6F}\u{72}") }
+
+    /// Assign to Contact
+    public static var PHOTO_ACTION_SELECT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}", value: "\u{41}\u{73}\u{73}\u{69}\u{67}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Add Photo
+    public static var PHOTO_ADD_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{41}\u{64}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Select a Pose
+    public static var PHOTO_ANIMOJI_SELECT_POSE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{4E}\u{49}\u{4D}\u{4F}\u{4A}\u{49}\u{5F}\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}\u{5F}\u{50}\u{4F}\u{53}\u{45}", value: "\u{53}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{50}\u{6F}\u{73}\u{65}") }
+
+    /// Cancel
+    public static var PHOTO_EDITING_DISCARD_CANCEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{49}\u{4E}\u{47}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Discard Changes
+    public static var PHOTO_EDITING_DISCARD_CONFIRM｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{49}\u{4E}\u{47}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}", value: "\u{44}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}") }
+
+    /// Are you sure you want to discard your changes?
+    public static var PHOTO_EDITING_DISCARD_CONFIRMATION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{49}\u{4E}\u{47}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{64}\u{69}\u{73}\u{63}\u{61}\u{72}\u{64}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{3F}") }
+
+    /// Animoji
+    public static var PHOTO_EDIT_ANIMOJI_HEADER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{41}\u{4E}\u{49}\u{4D}\u{4F}\u{4A}\u{49}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}", value: "\u{41}\u{6E}\u{69}\u{6D}\u{6F}\u{6A}\u{69}") }
+
+    /// Edit
+    public static var PHOTO_EDIT_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{45}\u{64}\u{69}\u{74}") }
+
+    /// Suggestions
+    public static var PHOTO_EDIT_PHOTOS_HEADER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{53}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}", value: "\u{53}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}\u{73}") }
+
+    /// All Photos
+    public static var PHOTO_EDIT_PHOTOS_HEADER_ACTION｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{53}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}", value: "\u{41}\u{6C}\u{6C}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{73}") }
+
+    /// Dramatic Cool
+    public static var PHOTO_FILTER_DRAMATICCOOL_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{44}\u{52}\u{41}\u{4D}\u{41}\u{54}\u{49}\u{43}\u{43}\u{4F}\u{4F}\u{4C}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{44}\u{72}\u{61}\u{6D}\u{61}\u{74}\u{69}\u{63}\u{20}\u{43}\u{6F}\u{6F}\u{6C}") }
+
+    /// Dramatic Warm
+    public static var PHOTO_FILTER_DRAMATICWARM_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{44}\u{52}\u{41}\u{4D}\u{41}\u{54}\u{49}\u{43}\u{57}\u{41}\u{52}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{44}\u{72}\u{61}\u{6D}\u{61}\u{74}\u{69}\u{63}\u{20}\u{57}\u{61}\u{72}\u{6D}") }
+
+    /// Dramatic
+    public static var PHOTO_FILTER_DRAMATIC_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{44}\u{52}\u{41}\u{4D}\u{41}\u{54}\u{49}\u{43}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{44}\u{72}\u{61}\u{6D}\u{61}\u{74}\u{69}\u{63}") }
+
+    /// Mono
+    public static var PHOTO_FILTER_MONO_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{4D}\u{4F}\u{4E}\u{4F}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{4D}\u{6F}\u{6E}\u{6F}") }
+
+    /// Noir
+    public static var PHOTO_FILTER_NOIR_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{4E}\u{4F}\u{49}\u{52}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{4E}\u{6F}\u{69}\u{72}") }
+
+    /// Original
+    public static var PHOTO_FILTER_ORIGINAL_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{4F}\u{52}\u{49}\u{47}\u{49}\u{4E}\u{41}\u{4C}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{4F}\u{72}\u{69}\u{67}\u{69}\u{6E}\u{61}\u{6C}") }
+
+    /// Silvertone
+    public static var PHOTO_FILTER_SILVERTONE_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{53}\u{49}\u{4C}\u{56}\u{45}\u{52}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{53}\u{69}\u{6C}\u{76}\u{65}\u{72}\u{74}\u{6F}\u{6E}\u{65}") }
+
+    /// Vivid Cool
+    public static var PHOTO_FILTER_VIVIDCOOL_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{56}\u{49}\u{56}\u{49}\u{44}\u{43}\u{4F}\u{4F}\u{4C}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{56}\u{69}\u{76}\u{69}\u{64}\u{20}\u{43}\u{6F}\u{6F}\u{6C}") }
+
+    /// Vivid Warm
+    public static var PHOTO_FILTER_VIVIDWARM_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{56}\u{49}\u{56}\u{49}\u{44}\u{57}\u{41}\u{52}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{56}\u{69}\u{76}\u{69}\u{64}\u{20}\u{57}\u{61}\u{72}\u{6D}") }
+
+    /// Vivid
+    public static var PHOTO_FILTER_VIVID_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}\u{5F}\u{56}\u{49}\u{56}\u{49}\u{44}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{56}\u{69}\u{76}\u{69}\u{64}") }
+
+    /// Select a Color
+    public static var PHOTO_SELECT_COLOR｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}\u{5F}\u{43}\u{4F}\u{4C}\u{4F}\u{52}", value: "\u{53}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{43}\u{6F}\u{6C}\u{6F}\u{72}") }
+
+    /// Select a Filter
+    public static var PHOTO_SELECT_FILTER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}\u{5F}\u{46}\u{49}\u{4C}\u{54}\u{45}\u{52}", value: "\u{53}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{61}\u{20}\u{46}\u{69}\u{6C}\u{74}\u{65}\u{72}") }
+
+    /// To choose a photo, rotate device to portrait.
+    public static var PHOTO_TRAP_VIEW_LANDSCAPE_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{54}\u{52}\u{41}\u{50}\u{5F}\u{56}\u{49}\u{45}\u{57}\u{5F}\u{4C}\u{41}\u{4E}\u{44}\u{53}\u{43}\u{41}\u{50}\u{45}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{54}\u{6F}\u{20}\u{63}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{61}\u{20}\u{70}\u{68}\u{6F}\u{74}\u{6F}\u{2C}\u{20}\u{72}\u{6F}\u{74}\u{61}\u{74}\u{65}\u{20}\u{64}\u{65}\u{76}\u{69}\u{63}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{70}\u{6F}\u{72}\u{74}\u{72}\u{61}\u{69}\u{74}\u{2E}") }
+
+    /// To choose a photo, continue in the Contacts app.
+    public static var PHOTO_TRAP_VIEW_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{54}\u{52}\u{41}\u{50}\u{5F}\u{56}\u{49}\u{45}\u{57}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{54}\u{6F}\u{20}\u{63}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{61}\u{20}\u{70}\u{68}\u{6F}\u{74}\u{6F}\u{2C}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{69}\u{6E}\u{75}\u{65}\u{20}\u{69}\u{6E}\u{20}\u{74}\u{68}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{61}\u{70}\u{70}\u{2E}") }
+
+    /// always use:
+    public static var PREFERRED_LINE_CONTACT_HEADER_ALWAYS_USE_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{55}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{61}\u{6C}\u{77}\u{61}\u{79}\u{73}\u{20}\u{75}\u{73}\u{65}\u{3A}") }
+
+    /// default:
+    public static var PREFERRED_LINE_CONTACT_HEADER_DEFAULT_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{64}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}\u{3A}") }
+
+    /// last used:
+    public static var PREFERRED_LINE_CONTACT_HEADER_LAST_USED_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}\u{5F}\u{4C}\u{41}\u{53}\u{54}\u{5F}\u{55}\u{53}\u{45}\u{44}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{6C}\u{61}\u{73}\u{74}\u{20}\u{75}\u{73}\u{65}\u{64}\u{3A}") }
+
+    /// %@
+    public static var PREFERRED_LINE_CONTACT_HEADER_VALUE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}") }
+
+    /// “%@” (unavailable)
+    public static var PREFERRED_LINE_CONTACT_HEADER_VALUE_UNAVAILBLE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}\u{5F}\u{55}\u{4E}\u{41}\u{56}\u{41}\u{49}\u{4C}\u{42}\u{4C}\u{45}\u{2D}\u{25}\u{40}", value: "\u{201C}\u{25}\u{40}\u{201D}\u{20}\u{28}\u{75}\u{6E}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{29}") }
+
+    /// always use — “%@”
+    public static var PREFERRED_LINE_EDIT_CONTACT_PROPERTY_ALWAYS_USE_VALUE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{59}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{55}\u{53}\u{45}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}\u{2D}\u{25}\u{40}", value: "\u{61}\u{6C}\u{77}\u{61}\u{79}\u{73}\u{20}\u{75}\u{73}\u{65}\u{20}\u{2014}\u{20}\u{201C}\u{25}\u{40}\u{201D}") }
+
+    /// always use — “%@” (unavailable)
+    public static var PREFERRED_LINE_EDIT_CONTACT_PROPERTY_ALWAYS_USE_VALUE_UNAVAILABLE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{59}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{55}\u{53}\u{45}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}\u{5F}\u{55}\u{4E}\u{41}\u{56}\u{41}\u{49}\u{4C}\u{41}\u{42}\u{4C}\u{45}\u{2D}\u{25}\u{40}", value: "\u{61}\u{6C}\u{77}\u{61}\u{79}\u{73}\u{20}\u{75}\u{73}\u{65}\u{20}\u{2014}\u{20}\u{201C}\u{25}\u{40}\u{201D}\u{20}\u{28}\u{75}\u{6E}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{29}") }
+
+    /// default — “%@”
+    public static var PREFERRED_LINE_EDIT_CONTACT_PROPERTY_DEFAULT_VALUE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{59}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}\u{2D}\u{25}\u{40}", value: "\u{64}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}\u{20}\u{2014}\u{20}\u{201C}\u{25}\u{40}\u{201D}") }
+
+    /// Preferred Line
+    public static var PREFERRED_LINE_EDIT_CONTACT_PROPERTY_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{50}\u{72}\u{65}\u{66}\u{65}\u{72}\u{72}\u{65}\u{64}\u{20}\u{4C}\u{69}\u{6E}\u{65}") }
+
+    /// last used — “%@”
+    public static var PREFERRED_LINE_EDIT_CONTACT_PROPERTY_LAST_USED_VALUE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{59}\u{5F}\u{4C}\u{41}\u{53}\u{54}\u{5F}\u{55}\u{53}\u{45}\u{44}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}\u{2D}\u{25}\u{40}", value: "\u{6C}\u{61}\u{73}\u{74}\u{20}\u{75}\u{73}\u{65}\u{64}\u{20}\u{2014}\u{20}\u{201C}\u{25}\u{40}\u{201D}") }
+
+    /// last used — “%@” (unavailable)
+    public static var PREFERRED_LINE_EDIT_CONTACT_PROPERTY_LAST_USED_VALUE_UNAVAILABLE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{45}\u{44}\u{49}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{4F}\u{50}\u{45}\u{52}\u{54}\u{59}\u{5F}\u{4C}\u{41}\u{53}\u{54}\u{5F}\u{55}\u{53}\u{45}\u{44}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}\u{5F}\u{55}\u{4E}\u{41}\u{56}\u{41}\u{49}\u{4C}\u{41}\u{42}\u{4C}\u{45}\u{2D}\u{25}\u{40}", value: "\u{6C}\u{61}\u{73}\u{74}\u{20}\u{75}\u{73}\u{65}\u{64}\u{20}\u{2014}\u{20}\u{201C}\u{25}\u{40}\u{201D}\u{20}\u{28}\u{75}\u{6E}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{29}") }
+
+    /// Start new calls and Messages conversations with this person from a particular line. Messages conversations will be continued with the line they started with.
+    public static var PREFERRED_LINE_PICKER_ALWAYS_USE_FOOTER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{55}\u{53}\u{45}\u{5F}\u{46}\u{4F}\u{4F}\u{54}\u{45}\u{52}", value: "\u{53}\u{74}\u{61}\u{72}\u{74}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{63}\u{61}\u{6C}\u{6C}\u{73}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{76}\u{65}\u{72}\u{73}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{70}\u{65}\u{72}\u{73}\u{6F}\u{6E}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{61}\u{20}\u{70}\u{61}\u{72}\u{74}\u{69}\u{63}\u{75}\u{6C}\u{61}\u{72}\u{20}\u{6C}\u{69}\u{6E}\u{65}\u{2E}\u{20}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}\u{20}\u{63}\u{6F}\u{6E}\u{76}\u{65}\u{72}\u{73}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{69}\u{6E}\u{75}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{69}\u{6E}\u{65}\u{20}\u{74}\u{68}\u{65}\u{79}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{2E}") }
+
+    /// ALWAYS USE
+    public static var PREFERRED_LINE_PICKER_ALWAYS_USE_HEADER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{55}\u{53}\u{45}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}", value: "\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{20}\u{55}\u{53}\u{45}") }
+
+    /// %@
+    public static var PREFERRED_LINE_PICKER_ALWAYS_USE_LABEL﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{55}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}") }
+
+    /// “%@” (unavailable)
+    public static var PREFERRED_LINE_PICKER_ALWAYS_USE_LABEL_UNAVAILABLE﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{55}\u{53}\u{45}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{55}\u{4E}\u{41}\u{56}\u{41}\u{49}\u{4C}\u{41}\u{42}\u{4C}\u{45}\u{2D}\u{25}\u{40}", value: "\u{201C}\u{25}\u{40}\u{201D}\u{20}\u{28}\u{75}\u{6E}\u{61}\u{76}\u{61}\u{69}\u{6C}\u{61}\u{62}\u{6C}\u{65}\u{29}") }
+
+    /// Use the line from your last communication with this person to start new phone calls and messages.
+    public static var PREFERRED_LINE_PICKER_LAST_USED_FOOTER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{4C}\u{41}\u{53}\u{54}\u{5F}\u{55}\u{53}\u{45}\u{44}\u{5F}\u{46}\u{4F}\u{4F}\u{54}\u{45}\u{52}", value: "\u{55}\u{73}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6C}\u{69}\u{6E}\u{65}\u{20}\u{66}\u{72}\u{6F}\u{6D}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{6C}\u{61}\u{73}\u{74}\u{20}\u{63}\u{6F}\u{6D}\u{6D}\u{75}\u{6E}\u{69}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{70}\u{65}\u{72}\u{73}\u{6F}\u{6E}\u{20}\u{74}\u{6F}\u{20}\u{73}\u{74}\u{61}\u{72}\u{74}\u{20}\u{6E}\u{65}\u{77}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{63}\u{61}\u{6C}\u{6C}\u{73}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}\u{2E}") }
+
+    /// Last Used
+    public static var PREFERRED_LINE_PICKER_LAST_USED_VALUE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{4C}\u{41}\u{53}\u{54}\u{5F}\u{55}\u{53}\u{45}\u{44}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}", value: "\u{4C}\u{61}\u{73}\u{74}\u{20}\u{55}\u{73}\u{65}\u{64}") }
+
+    /// Preferred Line
+    public static var PREFERRED_LINE_PICKER_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4C}\u{49}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{50}\u{72}\u{65}\u{66}\u{65}\u{72}\u{72}\u{65}\u{64}\u{20}\u{4C}\u{69}\u{6E}\u{65}") }
+
+    /// RECENT
+    public static var RECENT_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{43}\u{45}\u{4E}\u{54}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{52}\u{45}\u{43}\u{45}\u{4E}\u{54}") }
+
+    /// Reject
+    public static var REJECT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{4A}\u{45}\u{43}\u{54}", value: "\u{52}\u{65}\u{6A}\u{65}\u{63}\u{74}") }
+
+    /// Related Info From %@
+    public static var RELATED_INFO_FROM_APP｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{4C}\u{41}\u{54}\u{45}\u{44}\u{5F}\u{49}\u{4E}\u{46}\u{4F}\u{5F}\u{46}\u{52}\u{4F}\u{4D}\u{5F}\u{41}\u{50}\u{50}", value: "\u{52}\u{65}\u{6C}\u{61}\u{74}\u{65}\u{64}\u{20}\u{49}\u{6E}\u{66}\u{6F}\u{20}\u{46}\u{72}\u{6F}\u{6D}\u{20}\u{25}\u{40}") }
+
+    /// Name
+    public static var RELATED_PEOPLE_PLACEHOLDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{4C}\u{41}\u{54}\u{45}\u{44}\u{5F}\u{50}\u{45}\u{4F}\u{50}\u{4C}\u{45}\u{5F}\u{50}\u{4C}\u{41}\u{43}\u{45}\u{48}\u{4F}\u{4C}\u{44}\u{45}\u{52}", value: "\u{4E}\u{61}\u{6D}\u{65}") }
+
+    /// Top Name Matches
+    public static var RELEVANCE_RANKED_SECTION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{4C}\u{45}\u{56}\u{41}\u{4E}\u{43}\u{45}\u{5F}\u{52}\u{41}\u{4E}\u{4B}\u{45}\u{44}\u{5F}\u{53}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{54}\u{6F}\u{70}\u{20}\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{4D}\u{61}\u{74}\u{63}\u{68}\u{65}\u{73}") }
+
+    /// Remember to contact %@
+    public static var REMINDER_TITLE_WITH_CONTACT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{4D}\u{49}\u{4E}\u{44}\u{45}\u{52}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{2D}\u{25}\u{40}", value: "\u{52}\u{65}\u{6D}\u{65}\u{6D}\u{62}\u{65}\u{72}\u{20}\u{74}\u{6F}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{25}\u{40}") }
+
+    /// Remove
+    public static var REMOVE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{4D}\u{4F}\u{56}\u{45}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}") }
+
+    /// Remove as Downtime Contact
+    public static var REMOVE_FROM_DOWNTIME_ACTION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{4D}\u{4F}\u{56}\u{45}\u{5F}\u{46}\u{52}\u{4F}\u{4D}\u{5F}\u{44}\u{4F}\u{57}\u{4E}\u{54}\u{49}\u{4D}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{52}\u{65}\u{6D}\u{6F}\u{76}\u{65}\u{20}\u{61}\u{73}\u{20}\u{44}\u{6F}\u{77}\u{6E}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Review
+    public static var REVIEW｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{45}\u{56}\u{49}\u{45}\u{57}", value: "\u{52}\u{65}\u{76}\u{69}\u{65}\u{77}") }
+
+    /// Ringtone
+    public static var RINGTONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}", value: "\u{52}\u{69}\u{6E}\u{67}\u{74}\u{6F}\u{6E}\u{65}") }
+
+    /// Default
+    public static var RINGTONE_CARD_ITEM_DEFAULT_VALUE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}", value: "\u{44}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}") }
+
+    /// Ringtone
+    public static var RINGTONE_CARD_ITEM_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{52}\u{69}\u{6E}\u{67}\u{74}\u{6F}\u{6E}\u{65}") }
+
+    /// Marimba
+    public static var RINGTONE_PICKER_DEFAULT_RINGTONE_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{4D}\u{61}\u{72}\u{69}\u{6D}\u{62}\u{61}") }
+
+    /// Default
+    public static var RINGTONE_PICKER_DEFAULT_VALUE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}", value: "\u{44}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}") }
+
+    /// Custom
+    public static var RINGTONE_PICKER_GROUP_TITLE_CUSTOM｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{43}\u{55}\u{53}\u{54}\u{4F}\u{4D}", value: "\u{43}\u{75}\u{73}\u{74}\u{6F}\u{6D}") }
+
+    /// Default
+    public static var RINGTONE_PICKER_GROUP_TITLE_DEFAULT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}", value: "\u{44}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}") }
+
+    /// New
+    public static var RINGTONE_PICKER_GROUP_TITLE_NEW｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{4E}\u{45}\u{57}", value: "\u{4E}\u{65}\u{77}") }
+
+    /// Original
+    public static var RINGTONE_PICKER_GROUP_TITLE_ORIGINAL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{4F}\u{52}\u{49}\u{47}\u{49}\u{4E}\u{41}\u{4C}", value: "\u{4F}\u{72}\u{69}\u{67}\u{69}\u{6E}\u{61}\u{6C}") }
+
+    /// Purchased
+    public static var RINGTONE_PICKER_GROUP_TITLE_PURCHASED｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{50}\u{55}\u{52}\u{43}\u{48}\u{41}\u{53}\u{45}\u{44}", value: "\u{50}\u{75}\u{72}\u{63}\u{68}\u{61}\u{73}\u{65}\u{64}") }
+
+    /// Standard
+    public static var RINGTONE_PICKER_GROUP_TITLE_STANDARD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{47}\u{52}\u{4F}\u{55}\u{50}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{53}\u{54}\u{41}\u{4E}\u{44}\u{41}\u{52}\u{44}", value: "\u{53}\u{74}\u{61}\u{6E}\u{64}\u{61}\u{72}\u{64}") }
+
+    /// None
+    public static var RINGTONE_PICKER_NONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{52}\u{49}\u{4E}\u{47}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{4E}\u{4F}\u{4E}\u{45}", value: "\u{4E}\u{6F}\u{6E}\u{65}") }
+
+    /// Save
+    public static var SAVE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{41}\u{56}\u{45}", value: "\u{53}\u{61}\u{76}\u{65}") }
+
+    /// Save Changes to a Contact
+    public static var SAVE_CONTACT_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{41}\u{56}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{53}\u{61}\u{76}\u{65}\u{20}\u{43}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{73}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Searching...
+    public static var SEARCHING｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{49}\u{4E}\u{47}", value: "\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}\u{69}\u{6E}\u{67}\u{2E}\u{2E}\u{2E}") }
+
+    /// Search Directory
+    public static var SEARCH_DIRECTORY_PLACEHOLDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{44}\u{49}\u{52}\u{45}\u{43}\u{54}\u{4F}\u{52}\u{59}\u{5F}\u{50}\u{4C}\u{41}\u{43}\u{45}\u{48}\u{4F}\u{4C}\u{44}\u{45}\u{52}", value: "\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}\u{20}\u{44}\u{69}\u{72}\u{65}\u{63}\u{74}\u{6F}\u{72}\u{79}") }
+
+    /// Search Failed
+    public static var SEARCH_FAILED｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{46}\u{41}\u{49}\u{4C}\u{45}\u{44}", value: "\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}\u{20}\u{46}\u{61}\u{69}\u{6C}\u{65}\u{64}") }
+
+    /// Search
+    public static var SEARCH_LOCAL_PLACEHOLDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{4C}\u{5F}\u{50}\u{4C}\u{41}\u{43}\u{45}\u{48}\u{4F}\u{4C}\u{44}\u{45}\u{52}", value: "\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}") }
+
+    /// Search
+    public static var SEARCH_NAV_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{4E}\u{41}\u{56}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{65}\u{61}\u{72}\u{63}\u{68}") }
+
+    /// Birthday Calendar
+    public static var SELECT_BIRTHDAY_CALENDAR_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}\u{5F}\u{42}\u{49}\u{52}\u{54}\u{48}\u{44}\u{41}\u{59}\u{5F}\u{43}\u{41}\u{4C}\u{45}\u{4E}\u{44}\u{41}\u{52}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{42}\u{69}\u{72}\u{74}\u{68}\u{64}\u{61}\u{79}\u{20}\u{43}\u{61}\u{6C}\u{65}\u{6E}\u{64}\u{61}\u{72}") }
+
+    /// Select the next Contact
+    public static var SELECT_NEXT_CONTACT_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}\u{5F}\u{4E}\u{45}\u{58}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{53}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6E}\u{65}\u{78}\u{74}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Select the previous Contact
+    public static var SELECT_PREVIOUS_CONTACT_KEYBOARD_DISCOVERY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}\u{5F}\u{50}\u{52}\u{45}\u{56}\u{49}\u{4F}\u{55}\u{53}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{4B}\u{45}\u{59}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{49}\u{53}\u{43}\u{4F}\u{56}\u{45}\u{52}\u{59}", value: "\u{53}\u{65}\u{6C}\u{65}\u{63}\u{74}\u{20}\u{74}\u{68}\u{65}\u{20}\u{70}\u{72}\u{65}\u{76}\u{69}\u{6F}\u{75}\u{73}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Service
+    public static var SELECT_SERVICE_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{4C}\u{45}\u{43}\u{54}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{65}\u{72}\u{76}\u{69}\u{63}\u{65}") }
+
+    /// Send request
+    public static var SEND_REQUEST｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{4E}\u{44}\u{5F}\u{52}\u{45}\u{51}\u{55}\u{45}\u{53}\u{54}", value: "\u{53}\u{65}\u{6E}\u{64}\u{20}\u{72}\u{65}\u{71}\u{75}\u{65}\u{73}\u{74}") }
+
+    /// %@ Global Address List
+    public static var SERVER_SEARCH_TITLE_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{52}\u{56}\u{45}\u{52}\u{5F}\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{47}\u{6C}\u{6F}\u{62}\u{61}\u{6C}\u{20}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{4C}\u{69}\u{73}\u{74}") }
+
+    /// Set Country or Region
+    public static var SET_COUNTRY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{54}\u{5F}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{52}\u{59}", value: "\u{53}\u{65}\u{74}\u{20}\u{43}\u{6F}\u{75}\u{6E}\u{74}\u{72}\u{79}\u{20}\u{6F}\u{72}\u{20}\u{52}\u{65}\u{67}\u{69}\u{6F}\u{6E}") }
+
+    /// Set My Card
+    public static var SET_ME_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{54}\u{5F}\u{4D}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{53}\u{65}\u{74}\u{20}\u{4D}\u{79}\u{20}\u{43}\u{61}\u{72}\u{64}") }
+
+    /// Use This Name For Unified Card
+    public static var SET_PREFERRED_NAME_ACTION_BUTTON_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{54}\u{5F}\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{55}\u{73}\u{65}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{46}\u{6F}\u{72}\u{20}\u{55}\u{6E}\u{69}\u{66}\u{69}\u{65}\u{64}\u{20}\u{43}\u{61}\u{72}\u{64}") }
+
+    /// Use This Photo For Unified Card
+    public static var SET_PREFERRED_PHOTO_ACTION_BUTTON_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{45}\u{54}\u{5F}\u{50}\u{52}\u{45}\u{46}\u{45}\u{52}\u{52}\u{45}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{55}\u{73}\u{65}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{46}\u{6F}\u{72}\u{20}\u{55}\u{6E}\u{69}\u{66}\u{69}\u{65}\u{64}\u{20}\u{43}\u{61}\u{72}\u{64}") }
+
+    /// Share Contact
+    public static var SHARE_CONTACT_ACTION_BUTTON_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Share
+    /// Contact
+    public static var SHARE_CONTACT_ACTION_BUTTON_TITLE_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{55}\u{54}\u{54}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{A}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Contact
+    public static var SHARE_CONTACT_EMAIL_SUBJECT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{45}\u{4D}\u{41}\u{49}\u{4C}\u{5F}\u{53}\u{55}\u{42}\u{4A}\u{45}\u{43}\u{54}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Share Contact Using:
+    public static var SHARE_CONTACT_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{55}\u{73}\u{69}\u{6E}\u{67}\u{3A}") }
+
+    /// Email
+    public static var SHARE_CONTACT_VIA_EMAIL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{56}\u{49}\u{41}\u{5F}\u{45}\u{4D}\u{41}\u{49}\u{4C}", value: "\u{45}\u{6D}\u{61}\u{69}\u{6C}") }
+
+    /// Message
+    public static var SHARE_CONTACT_VIA_TEXT_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{5F}\u{56}\u{49}\u{41}\u{5F}\u{54}\u{45}\u{58}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}") }
+
+    /// Share My Location
+    public static var SHARE_LOCATION_ALERT_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{41}\u{4C}\u{45}\u{52}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{4D}\u{79}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Share Until End of Day
+    public static var SHARE_LOCATION_END_OF_DAY_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{45}\u{4E}\u{44}\u{5F}\u{4F}\u{46}\u{5F}\u{44}\u{41}\u{59}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{55}\u{6E}\u{74}\u{69}\u{6C}\u{20}\u{45}\u{6E}\u{64}\u{20}\u{6F}\u{66}\u{20}\u{44}\u{61}\u{79}") }
+
+    /// Share Indefinitely
+    public static var SHARE_LOCATION_INDEFINITELY_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{49}\u{4E}\u{44}\u{45}\u{46}\u{49}\u{4E}\u{49}\u{54}\u{45}\u{4C}\u{59}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{49}\u{6E}\u{64}\u{65}\u{66}\u{69}\u{6E}\u{69}\u{74}\u{65}\u{6C}\u{79}") }
+
+    /// Share My Location
+    public static var SHARE_LOCATION_LABEL_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{4D}\u{79}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Share for One Hour
+    public static var SHARE_LOCATION_ONE_HOUR_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4F}\u{4E}\u{45}\u{5F}\u{48}\u{4F}\u{55}\u{52}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{66}\u{6F}\u{72}\u{20}\u{4F}\u{6E}\u{65}\u{20}\u{48}\u{6F}\u{75}\u{72}") }
+
+    /// Tweet
+    public static var SHARE_LOCATION_ON_TWITTER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4F}\u{4E}\u{5F}\u{54}\u{57}\u{49}\u{54}\u{54}\u{45}\u{52}", value: "\u{54}\u{77}\u{65}\u{65}\u{74}") }
+
+    /// Weibo
+    public static var SHARE_LOCATION_ON_WEIBO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4F}\u{4E}\u{5F}\u{57}\u{45}\u{49}\u{42}\u{4F}", value: "\u{57}\u{65}\u{69}\u{62}\u{6F}") }
+
+    /// Share Location Using:
+    public static var SHARE_LOCATION_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{55}\u{73}\u{69}\u{6E}\u{67}\u{3A}") }
+
+    /// Stop Sharing My Location
+    public static var SHARE_LOCATION_STOP_SHARING_LABEL_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{53}\u{54}\u{4F}\u{50}\u{5F}\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{53}\u{74}\u{6F}\u{70}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{4D}\u{79}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Stop Sharing My Location
+    public static var SHARE_LOCATION_STOP_SHARING_TEXT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{45}\u{5F}\u{4C}\u{4F}\u{43}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{53}\u{54}\u{4F}\u{50}\u{5F}\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{54}\u{45}\u{58}\u{54}", value: "\u{53}\u{74}\u{6F}\u{70}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{4D}\u{79}\u{20}\u{4C}\u{6F}\u{63}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Add Photo
+    public static var SHARING_ADD_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{41}\u{64}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Always Ask
+    public static var SHARING_AUDIENCE_ALWAYS_ASK｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{41}\u{53}\u{4B}", value: "\u{41}\u{6C}\u{77}\u{61}\u{79}\u{73}\u{20}\u{41}\u{73}\u{6B}") }
+
+    /// You will be prompted before updated name and photo are shared.
+    public static var SHARING_AUDIENCE_ALWAYS_ASK_FOOTER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{41}\u{4C}\u{57}\u{41}\u{59}\u{53}\u{5F}\u{41}\u{53}\u{4B}\u{5F}\u{46}\u{4F}\u{4F}\u{54}\u{45}\u{52}", value: "\u{59}\u{6F}\u{75}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{6D}\u{70}\u{74}\u{65}\u{64}\u{20}\u{62}\u{65}\u{66}\u{6F}\u{72}\u{65}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{70}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{61}\u{72}\u{65}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{64}\u{2E}") }
+
+    /// Contacts Only
+    public static var SHARING_AUDIENCE_CONTACTS_ONLY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}\u{5F}\u{4F}\u{4E}\u{4C}\u{59}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{4F}\u{6E}\u{6C}\u{79}") }
+
+    /// Updated name and photo will be automatically shared with people in your contacts the next time you send a message.
+    public static var SHARING_AUDIENCE_CONTACTS_ONLY_FOOTER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}\u{5F}\u{4F}\u{4E}\u{4C}\u{59}\u{5F}\u{46}\u{4F}\u{4F}\u{54}\u{45}\u{52}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{70}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{61}\u{75}\u{74}\u{6F}\u{6D}\u{61}\u{74}\u{69}\u{63}\u{61}\u{6C}\u{6C}\u{79}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{70}\u{65}\u{6F}\u{70}\u{6C}\u{65}\u{20}\u{69}\u{6E}\u{20}\u{79}\u{6F}\u{75}\u{72}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6E}\u{65}\u{78}\u{74}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{65}\u{6E}\u{64}\u{20}\u{61}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{2E}") }
+
+    /// Everyone
+    public static var SHARING_AUDIENCE_EVERYONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{45}\u{56}\u{45}\u{52}\u{59}\u{4F}\u{4E}\u{45}", value: "\u{45}\u{76}\u{65}\u{72}\u{79}\u{6F}\u{6E}\u{65}") }
+
+    /// Updated name and photo will be automatically shared with everyone the next time you send a message.
+    public static var SHARING_AUDIENCE_EVERYONE_FOOTER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{45}\u{56}\u{45}\u{52}\u{59}\u{4F}\u{4E}\u{45}\u{5F}\u{46}\u{4F}\u{4F}\u{54}\u{45}\u{52}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{64}\u{20}\u{6E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{70}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{61}\u{75}\u{74}\u{6F}\u{6D}\u{61}\u{74}\u{69}\u{63}\u{61}\u{6C}\u{6C}\u{79}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{65}\u{76}\u{65}\u{72}\u{79}\u{6F}\u{6E}\u{65}\u{20}\u{74}\u{68}\u{65}\u{20}\u{6E}\u{65}\u{78}\u{74}\u{20}\u{74}\u{69}\u{6D}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{65}\u{6E}\u{64}\u{20}\u{61}\u{20}\u{6D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{2E}") }
+
+    /// SHARE AUTOMATICALLY
+    public static var SHARING_AUDIENCE_SECTION_HEADER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}\u{5F}\u{53}\u{45}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}", value: "\u{53}\u{48}\u{41}\u{52}\u{45}\u{20}\u{41}\u{55}\u{54}\u{4F}\u{4D}\u{41}\u{54}\u{49}\u{43}\u{41}\u{4C}\u{4C}\u{59}") }
+
+    /// Choose Your Photo To Share
+    public static var SHARING_CHOOSE_YOUR_PHOTO_TO_SHARE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{59}\u{4F}\u{55}\u{52}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{41}\u{52}\u{45}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{59}\u{6F}\u{75}\u{72}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{54}\u{6F}\u{20}\u{53}\u{68}\u{61}\u{72}\u{65}") }
+
+    /// Continue
+    public static var SHARING_CONTINUE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{49}\u{4E}\u{55}\u{45}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{69}\u{6E}\u{75}\u{65}") }
+
+    /// Done
+    public static var SHARING_DONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{44}\u{4F}\u{4E}\u{45}", value: "\u{44}\u{6F}\u{6E}\u{65}") }
+
+    /// Edit
+    public static var SHARING_EDIT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{44}\u{49}\u{54}", value: "\u{45}\u{64}\u{69}\u{74}") }
+
+    /// Name and Photo Sharing
+    public static var SHARING_ENABLED_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{4E}\u{41}\u{42}\u{4C}\u{45}\u{44}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}") }
+
+    /// Last name
+    public static var SHARING_FAMILY_NAME_PLACEHOLDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{46}\u{41}\u{4D}\u{49}\u{4C}\u{59}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{50}\u{4C}\u{41}\u{43}\u{45}\u{48}\u{4F}\u{4C}\u{44}\u{45}\u{52}", value: "\u{4C}\u{61}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// First name
+    public static var SHARING_GIVEN_NAME_PLACEHOLDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{47}\u{49}\u{56}\u{45}\u{4E}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{50}\u{4C}\u{41}\u{43}\u{45}\u{48}\u{4F}\u{4C}\u{44}\u{45}\u{52}", value: "\u{46}\u{69}\u{72}\u{73}\u{74}\u{20}\u{6E}\u{61}\u{6D}\u{65}") }
+
+    /// More
+    public static var SHARING_MORE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4D}\u{4F}\u{52}\u{45}", value: "\u{4D}\u{6F}\u{72}\u{65}") }
+
+    /// Add Photo
+    public static var SHARING_ONBOARDING_ADD_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{41}\u{64}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Choose Who You Share Your Name and Photo with
+    public static var SHARING_ONBOARDING_CHOOSE_SHARING_AUDIENCE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{43}\u{48}\u{4F}\u{4F}\u{53}\u{45}\u{5F}\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{41}\u{55}\u{44}\u{49}\u{45}\u{4E}\u{43}\u{45}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{57}\u{68}\u{6F}\u{20}\u{59}\u{6F}\u{75}\u{20}\u{53}\u{68}\u{61}\u{72}\u{65}\u{20}\u{59}\u{6F}\u{75}\u{72}\u{20}\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{77}\u{69}\u{74}\u{68}") }
+
+    /// DISPLAY NAME
+    public static var SHARING_ONBOARDING_DISPLAY_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{44}\u{49}\u{53}\u{50}\u{4C}\u{41}\u{59}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{44}\u{49}\u{53}\u{50}\u{4C}\u{41}\u{59}\u{20}\u{4E}\u{41}\u{4D}\u{45}") }
+
+    /// No
+    public static var SHARING_ONBOARDING_EVERYONE_CONFIRMATION_CANCEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{56}\u{45}\u{52}\u{59}\u{4F}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}", value: "\u{4E}\u{6F}") }
+
+    /// Yes
+    public static var SHARING_ONBOARDING_EVERYONE_CONFIRMATION_CONFIRM｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{56}\u{45}\u{52}\u{59}\u{4F}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}", value: "\u{59}\u{65}\u{73}") }
+
+    /// Are you sure you want to automatically share profile updates with everyone?
+    public static var SHARING_ONBOARDING_EVERYONE_CONFIRMATION_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{56}\u{45}\u{52}\u{59}\u{4F}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{41}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{73}\u{75}\u{72}\u{65}\u{20}\u{79}\u{6F}\u{75}\u{20}\u{77}\u{61}\u{6E}\u{74}\u{20}\u{74}\u{6F}\u{20}\u{61}\u{75}\u{74}\u{6F}\u{6D}\u{61}\u{74}\u{69}\u{63}\u{61}\u{6C}\u{6C}\u{79}\u{20}\u{73}\u{68}\u{61}\u{72}\u{65}\u{20}\u{70}\u{72}\u{6F}\u{66}\u{69}\u{6C}\u{65}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{73}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{65}\u{76}\u{65}\u{72}\u{79}\u{6F}\u{6E}\u{65}\u{3F}") }
+
+    /// Sharing With Everyone
+    public static var SHARING_ONBOARDING_EVERYONE_CONFIRMATION_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{45}\u{56}\u{45}\u{52}\u{59}\u{4F}\u{4E}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}\u{20}\u{57}\u{69}\u{74}\u{68}\u{20}\u{45}\u{76}\u{65}\u{72}\u{79}\u{6F}\u{6E}\u{65}") }
+
+    /// Choose Your Name and Photo
+    public static var SHARING_ONBOARDING_NAME_AND_PHOTO_HEADER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{48}\u{45}\u{41}\u{44}\u{45}\u{52}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{73}\u{65}\u{20}\u{59}\u{6F}\u{75}\u{72}\u{20}\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// View More
+    public static var SHARING_ONBOARDING_VIEW_MORE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{4F}\u{4E}\u{42}\u{4F}\u{41}\u{52}\u{44}\u{49}\u{4E}\u{47}\u{5F}\u{56}\u{49}\u{45}\u{57}\u{5F}\u{4D}\u{4F}\u{52}\u{45}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{4D}\u{6F}\u{72}\u{65}") }
+
+    /// Use in Messages
+    public static var SHARING_PHOTOPICKER_ASSIGN_TITLE_OVERRIDE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{50}\u{49}\u{43}\u{4B}\u{45}\u{52}\u{5F}\u{41}\u{53}\u{53}\u{49}\u{47}\u{4E}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}\u{5F}\u{4F}\u{56}\u{45}\u{52}\u{52}\u{49}\u{44}\u{45}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}") }
+
+    /// Name and Photo
+    public static var SHARING_SETTINGS_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{53}\u{45}\u{54}\u{54}\u{49}\u{4E}\u{47}\u{53}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Set Up Later in Settings
+    public static var SHARING_SET_UP_LATER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{53}\u{45}\u{54}\u{5F}\u{55}\u{50}\u{5F}\u{4C}\u{41}\u{54}\u{45}\u{52}", value: "\u{53}\u{65}\u{74}\u{20}\u{55}\u{70}\u{20}\u{4C}\u{61}\u{74}\u{65}\u{72}\u{20}\u{69}\u{6E}\u{20}\u{53}\u{65}\u{74}\u{74}\u{69}\u{6E}\u{67}\u{73}") }
+
+    /// Set Up Name and Photo Sharing
+    public static var SHARING_SET_UP_NAME_AND_PHOTO_SHARING｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{53}\u{45}\u{54}\u{5F}\u{55}\u{50}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}", value: "\u{53}\u{65}\u{74}\u{20}\u{55}\u{70}\u{20}\u{4E}\u{61}\u{6D}\u{65}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{53}\u{68}\u{61}\u{72}\u{69}\u{6E}\u{67}") }
+
+    /// Strike Your Pose
+    public static var SHARING_STRIKE_YOUR_POSE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{53}\u{54}\u{52}\u{49}\u{4B}\u{45}\u{5F}\u{59}\u{4F}\u{55}\u{52}\u{5F}\u{50}\u{4F}\u{53}\u{45}", value: "\u{53}\u{74}\u{72}\u{69}\u{6B}\u{65}\u{20}\u{59}\u{6F}\u{75}\u{72}\u{20}\u{50}\u{6F}\u{73}\u{65}") }
+
+    /// Not Now
+    public static var SHARING_UPDATE_ME_CARD_PROMPT_CANCEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{55}\u{50}\u{44}\u{41}\u{54}\u{45}\u{5F}\u{4D}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}\u{5F}\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}", value: "\u{4E}\u{6F}\u{74}\u{20}\u{4E}\u{6F}\u{77}") }
+
+    /// Use
+    public static var SHARING_UPDATE_ME_CARD_PROMPT_CONFIRM｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{55}\u{50}\u{44}\u{41}\u{54}\u{45}\u{5F}\u{4D}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}\u{5F}\u{43}\u{4F}\u{4E}\u{46}\u{49}\u{52}\u{4D}", value: "\u{55}\u{73}\u{65}") }
+
+    /// Your Apple ID and My Card in Contacts will be updated with this photo.
+    public static var SHARING_UPDATE_ME_CARD_PROMPT_MESSAGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{55}\u{50}\u{44}\u{41}\u{54}\u{45}\u{5F}\u{4D}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}", value: "\u{59}\u{6F}\u{75}\u{72}\u{20}\u{41}\u{70}\u{70}\u{6C}\u{65}\u{20}\u{49}\u{44}\u{20}\u{61}\u{6E}\u{64}\u{20}\u{4D}\u{79}\u{20}\u{43}\u{61}\u{72}\u{64}\u{20}\u{69}\u{6E}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{20}\u{77}\u{69}\u{6C}\u{6C}\u{20}\u{62}\u{65}\u{20}\u{75}\u{70}\u{64}\u{61}\u{74}\u{65}\u{64}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{70}\u{68}\u{6F}\u{74}\u{6F}\u{2E}") }
+
+    /// Use This Photo Everywhere?
+    public static var SHARING_UPDATE_ME_CARD_PROMPT_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{41}\u{52}\u{49}\u{4E}\u{47}\u{5F}\u{55}\u{50}\u{44}\u{41}\u{54}\u{45}\u{5F}\u{4D}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{50}\u{52}\u{4F}\u{4D}\u{50}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{55}\u{73}\u{65}\u{20}\u{54}\u{68}\u{69}\u{73}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{45}\u{76}\u{65}\u{72}\u{79}\u{77}\u{68}\u{65}\u{72}\u{65}\u{3F}") }
+
+    /// Show All Contacts
+    public static var SHOW_ALL_CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{4F}\u{57}\u{5F}\u{41}\u{4C}\u{4C}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{41}\u{6C}\u{6C}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Show More
+    public static var SHOW_MORE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{48}\u{4F}\u{57}\u{5F}\u{4D}\u{4F}\u{52}\u{45}", value: "\u{53}\u{68}\u{6F}\u{77}\u{20}\u{4D}\u{6F}\u{72}\u{65}") }
+
+    /// %@ (%@)
+    public static var SOCIAL_PROFILE_USERNAME_AND_SERVICE_FORMAT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{4F}\u{43}\u{49}\u{41}\u{4C}\u{5F}\u{50}\u{52}\u{4F}\u{46}\u{49}\u{4C}\u{45}\u{5F}\u{55}\u{53}\u{45}\u{52}\u{4E}\u{41}\u{4D}\u{45}\u{5F}\u{41}\u{4E}\u{44}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// , 
+    public static var SOURCE_NAMES_DELIMITER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{4F}\u{55}\u{52}\u{43}\u{45}\u{5F}\u{4E}\u{41}\u{4D}\u{45}\u{53}\u{5F}\u{44}\u{45}\u{4C}\u{49}\u{4D}\u{49}\u{54}\u{45}\u{52}", value: "\u{2C}\u{20}") }
+
+    /// Siri Found in Apps
+    public static var SUGGESTIONS_SEARCH_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{53}\u{5F}\u{53}\u{45}\u{41}\u{52}\u{43}\u{48}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{53}\u{69}\u{72}\u{69}\u{20}\u{46}\u{6F}\u{75}\u{6E}\u{64}\u{20}\u{69}\u{6E}\u{20}\u{41}\u{70}\u{70}\u{73}") }
+
+    /// Add
+    public static var SUGGESTION_ADD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{41}\u{44}\u{44}", value: "\u{41}\u{64}\u{64}") }
+
+    /// LIKELY
+    public static var SUGGESTION_BADGE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{41}\u{44}\u{47}\u{45}", value: "\u{4C}\u{49}\u{4B}\u{45}\u{4C}\u{59}") }
+
+    /// %@ (Siri found in Mail)
+    public static var SUGGESTION_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{28}\u{53}\u{69}\u{72}\u{69}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{69}\u{6C}\u{29}") }
+
+    /// email (Siri found in Mail)
+    public static var SUGGESTION_FORMAT﹣％＠_emailAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}\u{20}\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{65}\u{6D}\u{61}\u{69}\u{6C}\u{20}\u{28}\u{53}\u{69}\u{72}\u{69}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{69}\u{6C}\u{29}") }
+
+    /// phone (Siri found in Mail)
+    public static var SUGGESTION_FORMAT﹣％＠_phoneNumbers｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}\u{20}\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{4E}\u{75}\u{6D}\u{62}\u{65}\u{72}\u{73}", value: "\u{70}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{28}\u{53}\u{69}\u{72}\u{69}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{69}\u{6C}\u{29}") }
+
+    /// address (Siri found in Mail)
+    public static var SUGGESTION_FORMAT﹣％＠_postalAddresses｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}\u{20}\u{70}\u{6F}\u{73}\u{74}\u{61}\u{6C}\u{41}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{65}\u{73}", value: "\u{61}\u{64}\u{64}\u{72}\u{65}\u{73}\u{73}\u{20}\u{28}\u{53}\u{69}\u{72}\u{69}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}\u{20}\u{69}\u{6E}\u{20}\u{4D}\u{61}\u{69}\u{6C}\u{29}") }
+
+    /// %@ (Siri found in %@)
+    public static var SUGGESTION_FOUND_IN_APP｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{4F}\u{55}\u{4E}\u{44}\u{5F}\u{49}\u{4E}\u{5F}\u{41}\u{50}\u{50}", value: "\u{25}\u{40}\u{20}\u{28}\u{53}\u{69}\u{72}\u{69}\u{20}\u{66}\u{6F}\u{75}\u{6E}\u{64}\u{20}\u{69}\u{6E}\u{20}\u{25}\u{40}\u{29}") }
+
+    /// %@ (%@)
+    public static var SUGGESTION_FROM_FORMAT﹣％＠﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{46}\u{52}\u{4F}\u{4D}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{28}\u{25}\u{40}\u{29}") }
+
+    /// Ignore
+    public static var SUGGESTION_IGNORE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{49}\u{47}\u{4E}\u{4F}\u{52}\u{45}", value: "\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}") }
+
+    /// Ignore Contact
+    public static var SUGGESTION_IGNORE_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{49}\u{47}\u{4E}\u{4F}\u{52}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{49}\u{67}\u{6E}\u{6F}\u{72}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// No subject
+    public static var SUGGESTION_REVIEW_MAIL_DEFAULT_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{52}\u{45}\u{56}\u{49}\u{45}\u{57}\u{5F}\u{4D}\u{41}\u{49}\u{4C}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{4E}\u{6F}\u{20}\u{73}\u{75}\u{62}\u{6A}\u{65}\u{63}\u{74}") }
+
+    /// Review
+    public static var SUGGESTION_REVIEW_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{52}\u{45}\u{56}\u{49}\u{45}\u{57}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{52}\u{65}\u{76}\u{69}\u{65}\u{77}") }
+
+    /// %@ (suggestion)
+    public static var SUGGESTION_UNKNOWN_ORIGIN｜ContactsUI: String { Util｜ContactsUI.systemString("\u{53}\u{55}\u{47}\u{47}\u{45}\u{53}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{55}\u{4E}\u{4B}\u{4E}\u{4F}\u{57}\u{4E}\u{5F}\u{4F}\u{52}\u{49}\u{47}\u{49}\u{4E}", value: "\u{25}\u{40}\u{20}\u{28}\u{73}\u{75}\u{67}\u{67}\u{65}\u{73}\u{74}\u{69}\u{6F}\u{6E}\u{29}") }
+
+    /// Take Photo
+    public static var TAKE_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{54}\u{41}\u{4B}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{54}\u{61}\u{6B}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Text Tone
+    public static var TEXTTONE_CARD_ITEM_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{54}\u{45}\u{58}\u{54}\u{54}\u{4F}\u{4E}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{54}\u{65}\u{78}\u{74}\u{20}\u{54}\u{6F}\u{6E}\u{65}") }
+
+    /// %@ (RTT/TTY Relay)
+    public static var TTYRELAY_LABEL_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{54}\u{54}\u{59}\u{52}\u{45}\u{4C}\u{41}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{25}\u{40}\u{20}\u{28}\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}\u{20}\u{52}\u{65}\u{6C}\u{61}\u{79}\u{29}") }
+
+    /// RTT/TTY Relay
+    public static var TTYRELAY_NO_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{54}\u{54}\u{59}\u{52}\u{45}\u{4C}\u{41}\u{59}\u{5F}\u{4E}\u{4F}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}\u{20}\u{52}\u{65}\u{6C}\u{61}\u{79}") }
+
+    /// %@ (RTT/TTY)
+    public static var TTY_LABEL_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{54}\u{54}\u{59}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{25}\u{40}\u{20}\u{28}\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}\u{29}") }
+
+    /// RTT/TTY
+    public static var TTY_NO_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{54}\u{54}\u{59}\u{5F}\u{4E}\u{4F}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{52}\u{54}\u{54}\u{2F}\u{54}\u{54}\u{59}") }
+
+    /// Twitter
+    public static var TWITTER_FIELD_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{54}\u{57}\u{49}\u{54}\u{54}\u{45}\u{52}\u{5F}\u{46}\u{49}\u{45}\u{4C}\u{44}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{54}\u{77}\u{69}\u{74}\u{74}\u{65}\u{72}") }
+
+    /// Unblock this Caller
+    public static var UNBLOCK_THIS_CALLER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{4E}\u{42}\u{4C}\u{4F}\u{43}\u{4B}\u{5F}\u{54}\u{48}\u{49}\u{53}\u{5F}\u{43}\u{41}\u{4C}\u{4C}\u{45}\u{52}", value: "\u{55}\u{6E}\u{62}\u{6C}\u{6F}\u{63}\u{6B}\u{20}\u{74}\u{68}\u{69}\u{73}\u{20}\u{43}\u{61}\u{6C}\u{6C}\u{65}\u{72}") }
+
+    /// Add to Existing Contact
+    public static var UNKNOWN_CARD_ADD_TO_EXISTING_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{4E}\u{4B}\u{4E}\u{4F}\u{57}\u{4E}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{54}\u{4F}\u{5F}\u{45}\u{58}\u{49}\u{53}\u{54}\u{49}\u{4E}\u{47}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{45}\u{78}\u{69}\u{73}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Update Contact “%@”
+    public static var UNKNOWN_CARD_ADD_UPDATE_CONTACT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{4E}\u{4B}\u{4E}\u{4F}\u{57}\u{4E}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{44}\u{44}\u{5F}\u{55}\u{50}\u{44}\u{41}\u{54}\u{45}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{2D}\u{25}\u{40}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{201C}\u{25}\u{40}\u{201D}") }
+
+    /// Create New Contact
+    public static var UNKNOWN_CARD_CREATE_NEW_CONTACT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{4E}\u{4B}\u{4E}\u{4F}\u{57}\u{4E}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Unknown
+    public static var UNKNOWN_SOURCE_STRING｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{4E}\u{4B}\u{4E}\u{4F}\u{57}\u{4E}\u{5F}\u{53}\u{4F}\u{55}\u{52}\u{43}\u{45}\u{5F}\u{53}\u{54}\u{52}\u{49}\u{4E}\u{47}", value: "\u{55}\u{6E}\u{6B}\u{6E}\u{6F}\u{77}\u{6E}") }
+
+    /// Unlink
+    public static var UNLINK｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{4E}\u{4C}\u{49}\u{4E}\u{4B}", value: "\u{55}\u{6E}\u{6C}\u{69}\u{6E}\u{6B}") }
+
+    /// Update
+    public static var UPDATE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{50}\u{44}\u{41}\u{54}\u{45}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}") }
+
+    /// Updating Contacts…
+    public static var UPDATING_CONTACTS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{50}\u{44}\u{41}\u{54}\u{49}\u{4E}\u{47}\u{5F}\u{43}\u{4F}\u{4E}\u{54}\u{41}\u{43}\u{54}\u{53}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{69}\u{6E}\u{67}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}\u{2026}") }
+
+    /// Add to Bookmarks
+    public static var URL_ACTION_BOOKMARK｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{52}\u{4C}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{42}\u{4F}\u{4F}\u{4B}\u{4D}\u{41}\u{52}\u{4B}", value: "\u{41}\u{64}\u{64}\u{20}\u{74}\u{6F}\u{20}\u{42}\u{6F}\u{6F}\u{6B}\u{6D}\u{61}\u{72}\u{6B}\u{73}") }
+
+    /// Visit
+    public static var URL_ACTION_VISIT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{52}\u{4C}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{49}\u{53}\u{49}\u{54}", value: "\u{56}\u{69}\u{73}\u{69}\u{74}") }
+
+    /// Use %@ Photo
+    public static var USE_ACCOUNT_PHOTO_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{41}\u{43}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{55}\u{73}\u{65}\u{20}\u{25}\u{40}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// %@
+    public static var USE_ACCOUNT_PHOTO_FORMAT_SHORT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{41}\u{43}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}") }
+
+    /// %@ Photo %@
+    public static var USE_ACCOUNT_PHOTO_FORMAT_SHORT_WITH_SUFFIX﹣％＠﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{41}\u{43}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}\u{2D}\u{25}\u{40}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use %@ Photo %@
+    public static var USE_ACCOUNT_PHOTO_FORMAT_WITH_SUFFIX﹣％＠﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{41}\u{43}\u{43}\u{4F}\u{55}\u{4E}\u{54}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}\u{2D}\u{25}\u{40}\u{2D}\u{25}\u{40}", value: "\u{55}\u{73}\u{65}\u{20}\u{25}\u{40}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use CardDAV Photo
+    public static var USE_CARDDAV_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{44}\u{41}\u{56}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{43}\u{61}\u{72}\u{64}\u{44}\u{41}\u{56}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// CardDAV Photo %@
+    public static var USE_CARDDAV_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{44}\u{41}\u{56}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{43}\u{61}\u{72}\u{64}\u{44}\u{41}\u{56}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use CardDAV Photo %@
+    public static var USE_CARDDAV_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{44}\u{41}\u{56}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{43}\u{61}\u{72}\u{64}\u{44}\u{41}\u{56}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// CardDAV
+    public static var USE_CARDDAV_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{44}\u{41}\u{56}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{43}\u{61}\u{72}\u{64}\u{44}\u{41}\u{56}") }
+
+    /// Use Exchange Photo
+    public static var USE_EXCHANGE_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{45}\u{58}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{45}\u{78}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Exchange Photo %@
+    public static var USE_EXCHANGE_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{45}\u{58}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{45}\u{78}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use Exchange Photo %@
+    public static var USE_EXCHANGE_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{45}\u{58}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{45}\u{78}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Exchange
+    public static var USE_EXCHANGE_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{45}\u{58}\u{43}\u{48}\u{41}\u{4E}\u{47}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{45}\u{78}\u{63}\u{68}\u{61}\u{6E}\u{67}\u{65}") }
+
+    /// Use Facebook Photo
+    public static var USE_FACEBOOK_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{46}\u{41}\u{43}\u{45}\u{42}\u{4F}\u{4F}\u{4B}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// Facebook Photo %@
+    public static var USE_FACEBOOK_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{46}\u{41}\u{43}\u{45}\u{42}\u{4F}\u{4F}\u{4B}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use Facebook Photo %@
+    public static var USE_FACEBOOK_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{46}\u{41}\u{43}\u{45}\u{42}\u{4F}\u{4F}\u{4B}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Facebook
+    public static var USE_FACEBOOK_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{46}\u{41}\u{43}\u{45}\u{42}\u{4F}\u{4F}\u{4B}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{46}\u{61}\u{63}\u{65}\u{62}\u{6F}\u{6F}\u{6B}") }
+
+    /// Use iCloud Photo
+    public static var USE_ICLOUD_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{43}\u{4C}\u{4F}\u{55}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// iCloud Photo %@
+    public static var USE_ICLOUD_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{43}\u{4C}\u{4F}\u{55}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use iCloud Photo %@
+    public static var USE_ICLOUD_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{43}\u{4C}\u{4F}\u{55}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// iCloud
+    public static var USE_ICLOUD_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{43}\u{4C}\u{4F}\u{55}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{69}\u{43}\u{6C}\u{6F}\u{75}\u{64}") }
+
+    /// Use iPad Photo
+    public static var USE_IPAD_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{41}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{61}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// iPad Photo %@
+    public static var USE_IPAD_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{41}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{69}\u{50}\u{61}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use iPad Photo %@
+    public static var USE_IPAD_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{41}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{61}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// iPad
+    public static var USE_IPAD_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{41}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{69}\u{50}\u{61}\u{64}") }
+
+    /// Use iPhone Photo
+    public static var USE_IPHONE_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// iPhone Photo %@
+    public static var USE_IPHONE_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use iPhone Photo %@
+    public static var USE_IPHONE_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// iPhone
+    public static var USE_IPHONE_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// Use iPhone Simulator Photo
+    public static var USE_IPHONE_SIMULATOR_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{53}\u{49}\u{4D}\u{55}\u{4C}\u{41}\u{54}\u{4F}\u{52}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{53}\u{69}\u{6D}\u{75}\u{6C}\u{61}\u{74}\u{6F}\u{72}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// iPhone Simulator Photo %@
+    public static var USE_IPHONE_SIMULATOR_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{53}\u{49}\u{4D}\u{55}\u{4C}\u{41}\u{54}\u{4F}\u{52}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{53}\u{69}\u{6D}\u{75}\u{6C}\u{61}\u{74}\u{6F}\u{72}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use iPhone Simulator Photo %@
+    public static var USE_IPHONE_SIMULATOR_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{53}\u{49}\u{4D}\u{55}\u{4C}\u{41}\u{54}\u{4F}\u{52}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{53}\u{69}\u{6D}\u{75}\u{6C}\u{61}\u{74}\u{6F}\u{72}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// iPhone Simulator
+    public static var USE_IPHONE_SIMULATOR_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{48}\u{4F}\u{4E}\u{45}\u{5F}\u{53}\u{49}\u{4D}\u{55}\u{4C}\u{41}\u{54}\u{4F}\u{52}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{69}\u{50}\u{68}\u{6F}\u{6E}\u{65}\u{20}\u{53}\u{69}\u{6D}\u{75}\u{6C}\u{61}\u{74}\u{6F}\u{72}") }
+
+    /// Use iPod Photo
+    public static var USE_IPOD_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{4F}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{6F}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// iPod Photo %@
+    public static var USE_IPOD_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{4F}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{69}\u{50}\u{6F}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use iPod Photo %@
+    public static var USE_IPOD_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{4F}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{69}\u{50}\u{6F}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// iPod
+    public static var USE_IPOD_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{49}\u{50}\u{4F}\u{44}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{69}\u{50}\u{6F}\u{64}") }
+
+    /// Use MobileMe Photo
+    public static var USE_MOBILEME_PHOTO｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{4D}\u{4F}\u{42}\u{49}\u{4C}\u{45}\u{4D}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}", value: "\u{55}\u{73}\u{65}\u{20}\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{4D}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// MobileMe Photo %@
+    public static var USE_MOBILEME_PHOTO_FORMAT_SHORT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{4D}\u{4F}\u{42}\u{49}\u{4C}\u{45}\u{4D}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{4D}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use MobileMe Photo %@
+    public static var USE_MOBILEME_PHOTO_FORMAT_WITH_SUFFIX｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{4D}\u{4F}\u{42}\u{49}\u{4C}\u{45}\u{4D}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}", value: "\u{55}\u{73}\u{65}\u{20}\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{4D}\u{65}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// MobileMe
+    public static var USE_MOBILEME_PHOTO_SHORT｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{4D}\u{4F}\u{42}\u{49}\u{4C}\u{45}\u{4D}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}", value: "\u{4D}\u{6F}\u{62}\u{69}\u{6C}\u{65}\u{4D}\u{65}") }
+
+    /// Use %@ Photo
+    public static var USE_SOURCE_PHOTO_FORMAT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{53}\u{4F}\u{55}\u{52}\u{43}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{2D}\u{25}\u{40}", value: "\u{55}\u{73}\u{65}\u{20}\u{25}\u{40}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}") }
+
+    /// %@
+    public static var USE_SOURCE_PHOTO_FORMAT_SHORT﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{53}\u{4F}\u{55}\u{52}\u{43}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}") }
+
+    /// %@ Photo %@
+    public static var USE_SOURCE_PHOTO_FORMAT_SHORT_WITH_SUFFIX﹣％＠﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{53}\u{4F}\u{55}\u{52}\u{43}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}\u{2D}\u{25}\u{40}\u{2D}\u{25}\u{40}", value: "\u{25}\u{40}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Use %@ Photo %@
+    public static var USE_SOURCE_PHOTO_FORMAT_WITH_SUFFIX﹣％＠﹣％＠｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{53}\u{45}\u{5F}\u{53}\u{4F}\u{55}\u{52}\u{43}\u{45}\u{5F}\u{50}\u{48}\u{4F}\u{54}\u{4F}\u{5F}\u{46}\u{4F}\u{52}\u{4D}\u{41}\u{54}\u{5F}\u{57}\u{49}\u{54}\u{48}\u{5F}\u{53}\u{55}\u{46}\u{46}\u{49}\u{58}\u{2D}\u{25}\u{40}\u{2D}\u{25}\u{40}", value: "\u{55}\u{73}\u{65}\u{20}\u{25}\u{40}\u{20}\u{50}\u{68}\u{6F}\u{74}\u{6F}\u{20}\u{25}\u{40}") }
+
+    /// Unable to open contact card.
+    public static var Unable_to_open_contact_card．｜ContactsUI: String { Util｜ContactsUI.systemString("\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6F}\u{70}\u{65}\u{6E}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{63}\u{61}\u{72}\u{64}\u{2E}", value: "\u{55}\u{6E}\u{61}\u{62}\u{6C}\u{65}\u{20}\u{74}\u{6F}\u{20}\u{6F}\u{70}\u{65}\u{6E}\u{20}\u{63}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{63}\u{61}\u{72}\u{64}\u{2E}") }
+
+    /// Merge with Contacts
+    public static var VCARD_ADD｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{41}\u{44}\u{44}", value: "\u{4D}\u{65}\u{72}\u{67}\u{65}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Cancel
+    public static var VCARD_CANCEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{41}\u{4E}\u{43}\u{45}\u{4C}", value: "\u{43}\u{61}\u{6E}\u{63}\u{65}\u{6C}") }
+
+    /// Create New Contacts
+    public static var VCARD_CREATE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Create New Contacts
+    public static var VCARD_CREATE_NEW_MANY｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{4D}\u{41}\u{4E}\u{59}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{73}") }
+
+    /// Create New Contact
+    public static var VCARD_CREATE_NEW_ONE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{43}\u{52}\u{45}\u{41}\u{54}\u{45}\u{5F}\u{4E}\u{45}\u{57}\u{5F}\u{4F}\u{4E}\u{45}", value: "\u{43}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{4E}\u{65}\u{77}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Contact
+    public static var VCARD_DEFAULT_FILE_NAME｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{46}\u{49}\u{4C}\u{45}\u{5F}\u{4E}\u{41}\u{4D}\u{45}", value: "\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}") }
+
+    /// Default
+    public static var VIBRATION_CARD_ITEM_DEFAULT_VALUE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{49}\u{42}\u{52}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{5F}\u{44}\u{45}\u{46}\u{41}\u{55}\u{4C}\u{54}\u{5F}\u{56}\u{41}\u{4C}\u{55}\u{45}", value: "\u{44}\u{65}\u{66}\u{61}\u{75}\u{6C}\u{74}") }
+
+    /// Vibration
+    public static var VIBRATION_CARD_ITEM_LABEL｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{49}\u{42}\u{52}\u{41}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{54}\u{45}\u{4D}\u{5F}\u{4C}\u{41}\u{42}\u{45}\u{4C}", value: "\u{56}\u{69}\u{62}\u{72}\u{61}\u{74}\u{69}\u{6F}\u{6E}") }
+
+    /// Make a Voice Call Reminder
+    public static var VOICE_CALL_REMINDER｜ContactsUI: String { Util｜ContactsUI.systemString("\u{56}\u{4F}\u{49}\u{43}\u{45}\u{5F}\u{43}\u{41}\u{4C}\u{4C}\u{5F}\u{52}\u{45}\u{4D}\u{49}\u{4E}\u{44}\u{45}\u{52}", value: "\u{4D}\u{61}\u{6B}\u{65}\u{20}\u{61}\u{20}\u{56}\u{6F}\u{69}\u{63}\u{65}\u{20}\u{43}\u{61}\u{6C}\u{6C}\u{20}\u{52}\u{65}\u{6D}\u{69}\u{6E}\u{64}\u{65}\u{72}") }
+
+    /// Mention in Weibo
+    public static var WEIBO_ACTION_SEND｜ContactsUI: String { Util｜ContactsUI.systemString("\u{57}\u{45}\u{49}\u{42}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{53}\u{45}\u{4E}\u{44}", value: "\u{4D}\u{65}\u{6E}\u{74}\u{69}\u{6F}\u{6E}\u{20}\u{69}\u{6E}\u{20}\u{57}\u{65}\u{69}\u{62}\u{6F}") }
+
+    /// Weibo
+    public static var WEIBO_ACTION_SHEET_TITLE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{57}\u{45}\u{49}\u{42}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{53}\u{48}\u{45}\u{45}\u{54}\u{5F}\u{54}\u{49}\u{54}\u{4C}\u{45}", value: "\u{57}\u{65}\u{69}\u{62}\u{6F}") }
+
+    /// View Weibos
+    public static var WEIBO_ACTION_VIEW_WEIBOS｜ContactsUI: String { Util｜ContactsUI.systemString("\u{57}\u{45}\u{49}\u{42}\u{4F}\u{5F}\u{41}\u{43}\u{54}\u{49}\u{4F}\u{4E}\u{5F}\u{56}\u{49}\u{45}\u{57}\u{5F}\u{57}\u{45}\u{49}\u{42}\u{4F}\u{53}", value: "\u{56}\u{69}\u{65}\u{77}\u{20}\u{57}\u{65}\u{69}\u{62}\u{6F}\u{73}") }
+
+    /// Your Contact Card is not set.
+    public static var YOUR_ME_CARD_IS_NOT_SET｜ContactsUI: String { Util｜ContactsUI.systemString("\u{59}\u{4F}\u{55}\u{52}\u{5F}\u{4D}\u{45}\u{5F}\u{43}\u{41}\u{52}\u{44}\u{5F}\u{49}\u{53}\u{5F}\u{4E}\u{4F}\u{54}\u{5F}\u{53}\u{45}\u{54}", value: "\u{59}\u{6F}\u{75}\u{72}\u{20}\u{43}\u{6F}\u{6E}\u{74}\u{61}\u{63}\u{74}\u{20}\u{43}\u{61}\u{72}\u{64}\u{20}\u{69}\u{73}\u{20}\u{6E}\u{6F}\u{74}\u{20}\u{73}\u{65}\u{74}\u{2E}") }
+
+    /// Yahoo!
+    public static var Yahoo_SHORT_INSTANT_MESSAGE_SERVICE｜ContactsUI: String { Util｜ContactsUI.systemString("\u{59}\u{61}\u{68}\u{6F}\u{6F}\u{20}\u{53}\u{48}\u{4F}\u{52}\u{54}\u{5F}\u{49}\u{4E}\u{53}\u{54}\u{41}\u{4E}\u{54}\u{5F}\u{4D}\u{45}\u{53}\u{53}\u{41}\u{47}\u{45}\u{5F}\u{53}\u{45}\u{52}\u{56}\u{49}\u{43}\u{45}", value: "\u{59}\u{61}\u{68}\u{6F}\u{6F}\u{21}") }
+
+    /// Time Passing
+    public static var alarm﹣system：Alarm1｜ContactsUI: String { Util｜ContactsUI.systemString("\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{2D}\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{41}\u{6C}\u{61}\u{72}\u{6D}\u{31}", value: "\u{54}\u{69}\u{6D}\u{65}\u{20}\u{50}\u{61}\u{73}\u{73}\u{69}\u{6E}\u{67}") }
+
+    /// Time’s Up
+    public static var alarm﹣system：Alarm2｜ContactsUI: String { Util｜ContactsUI.systemString("\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{2D}\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{41}\u{6C}\u{61}\u{72}\u{6D}\u{32}", value: "\u{54}\u{69}\u{6D}\u{65}\u{2019}\u{73}\u{20}\u{55}\u{70}") }
+
+    /// Checkmate
+    public static var alarm﹣system：Alarm3｜ContactsUI: String { Util｜ContactsUI.systemString("\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{2D}\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{41}\u{6C}\u{61}\u{72}\u{6D}\u{33}", value: "\u{43}\u{68}\u{65}\u{63}\u{6B}\u{6D}\u{61}\u{74}\u{65}") }
+
+    /// Jump
+    public static var alarm﹣system：Alarm4｜ContactsUI: String { Util｜ContactsUI.systemString("\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{2D}\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{41}\u{6C}\u{61}\u{72}\u{6D}\u{34}", value: "\u{4A}\u{75}\u{6D}\u{70}") }
+
+    /// Up Down
+    public static var alarm﹣system：Alarm5｜ContactsUI: String { Util｜ContactsUI.systemString("\u{61}\u{6C}\u{61}\u{72}\u{6D}\u{2D}\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{41}\u{6C}\u{61}\u{72}\u{6D}\u{35}", value: "\u{55}\u{70}\u{20}\u{44}\u{6F}\u{77}\u{6E}") }
+
+    /// Alarm
+    public static var system：Alarm｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{41}\u{6C}\u{61}\u{72}\u{6D}", value: "\u{41}\u{6C}\u{61}\u{72}\u{6D}") }
+
+    /// Ascending
+    public static var system：Ascending｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{41}\u{73}\u{63}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}", value: "\u{41}\u{73}\u{63}\u{65}\u{6E}\u{64}\u{69}\u{6E}\u{67}") }
+
+    /// Bark
+    public static var system：Bark｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{42}\u{61}\u{72}\u{6B}", value: "\u{42}\u{61}\u{72}\u{6B}") }
+
+    /// Bell Tower
+    public static var system：Bell_Tower｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{42}\u{65}\u{6C}\u{6C}\u{20}\u{54}\u{6F}\u{77}\u{65}\u{72}", value: "\u{42}\u{65}\u{6C}\u{6C}\u{20}\u{54}\u{6F}\u{77}\u{65}\u{72}") }
+
+    /// Blues
+    public static var system：Blues｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{42}\u{6C}\u{75}\u{65}\u{73}", value: "\u{42}\u{6C}\u{75}\u{65}\u{73}") }
+
+    /// Boing
+    public static var system：Boing｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{42}\u{6F}\u{69}\u{6E}\u{67}", value: "\u{42}\u{6F}\u{69}\u{6E}\u{67}") }
+
+    /// Crickets
+    public static var system：Crickets｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{43}\u{72}\u{69}\u{63}\u{6B}\u{65}\u{74}\u{73}", value: "\u{43}\u{72}\u{69}\u{63}\u{6B}\u{65}\u{74}\u{73}") }
+
+    /// Digital
+    public static var system：Digital｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{44}\u{69}\u{67}\u{69}\u{74}\u{61}\u{6C}", value: "\u{44}\u{69}\u{67}\u{69}\u{74}\u{61}\u{6C}") }
+
+    /// Doorbell
+    public static var system：Doorbell｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{44}\u{6F}\u{6F}\u{72}\u{62}\u{65}\u{6C}\u{6C}", value: "\u{44}\u{6F}\u{6F}\u{72}\u{62}\u{65}\u{6C}\u{6C}") }
+
+    /// Duck
+    public static var system：Duck｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{44}\u{75}\u{63}\u{6B}", value: "\u{44}\u{75}\u{63}\u{6B}") }
+
+    /// Harp
+    public static var system：Harp｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{48}\u{61}\u{72}\u{70}", value: "\u{48}\u{61}\u{72}\u{70}") }
+
+    /// Motorcycle
+    public static var system：Motorcycle｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{4D}\u{6F}\u{74}\u{6F}\u{72}\u{63}\u{79}\u{63}\u{6C}\u{65}", value: "\u{4D}\u{6F}\u{74}\u{6F}\u{72}\u{63}\u{79}\u{63}\u{6C}\u{65}") }
+
+    /// Old Car Horn
+    public static var system：Old_Car_Horn｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{4F}\u{6C}\u{64}\u{20}\u{43}\u{61}\u{72}\u{20}\u{48}\u{6F}\u{72}\u{6E}", value: "\u{4F}\u{6C}\u{64}\u{20}\u{43}\u{61}\u{72}\u{20}\u{48}\u{6F}\u{72}\u{6E}") }
+
+    /// Old Phone
+    public static var system：Old_Phone｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{4F}\u{6C}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{6E}\u{65}", value: "\u{4F}\u{6C}\u{64}\u{20}\u{50}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// Piano Riff
+    public static var system：Piano_Riff｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{50}\u{69}\u{61}\u{6E}\u{6F}\u{20}\u{52}\u{69}\u{66}\u{66}", value: "\u{50}\u{69}\u{61}\u{6E}\u{6F}\u{20}\u{52}\u{69}\u{66}\u{66}") }
+
+    /// Pinball
+    public static var system：Pinball｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{50}\u{69}\u{6E}\u{62}\u{61}\u{6C}\u{6C}", value: "\u{50}\u{69}\u{6E}\u{62}\u{61}\u{6C}\u{6C}") }
+
+    /// Robot
+    public static var system：Robot｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{52}\u{6F}\u{62}\u{6F}\u{74}", value: "\u{52}\u{6F}\u{62}\u{6F}\u{74}") }
+
+    /// Sci-Fi
+    public static var system：Sci﹣Fi｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{53}\u{63}\u{69}\u{2D}\u{46}\u{69}", value: "\u{53}\u{63}\u{69}\u{2D}\u{46}\u{69}") }
+
+    /// Sonar
+    public static var system：Sonar｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{53}\u{6F}\u{6E}\u{61}\u{72}", value: "\u{53}\u{6F}\u{6E}\u{61}\u{72}") }
+
+    /// Strum
+    public static var system：Strum｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{53}\u{74}\u{72}\u{75}\u{6D}", value: "\u{53}\u{74}\u{72}\u{75}\u{6D}") }
+
+    /// Timba
+    public static var system：Timba｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{54}\u{69}\u{6D}\u{62}\u{61}", value: "\u{54}\u{69}\u{6D}\u{62}\u{61}") }
+
+    /// Time Passing
+    public static var system：Time_Passing｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{54}\u{69}\u{6D}\u{65}\u{20}\u{50}\u{61}\u{73}\u{73}\u{69}\u{6E}\u{67}", value: "\u{54}\u{69}\u{6D}\u{65}\u{20}\u{50}\u{61}\u{73}\u{73}\u{69}\u{6E}\u{67}") }
+
+    /// Trill
+    public static var system：Trill｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{54}\u{72}\u{69}\u{6C}\u{6C}", value: "\u{54}\u{72}\u{69}\u{6C}\u{6C}") }
+
+    /// Xylophone
+    public static var system：Xylophone｜ContactsUI: String { Util｜ContactsUI.systemString("\u{73}\u{79}\u{73}\u{74}\u{65}\u{6D}\u{3A}\u{58}\u{79}\u{6C}\u{6F}\u{70}\u{68}\u{6F}\u{6E}\u{65}", value: "\u{58}\u{79}\u{6C}\u{6F}\u{70}\u{68}\u{6F}\u{6E}\u{65}") }
+
+    /// Anticipate
+    public static var texttone：Anticipate｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{41}\u{6E}\u{74}\u{69}\u{63}\u{69}\u{70}\u{61}\u{74}\u{65}", value: "\u{41}\u{6E}\u{74}\u{69}\u{63}\u{69}\u{70}\u{61}\u{74}\u{65}") }
+
+    /// Bell
+    public static var texttone：Bell｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{42}\u{65}\u{6C}\u{6C}", value: "\u{42}\u{65}\u{6C}\u{6C}") }
+
+    /// Bloom
+    public static var texttone：Bloom｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{42}\u{6C}\u{6F}\u{6F}\u{6D}", value: "\u{42}\u{6C}\u{6F}\u{6F}\u{6D}") }
+
+    /// Calypso
+    public static var texttone：Calypso｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{43}\u{61}\u{6C}\u{79}\u{70}\u{73}\u{6F}", value: "\u{43}\u{61}\u{6C}\u{79}\u{70}\u{73}\u{6F}") }
+
+    /// Chime
+    public static var texttone：Chime｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{43}\u{68}\u{69}\u{6D}\u{65}", value: "\u{43}\u{68}\u{69}\u{6D}\u{65}") }
+
+    /// Choo Choo
+    public static var texttone：Choo_Choo｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{43}\u{68}\u{6F}\u{6F}\u{20}\u{43}\u{68}\u{6F}\u{6F}", value: "\u{43}\u{68}\u{6F}\u{6F}\u{20}\u{43}\u{68}\u{6F}\u{6F}") }
+
+    /// Descent
+    public static var texttone：Descent｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{44}\u{65}\u{73}\u{63}\u{65}\u{6E}\u{74}", value: "\u{44}\u{65}\u{73}\u{63}\u{65}\u{6E}\u{74}") }
+
+    /// Electronic
+    public static var texttone：Electronic｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{45}\u{6C}\u{65}\u{63}\u{74}\u{72}\u{6F}\u{6E}\u{69}\u{63}", value: "\u{45}\u{6C}\u{65}\u{63}\u{74}\u{72}\u{6F}\u{6E}\u{69}\u{63}") }
+
+    /// Fanfare
+    public static var texttone：Fanfare｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{46}\u{61}\u{6E}\u{66}\u{61}\u{72}\u{65}", value: "\u{46}\u{61}\u{6E}\u{66}\u{61}\u{72}\u{65}") }
+
+    /// Glass
+    public static var texttone：Glass｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{47}\u{6C}\u{61}\u{73}\u{73}", value: "\u{47}\u{6C}\u{61}\u{73}\u{73}") }
+
+    /// Horn
+    public static var texttone：Horn｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{48}\u{6F}\u{72}\u{6E}", value: "\u{48}\u{6F}\u{72}\u{6E}") }
+
+    /// Ladder
+    public static var texttone：Ladder｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{4C}\u{61}\u{64}\u{64}\u{65}\u{72}", value: "\u{4C}\u{61}\u{64}\u{64}\u{65}\u{72}") }
+
+    /// Minuet
+    public static var texttone：Minuet｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{4D}\u{69}\u{6E}\u{75}\u{65}\u{74}", value: "\u{4D}\u{69}\u{6E}\u{75}\u{65}\u{74}") }
+
+    /// News Flash
+    public static var texttone：News_Flash｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{4E}\u{65}\u{77}\u{73}\u{20}\u{46}\u{6C}\u{61}\u{73}\u{68}", value: "\u{4E}\u{65}\u{77}\u{73}\u{20}\u{46}\u{6C}\u{61}\u{73}\u{68}") }
+
+    /// Noir
+    public static var texttone：Noir｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{4E}\u{6F}\u{69}\u{72}", value: "\u{4E}\u{6F}\u{69}\u{72}") }
+
+    /// Sherwood Forest
+    public static var texttone：Sherwood_Forest｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{53}\u{68}\u{65}\u{72}\u{77}\u{6F}\u{6F}\u{64}\u{20}\u{46}\u{6F}\u{72}\u{65}\u{73}\u{74}", value: "\u{53}\u{68}\u{65}\u{72}\u{77}\u{6F}\u{6F}\u{64}\u{20}\u{46}\u{6F}\u{72}\u{65}\u{73}\u{74}") }
+
+    /// Spell
+    public static var texttone：Spell｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{53}\u{70}\u{65}\u{6C}\u{6C}", value: "\u{53}\u{70}\u{65}\u{6C}\u{6C}") }
+
+    /// Suspense
+    public static var texttone：Suspense｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{53}\u{75}\u{73}\u{70}\u{65}\u{6E}\u{73}\u{65}", value: "\u{53}\u{75}\u{73}\u{70}\u{65}\u{6E}\u{73}\u{65}") }
+
+    /// Telegraph
+    public static var texttone：Telegraph｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{54}\u{65}\u{6C}\u{65}\u{67}\u{72}\u{61}\u{70}\u{68}", value: "\u{54}\u{65}\u{6C}\u{65}\u{67}\u{72}\u{61}\u{70}\u{68}") }
+
+    /// Tiptoes
+    public static var texttone：Tiptoes｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{54}\u{69}\u{70}\u{74}\u{6F}\u{65}\u{73}", value: "\u{54}\u{69}\u{70}\u{74}\u{6F}\u{65}\u{73}") }
+
+    /// Tri-tone
+    public static var texttone：Tri﹣tone｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{54}\u{72}\u{69}\u{2D}\u{74}\u{6F}\u{6E}\u{65}", value: "\u{54}\u{72}\u{69}\u{2D}\u{74}\u{6F}\u{6E}\u{65}") }
+
+    /// Typewriters
+    public static var texttone：Typewriters｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{54}\u{79}\u{70}\u{65}\u{77}\u{72}\u{69}\u{74}\u{65}\u{72}\u{73}", value: "\u{54}\u{79}\u{70}\u{65}\u{77}\u{72}\u{69}\u{74}\u{65}\u{72}\u{73}") }
+
+    /// Update
+    public static var texttone：Update｜ContactsUI: String { Util｜ContactsUI.systemString("\u{74}\u{65}\u{78}\u{74}\u{74}\u{6F}\u{6E}\u{65}\u{3A}\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}", value: "\u{55}\u{70}\u{64}\u{61}\u{74}\u{65}") }
+
+}
+
+// MARK: - ContactsUI Utilities
+
+@available(iOS 9.0, *)
+enum Util｜ContactsUI {
+
+    /// For testing: The preferred localization for ContactsUI strings (`nil` means use the current system locale)
+    static var preferredLocalization: String? = nil
+
+    /// Preferred available localization, depending on current value of `localization`
+    private static var preferredAvailableLocalization: String? {
+        Bundle.preferredLocalizations(from: availableLocalizations, forPreferences: preferredLocalization.flatMap { [$0] }).first
+    }
+
+    /// Localizations available in ContactsUI framework
+    private static let availableLocalizations = ["ar", "ca", "cs", "da", "de", "el", "en", "en_AU", "en_GB", "es", "es_419", "fi", "fr", "fr_CA", "he", "hi", "hr", "hu", "id", "it", "ja", "ko", "ms", "nl", "no", "pl", "pt", "pt_PT", "ro", "ru", "sk", "sv", "th", "tr", "uk", "vi", "zh_CN", "zh_HK", "zh_TW"]
+
+    /// Loads the ContactsUI string for the specified key
+    fileprivate static func systemString(_ key: String, value: String) -> String {
+        preferredAvailableLocalization.flatMap { bundle(for: $0)?.localizedString(forKey: key, value: value, table: nil) } ?? value
+    }
+
+    /// Utility method for accessing static (= lazy) properties
+    static func bundle(for localization: String) -> Bundle? {
+        switch localization {
+        case "ar": return ar｜ContactsUI
+        case "ca": return ca｜ContactsUI
+        case "cs": return cs｜ContactsUI
+        case "da": return da｜ContactsUI
+        case "de": return de｜ContactsUI
+        case "el": return el｜ContactsUI
+        case "en": return en｜ContactsUI
+        case "en_AU": return en_AU｜ContactsUI
+        case "en_GB": return en_GB｜ContactsUI
+        case "es": return es｜ContactsUI
+        case "es_419": return es_419｜ContactsUI
+        case "fi": return fi｜ContactsUI
+        case "fr": return fr｜ContactsUI
+        case "fr_CA": return fr_CA｜ContactsUI
+        case "he": return he｜ContactsUI
+        case "hi": return hi｜ContactsUI
+        case "hr": return hr｜ContactsUI
+        case "hu": return hu｜ContactsUI
+        case "id": return id｜ContactsUI
+        case "it": return it｜ContactsUI
+        case "ja": return ja｜ContactsUI
+        case "ko": return ko｜ContactsUI
+        case "ms": return ms｜ContactsUI
+        case "nl": return nl｜ContactsUI
+        case "no": return no｜ContactsUI
+        case "pl": return pl｜ContactsUI
+        case "pt": return pt｜ContactsUI
+        case "pt_PT": return pt_PT｜ContactsUI
+        case "ro": return ro｜ContactsUI
+        case "ru": return ru｜ContactsUI
+        case "sk": return sk｜ContactsUI
+        case "sv": return sv｜ContactsUI
+        case "th": return th｜ContactsUI
+        case "tr": return tr｜ContactsUI
+        case "uk": return uk｜ContactsUI
+        case "vi": return vi｜ContactsUI
+        case "zh_CN": return zh_CN｜ContactsUI
+        case "zh_HK": return zh_HK｜ContactsUI
+        case "zh_TW": return zh_TW｜ContactsUI
+        default: return nil
+        }
+    }
+
+    /// Localized bundle for ar strings. Kept static so that it's loaded lazily.
+    private static let ar｜ContactsUI = loadBundle(for: "ar")
+
+    /// Localized bundle for ca strings. Kept static so that it's loaded lazily.
+    private static let ca｜ContactsUI = loadBundle(for: "ca")
+
+    /// Localized bundle for cs strings. Kept static so that it's loaded lazily.
+    private static let cs｜ContactsUI = loadBundle(for: "cs")
+
+    /// Localized bundle for da strings. Kept static so that it's loaded lazily.
+    private static let da｜ContactsUI = loadBundle(for: "da")
+
+    /// Localized bundle for de strings. Kept static so that it's loaded lazily.
+    private static let de｜ContactsUI = loadBundle(for: "de")
+
+    /// Localized bundle for el strings. Kept static so that it's loaded lazily.
+    private static let el｜ContactsUI = loadBundle(for: "el")
+
+    /// Localized bundle for en strings. Kept static so that it's loaded lazily.
+    private static let en｜ContactsUI = loadBundle(for: "en")
+
+    /// Localized bundle for en_AU strings. Kept static so that it's loaded lazily.
+    private static let en_AU｜ContactsUI = loadBundle(for: "en_AU")
+
+    /// Localized bundle for en_GB strings. Kept static so that it's loaded lazily.
+    private static let en_GB｜ContactsUI = loadBundle(for: "en_GB")
+
+    /// Localized bundle for es strings. Kept static so that it's loaded lazily.
+    private static let es｜ContactsUI = loadBundle(for: "es")
+
+    /// Localized bundle for es_419 strings. Kept static so that it's loaded lazily.
+    private static let es_419｜ContactsUI = loadBundle(for: "es_419")
+
+    /// Localized bundle for fi strings. Kept static so that it's loaded lazily.
+    private static let fi｜ContactsUI = loadBundle(for: "fi")
+
+    /// Localized bundle for fr strings. Kept static so that it's loaded lazily.
+    private static let fr｜ContactsUI = loadBundle(for: "fr")
+
+    /// Localized bundle for fr_CA strings. Kept static so that it's loaded lazily.
+    private static let fr_CA｜ContactsUI = loadBundle(for: "fr_CA")
+
+    /// Localized bundle for he strings. Kept static so that it's loaded lazily.
+    private static let he｜ContactsUI = loadBundle(for: "he")
+
+    /// Localized bundle for hi strings. Kept static so that it's loaded lazily.
+    private static let hi｜ContactsUI = loadBundle(for: "hi")
+
+    /// Localized bundle for hr strings. Kept static so that it's loaded lazily.
+    private static let hr｜ContactsUI = loadBundle(for: "hr")
+
+    /// Localized bundle for hu strings. Kept static so that it's loaded lazily.
+    private static let hu｜ContactsUI = loadBundle(for: "hu")
+
+    /// Localized bundle for id strings. Kept static so that it's loaded lazily.
+    private static let id｜ContactsUI = loadBundle(for: "id")
+
+    /// Localized bundle for it strings. Kept static so that it's loaded lazily.
+    private static let it｜ContactsUI = loadBundle(for: "it")
+
+    /// Localized bundle for ja strings. Kept static so that it's loaded lazily.
+    private static let ja｜ContactsUI = loadBundle(for: "ja")
+
+    /// Localized bundle for ko strings. Kept static so that it's loaded lazily.
+    private static let ko｜ContactsUI = loadBundle(for: "ko")
+
+    /// Localized bundle for ms strings. Kept static so that it's loaded lazily.
+    private static let ms｜ContactsUI = loadBundle(for: "ms")
+
+    /// Localized bundle for nl strings. Kept static so that it's loaded lazily.
+    private static let nl｜ContactsUI = loadBundle(for: "nl")
+
+    /// Localized bundle for no strings. Kept static so that it's loaded lazily.
+    private static let no｜ContactsUI = loadBundle(for: "no")
+
+    /// Localized bundle for pl strings. Kept static so that it's loaded lazily.
+    private static let pl｜ContactsUI = loadBundle(for: "pl")
+
+    /// Localized bundle for pt strings. Kept static so that it's loaded lazily.
+    private static let pt｜ContactsUI = loadBundle(for: "pt")
+
+    /// Localized bundle for pt_PT strings. Kept static so that it's loaded lazily.
+    private static let pt_PT｜ContactsUI = loadBundle(for: "pt_PT")
+
+    /// Localized bundle for ro strings. Kept static so that it's loaded lazily.
+    private static let ro｜ContactsUI = loadBundle(for: "ro")
+
+    /// Localized bundle for ru strings. Kept static so that it's loaded lazily.
+    private static let ru｜ContactsUI = loadBundle(for: "ru")
+
+    /// Localized bundle for sk strings. Kept static so that it's loaded lazily.
+    private static let sk｜ContactsUI = loadBundle(for: "sk")
+
+    /// Localized bundle for sv strings. Kept static so that it's loaded lazily.
+    private static let sv｜ContactsUI = loadBundle(for: "sv")
+
+    /// Localized bundle for th strings. Kept static so that it's loaded lazily.
+    private static let th｜ContactsUI = loadBundle(for: "th")
+
+    /// Localized bundle for tr strings. Kept static so that it's loaded lazily.
+    private static let tr｜ContactsUI = loadBundle(for: "tr")
+
+    /// Localized bundle for uk strings. Kept static so that it's loaded lazily.
+    private static let uk｜ContactsUI = loadBundle(for: "uk")
+
+    /// Localized bundle for vi strings. Kept static so that it's loaded lazily.
+    private static let vi｜ContactsUI = loadBundle(for: "vi")
+
+    /// Localized bundle for zh_CN strings. Kept static so that it's loaded lazily.
+    private static let zh_CN｜ContactsUI = loadBundle(for: "zh_CN")
+
+    /// Localized bundle for zh_HK strings. Kept static so that it's loaded lazily.
+    private static let zh_HK｜ContactsUI = loadBundle(for: "zh_HK")
+
+    /// Localized bundle for zh_TW strings. Kept static so that it's loaded lazily.
+    private static let zh_TW｜ContactsUI = loadBundle(for: "zh_TW")
+
+    /// Convenience method for loading localized bundles
+    private static func loadBundle(for localization: String) -> Bundle? {
+        _ = ContactsUI.CNContactViewController.self // Force bundle load
+        return Bundle(identifier: "com.apple.ContactsUI")?
+            .path(forResource: localization, ofType: "lproj")
+            .flatMap { Bundle(path: $0) }
+    }
+
+}

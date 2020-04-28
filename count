@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while read -r file; do
+    base=$(basename "$file")
+    name=${base%%Strings.swift}
+    count=$(grep '.systemString("' "$file" | wc -l | tr -d '[:space:]')
+    echo "$name $count"
+done < <(find Sources -name "*Strings.swift" | sort -f) | column -t -s' '
