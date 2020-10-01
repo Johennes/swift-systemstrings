@@ -9,18 +9,18 @@ frameworks for reuse.
 Features
 --------
 
-*No dependencies*
+**No dependencies**
 
 SystemStrings does not require any non-system dependencies
 
-*Stand-alone files*
+**Stand-alone files**
 
 Only interested in `UIKit` strings? Simply copy
 [UIKitStrings.swift](Sources/SystemStrings/UIKitStrings.swift) directly
 into your project and profit. Every file in SystemStrings is stand-alone
 and can be used without requiring any of the other files in the package.
 
-*Discoverable strings*
+**Discoverable strings**
 
 Existing system strings are easy to find because keys are translated
 into identifiers by means of human-readable unicode characters
