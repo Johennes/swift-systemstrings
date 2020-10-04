@@ -1,8 +1,6 @@
 SystemStrings
 =============
 
-*Mirrors: [GitHub] ~ [GitLab]*
-
 A Swift package that exposes localized strings from iOS system
 frameworks for reuse.
 
@@ -111,6 +109,3 @@ License
 -------
 
 SystemStrings is licensed under the Apache License, Version 2.0.
-
-  [GitHub]: https://github.com/Johennes/swift-systemstrings
-  [GitLab]: https://gitlab.com/cherrypicker/swift-systemstrings
